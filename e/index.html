@@ -162,34 +162,63 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
   box-shadow:inset 0 0 35px rgba(74,48,19,.28)
 }
 .paper-title{text-align:center;font-size:1.55rem;letter-spacing:.06em;margin-bottom:14px}
-.log-table{display:grid;grid-template-columns:repeat(2,1fr);gap:5px 22px}
+.log-table{
+  width:min(620px,100%);margin:0 auto;border:1px solid rgba(51,40,25,.35);
+  border-radius:5px;overflow:hidden
+}
 .log-row{
-  display:grid;grid-template-columns:46px 1fr;gap:10px;padding:4px 8px;border-radius:4px;
-  transition:.25s
+  display:grid;grid-template-columns:1fr 1fr;position:relative;
+  border-bottom:1px solid rgba(51,40,25,.16);transition:.28s ease
 }
-.log-row.head{font-weight:700;border-bottom:1px solid rgba(51,40,25,.5)}
-.log-row.active{background:rgba(110,50,15,.19);box-shadow:inset 0 0 0 1px rgba(75,35,8,.28)}
-.log-row.disabled{opacity:.43}
-.slide-rule{
-  margin-top:18px;padding:22px 14px 18px;border-radius:10px;
-  background:linear-gradient(90deg,#c7ad7c,#e2cda2,#c7ad7c);
-  color:var(--ink);box-shadow:inset 0 0 22px rgba(56,37,15,.28),0 12px 30px rgba(0,0,0,.35);
-  overflow:hidden
+.log-row:last-child{border-bottom:0}
+.log-cell{padding:7px 16px}
+.log-cell:first-child{border-right:1px solid rgba(51,40,25,.26)}
+.log-row.head{
+  font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  background:rgba(68,43,16,.12);border-bottom:2px solid rgba(51,40,25,.5)
 }
-.rule-label{text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;margin-bottom:5px}
-.scale{position:relative;height:54px;border-top:2px solid rgba(52,37,19,.68)}
-.tick{
-  position:absolute;top:0;transform:translateX(-50%);font:12px Georgia,serif
+.log-row.choice-a{
+  background:rgba(120,58,25,.17);
+  box-shadow:inset 4px 0 0 #78411f
 }
-.tick:before{content:"";display:block;width:1px;height:15px;background:rgba(52,37,19,.72);margin:auto auto 3px}
-.cursor{
-  position:absolute;top:-8px;width:2px;height:65px;background:#9b1717;
-  box-shadow:0 0 7px rgba(155,23,23,.55);transition:left .28s ease
+.log-row.choice-b{
+  background:rgba(45,75,92,.16);
+  box-shadow:inset 4px 0 0 #315d73
 }
-.log-controls{margin-top:20px}
+.log-row.choice-a.choice-b{
+  background:linear-gradient(90deg,rgba(120,58,25,.18),rgba(45,75,92,.18));
+  box-shadow:inset 4px 0 0 #5a4e46
+}
+.log-row.answer{
+  background:rgba(112,87,22,.23);
+  box-shadow:inset 0 0 0 2px rgba(105,73,7,.38);
+  animation:paperMark 1.7s ease-in-out infinite alternate
+}
+@keyframes paperMark{
+  from{filter:sepia(.05);box-shadow:inset 0 0 0 1px rgba(105,73,7,.32)}
+  to{filter:sepia(.2);box-shadow:inset 0 0 0 2px rgba(105,73,7,.54),0 0 13px rgba(105,73,7,.12)}
+}
+.table-fade{
+  height:42px;margin:-42px 0 0;position:relative;z-index:2;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(216,195,155,0),rgba(216,195,155,.96))
+}
+.continuation{
+  width:min(620px,100%);margin:0 auto;border:1px solid rgba(51,40,25,.35);
+  border-top:0;border-radius:0 0 5px 5px;overflow:hidden
+}
+.continuation .ellipsis{
+  text-align:center;padding:7px;letter-spacing:.45em;color:rgba(51,40,25,.65)
+}
+.log-controls{margin:22px auto 0;width:min(620px,100%)}
 .log-result{
-  margin-top:17px;text-align:center;padding:16px;border:1px solid rgba(51,40,25,.22);
-  border-radius:8px;background:rgba(255,248,222,.34);font-size:1.13rem
+  margin:20px auto 0;width:min(760px,100%);text-align:center;padding:20px;
+  border:1px solid rgba(51,40,25,.29);border-radius:8px;
+  background:rgba(255,248,222,.48);font-size:1.16rem;
+  box-shadow:inset 0 0 18px rgba(91,58,20,.07)
+}
+.neat-example{
+  margin-top:22px;padding:18px 20px;border:1px solid var(--line);
+  border-radius:18px;background:rgba(255,255,255,.035)
 }
 .interest-story{
   display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin-bottom:18px
@@ -216,14 +245,16 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
 .step-num{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,255,255,.28)}
 .rotation-panel{margin-top:30px;padding-top:30px;border-top:1px solid var(--line)}
 .glow-button{animation:pulse 2.3s infinite;box-shadow:0 0 20px rgba(145,188,255,.17)}
-@keyframes pulse{50%{box-shadow:0 0 34px rgba(145,188,255,.35);border-color:rgba(145,188,255,.7)}}
+@keyframes pulse{
+  50%{box-shadow:0 0 23px rgba(145,188,255,.21);border-color:rgba(145,188,255,.52)}
+}
+.glow-button{animation-duration:3.6s}
 .final-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
 @media(max-width:800px){
   .progress{display:none}.box{grid-column:1/-1}.metrics{grid-template-columns:1fr}
   .timeline:before{left:10px}.timeline-item,.timeline-item:nth-child(even){width:100%;margin-left:0;padding-left:38px;padding-right:0}
   .timeline-item:nth-child(odd):after,.timeline-item:nth-child(even):after{left:4px;right:auto}
   .interest-story{grid-template-columns:1fr}
-  .log-table{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -280,19 +311,14 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
 <section id="r3" class="fade" data-room="Room 3 · Logarithms">
 <div class="wrap">
   <div class="kicker">Room Three</div>
-  <h2>Turning Multiplication Into Movement</h2>
-  <p class="lead">A logarithm table pairs each ordinary number with a second number—its logarithm. Multiplying two ordinary numbers then becomes a matter of finding two rows, adding their logarithms, and converting the result back. Sliding scales later made the same idea physical.</p>
+  <h2>Turning Multiplication Into Addition</h2>
+  <p class="lead">A logarithm table pairs each ordinary number with a second number—its logarithm. To multiply, people looked up two logarithms, added them, then used the same table in reverse to recover the answer.</p>
   <div class="paper-stage">
     <div class="paper">
       <div class="paper-title">A Small Table of Common Logarithms</div>
       <div class="log-table" id="logTable"></div>
-
-      <div class="slide-rule">
-        <div class="rule-label">Fixed logarithmic scale</div>
-        <div class="scale" id="scaleA"><div class="cursor" id="cursorA"></div></div>
-        <div class="rule-label">Sliding logarithmic scale</div>
-        <div class="scale" id="scaleB"><div class="cursor" id="cursorB"></div></div>
-      </div>
+      <div class="table-fade"></div>
+      <div class="continuation" id="continuation"></div>
 
       <div class="log-controls">
         <label>First number: <strong id="logAV">4</strong></label>
@@ -304,7 +330,11 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
       <div class="log-result" id="logResult"></div>
     </div>
   </div>
-  <p class="explain" style="margin-top:20px">For a neat example, \(32=2^5\) and \(64=2^6\), so \(32\times64=2^{5+6}=2^{11}=2048\). Tables and slide rules extended that same shortcut to numbers that were not obvious powers.</p>
+
+  <div class="neat-example">
+    <h3>A version you can do without a table</h3>
+    <p class="explain">Some numbers are already easy to recognize as powers. Since \(32=2^5\) and \(64=2^6\), multiplying them becomes \(2^{5+6}=2^{11}=2048\). A logarithm table applies that same exponent shortcut to less convenient numbers.</p>
+  </div>
   <div class="next"><button data-next="r4">Continue to Compound Interest</button></div>
 </div>
 </section>
@@ -317,9 +347,9 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
   <div class="card">
     <div class="interest-story">
       <div class="story-panel">
-        <h3>Why the rate changes</h3>
-        <p class="explain">If interest is added once, the full 100% is added at once. If it is added twice, each payment is 50%. If it is added four times, each payment is 25%.</p>
-        <p class="explain">Keeping every payment at 100% would create a completely different investment: two periods would mean two separate 100% payments, and twelve periods would mean twelve. The yearly rate would no longer be fixed.</p>
+        <h3>Keeping the comparison fair</h3>
+        <p class="explain">We want every example to promise the same total yearly rate: 100%. The only thing we change is how often that year's interest is placed into the account.</p>
+        <p class="explain">So one payment adds 100%, two payments add 50% each, and four payments add 25% each. Leaving every payment at 100% would quietly increase the total yearly rate, so it would no longer be the same investment.</p>
       </div>
       <div class="story-panel">
         <h3>The pattern</h3>
@@ -399,8 +429,8 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
       \]
     </div>
     <p class="explain">The exclamation mark means factorial. For example, \(4!=4\times3\times2\times1=24\). Calculators use approximation ideas like this to turn functions into arithmetic they can actually compute.</p>
-    <label>Pieces included: <strong id="termsV">5</strong></label>
-    <input id="terms" type="range" min="1" max="10" value="5">
+    <label>Pieces included: <strong id="termsV">1</strong></label>
+    <input id="terms" type="range" min="1" max="10" value="1">
     <div class="math-panel" id="seriesText"></div>
     <canvas id="seriesCanvas" width="1000" height="370"></canvas>
     <div class="legend">
@@ -496,6 +526,18 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const typeset=els=>{if(window.MathJax?.typesetPromise) MathJax.typesetPromise(els).catch(()=>{})};
+function prepareCanvas(canvas, cssHeight){
+  const dpr=Math.max(1,window.devicePixelRatio||1);
+  const cssWidth=Math.max(320,Math.round(canvas.getBoundingClientRect().width||1000));
+  canvas.style.height=cssHeight+"px";
+  const targetW=Math.round(cssWidth*dpr),targetH=Math.round(cssHeight*dpr);
+  if(canvas.width!==targetW||canvas.height!==targetH){
+    canvas.width=targetW;canvas.height=targetH;
+  }
+  const g=canvas.getContext("2d");
+  g.setTransform(dpr,0,0,dpr,0,0);
+  return {g,W:cssWidth,H:cssHeight};
+}
 
 function travelTo(id){
   const curtain=$("#curtain");curtain.classList.add("on");
@@ -516,26 +558,45 @@ $("#check").onclick=()=>{
 };
 
 function buildLogTable(){
-  let html='<div class="log-row head"><span>No.</span><span>log₁₀</span></div><div class="log-row head"><span>No.</span><span>log₁₀</span></div>';
+  let html='<div class="log-row head"><div class="log-cell">Number</div><div class="log-cell">log₁₀(number)</div></div>';
   for(let i=1;i<=15;i++){
-    html+=`<div class="log-row ${i>10?'disabled':''}" data-log-row="${i}"><span>${i}</span><span>${Math.log10(i).toFixed(5)}</span></div>`;
+    html+=`<div class="log-row" data-log-row="${i}">
+      <div class="log-cell">${i}</div>
+      <div class="log-cell">${Math.log10(i).toFixed(5)}</div>
+    </div>`;
   }
   $("#logTable").innerHTML=html;
-  [$("#scaleA"),$("#scaleB")].forEach(scale=>{
-    for(let n=1;n<=10;n++){
-      const tick=document.createElement("span");tick.className="tick";tick.textContent=n;
-      tick.style.left=(Math.log10(n)*100)+"%";scale.appendChild(tick);
-    }
-  });
 }
 function updateLogRoom(){
-  let a=+$("#logA").value,b=+$("#logB").value,product=a*b;
+  const a=+$("#logA").value,b=+$("#logB").value;
+  const logA=Math.log10(a),logB=Math.log10(b),sum=logA+logB,product=a*b;
   $("#logAV").textContent=a;$("#logBV").textContent=b;
-  $$("[data-log-row]").forEach(r=>r.classList.toggle("active",[a,b].includes(+r.dataset.logRow)));
-  $("#cursorA").style.left=(Math.log10(a)*100)+"%";
-  $("#cursorB").style.left=(Math.log10(b)*100)+"%";
-  $("#scaleB").style.transform=`translateX(${Math.log10(a)*32}%)`;
-  $("#logResult").innerHTML=`Find ${a} and ${b}. Their logarithms are ${Math.log10(a).toFixed(4)} and ${Math.log10(b).toFixed(4)}.<br><strong>Add them:</strong> ${(Math.log10(a)+Math.log10(b)).toFixed(4)}. Convert back, and the answer is <strong>${product}</strong>.`;
+
+  $$("[data-log-row]").forEach(row=>{
+    const n=+row.dataset.logRow;
+    row.classList.toggle("choice-a",n===a);
+    row.classList.toggle("choice-b",n===b);
+    row.classList.toggle("answer",n===product);
+  });
+
+  if(product<=15){
+    $("#continuation").innerHTML='<div class="ellipsis">· · ·</div>';
+  }else{
+    $("#continuation").innerHTML=`
+      <div class="ellipsis">· · ·</div>
+      <div class="log-row answer">
+        <div class="log-cell">${product}</div>
+        <div class="log-cell">${sum.toFixed(5)}</div>
+      </div>`;
+  }
+
+  $("#logResult").innerHTML=`
+    <strong>1.</strong> Find ${a}: its logarithm is ${logA.toFixed(5)}.<br>
+    <strong>2.</strong> Find ${b}: its logarithm is ${logB.toFixed(5)}.<br>
+    <strong>3.</strong> Add the logarithms: ${logA.toFixed(5)} + ${logB.toFixed(5)} = <strong>${sum.toFixed(5)}</strong>.<br>
+    <strong>4.</strong> Find that logarithm in reverse. It belongs to <strong>${product}</strong>.<br><br>
+    Therefore, <strong>${a} × ${b} = ${product}</strong>.
+  `;
 }
 $("#logA").oninput=$("#logB").oninput=updateLogRoom;
 
@@ -545,7 +606,7 @@ function drawCompound(){
   $("#count").textContent=n.toLocaleString();
   $("#periodRate").textContent=(100/n).toFixed(n<100?2:5)+"%";
   $("#balance").textContent="$"+v.toFixed(6);
-  let c=$("#compoundCanvas"),g=c.getContext("2d"),W=c.width,H=c.height;
+  let c=$("#compoundCanvas"),{g,W,H}=prepareCanvas(c,370);
   g.clearRect(0,0,W,H);
   const left=65,right=30,top=30,bottom=55,yMin=1.9,yMax=2.75;
   const tx=j=>left+j*(W-left-right)/(opts.length-1);
@@ -573,18 +634,26 @@ function drawFunction(){
   $("#xv").textContent=x0.toFixed(2);$("#height").textContent=y0.toFixed(3);
   $("#slope").textContent=m.toFixed(3);$("#difference").textContent=Math.abs(y0-m).toFixed(3);
   $("#fnMessage").textContent=active==="e"?"For eˣ, the height and the slope match wherever you move the point.":Math.abs(y0-m)<.03?"They happen to match near this one point, but they do not stay matched.":"The height and slope are different here.";
-  let c=$("#functionCanvas"),g=c.getContext("2d"),W=c.width,H=c.height;
+  let c=$("#functionCanvas"),{g,W,H}=prepareCanvas(c,400);
   g.clearRect(0,0,W,H);
   const xMin=-2,xMax=2.5,yMin=-3,yMax=9,left=55,right=25,top=25,bottom=45;
   const tx=x=>left+(x-xMin)/(xMax-xMin)*(W-left-right),ty=y=>H-bottom-(y-yMin)/(yMax-yMin)*(H-top-bottom);
   g.strokeStyle="rgba(255,255,255,.11)";g.lineWidth=1;g.beginPath();
   g.moveTo(tx(0),top);g.lineTo(tx(0),H-bottom);g.moveTo(left,ty(0));g.lineTo(W-right,ty(0));g.stroke();
+  g.font="12px system-ui";g.fillStyle="rgba(255,255,255,.32)";g.textAlign="right";
+  [-2,0,2,4,6,8].forEach(v=>{const yy=ty(v);g.fillText(v.toString(),tx(0)-9,yy+4);});
+  g.textAlign="left";
   g.strokeStyle="#91bcff";g.lineWidth=4;g.beginPath();
   let started=false;
   for(let px=0;px<=W-left-right;px++){let x=xMin+(xMax-xMin)*px/(W-left-right),Y=ty(def.f(x)),X=left+px;if(!Number.isFinite(Y))continue;if(!started){g.moveTo(X,Y);started=true}else g.lineTo(X,Y)}g.stroke();
   g.strokeStyle="#ff9797";g.lineWidth=3;g.beginPath();
   let xa=x0-1.1,xb=x0+1.1;g.moveTo(tx(xa),ty(y0+m*(xa-x0)));g.lineTo(tx(xb),ty(y0+m*(xb-x0)));g.stroke();
   g.fillStyle="white";g.beginPath();g.arc(tx(x0),ty(y0),8,0,Math.PI*2);g.fill();
+  const markerY=ty(y0);
+  g.strokeStyle="rgba(255,255,255,.26)";g.lineWidth=1;g.setLineDash([5,6]);
+  g.beginPath();g.moveTo(tx(0),markerY);g.lineTo(tx(x0),markerY);g.stroke();g.setLineDash([]);
+  g.fillStyle="rgba(255,255,255,.58)";g.font="13px system-ui";g.textAlign="right";
+  g.fillText("height "+y0.toFixed(2),tx(0)-10,markerY-7);g.textAlign="left";
 }
 $$("[data-f]").forEach(b=>b.onclick=()=>{$$("[data-f]").forEach(q=>q.classList.remove("active"));b.classList.add("active");active=b.dataset.f;drawFunction()});
 $("#x").oninput=drawFunction;
@@ -596,7 +665,7 @@ function seriesLatex(n){
 }
 function drawSeries(){
   let n=+$("#terms").value;$("#termsV").textContent=n;$("#seriesText").innerHTML=seriesLatex(n);typeset([$("#seriesText")]);
-  let c=$("#seriesCanvas"),g=c.getContext("2d"),W=c.width,H=c.height;
+  let c=$("#seriesCanvas"),{g,W,H}=prepareCanvas(c,370);
   const xMin=-3,xMax=3,yMin=-1,yMax=10,left=55,right=25,top=25,bottom=45;
   const tx=x=>left+(x-xMin)/(xMax-xMin)*(W-left-right),ty=y=>H-bottom-(y-yMin)/(yMax-yMin)*(H-top-bottom);
   g.clearRect(0,0,W,H);g.strokeStyle="rgba(255,255,255,.1)";g.lineWidth=1;g.beginPath();
@@ -614,7 +683,7 @@ function drawComplex(){
   const unlocked=Math.abs(t-Math.PI)<.016;
   $("#identityPanel").style.opacity=unlocked?1:.48;
   $("#identityPanel").style.boxShadow=unlocked?"0 0 44px rgba(145,188,255,.22)":"none";
-  let c=$("#complexCanvas"),g=c.getContext("2d"),W=c.width,H=c.height,cx=W/2,cy=H/2,r=145;
+  let c=$("#complexCanvas"),{g,W,H}=prepareCanvas(c,440),cx=W/2,cy=H/2,r=Math.min(155,W*.18);
   g.clearRect(0,0,W,H);
   g.strokeStyle="rgba(255,255,255,.18)";g.lineWidth=1;g.beginPath();
   g.moveTo(70,cy);g.lineTo(W-70,cy);g.moveTo(cx,35);g.lineTo(cx,H-35);g.stroke();
@@ -648,14 +717,14 @@ function setScenario(){
   typeset([$("#scenarioFormula")]);drawChange();
 }
 function drawChange(){
-  const s=scenarios[scenario],param=+$("#parameter").value,c=$("#changeCanvas"),g=c.getContext("2d"),W=c.width,H=c.height,vals=[];
+  const s=scenarios[scenario],param=+$("#parameter").value,c=$("#changeCanvas"),vals=[];let {g,W,H}=prepareCanvas(c,370);
   for(let i=0;i<500;i++)vals.push(s.fn(i/499*8,param));
   let mn=Math.min(...vals),mx=Math.max(...vals),pad=(mx-mn||1)*.12;mn-=pad;mx+=pad;
   g.clearRect(0,0,W,H);g.strokeStyle="rgba(255,255,255,.1)";
   for(let i=0;i<6;i++){let y=30+i*(H-60)/5;g.beginPath();g.moveTo(40,y);g.lineTo(W-25,y);g.stroke()}
   g.strokeStyle="#91bcff";g.lineWidth=4;g.beginPath();
   vals.forEach((v,i)=>{let x=40+i/499*(W-65),y=H-30-(v-mn)/(mx-mn)*(H-60);i?g.lineTo(x,y):g.moveTo(x,y)});g.stroke();
-  g.fillStyle="rgba(255,255,255,.72)";g.font="16px system-ui";g.fillText("control = "+param.toFixed(2),55,28);
+  g.fillStyle="rgba(255,255,255,.72)";g.font="16px system-ui";g.fillText(s.unit+" = "+param.toFixed(2),55,28);
 }
 $$("[data-s]").forEach(b=>b.onclick=()=>{$$("[data-s]").forEach(q=>q.classList.remove("active"));b.classList.add("active");scenario=b.dataset.s;setScenario()});
 $("#parameter").oninput=drawChange;
@@ -665,6 +734,8 @@ function initialize(){
   setTimeout(()=>typeset([document.body]),250);
 }
 if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",initialize); else initialize();
+let resizeTimer;
+window.addEventListener("resize",()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{drawCompound();drawFunction();drawSeries();drawComplex();drawChange();},120)});
 </script>
 </body>
 </html>
