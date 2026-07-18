@@ -1,97 +1,41 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Math Museum</title>
-<meta name="description" content="Interactive exhibits that let you explore the ideas behind mathematics.">
-<link rel="stylesheet" href="/assets/museum.css">
-</head>
-<body>
-<nav class="site-nav">
-  <a class="brand" href="/">
-    <span class="brand-mark">∑</span>
-    <span>ApogeeLab Mathematics Museum</span>
-  </a>
-  <div class="nav-links">
-    <a href="#exhibits">Exhibits</a>
-    <a href="#about">About</a>
-    <a href="https://apogeelab.org">ApogeeLab</a>
-  </div>
-</nav>
-
-<header class="hero">
-  <div class="hero-inner">
-    <div class="kicker">A collection of interactive experiences</div>
-    <h1>Walk Through Mathematics</h1>
-    <p class="lead">Explore the discoveries, questions, and experiments behind the equations. Each exhibit is designed to be experienced—not merely read.</p>
-  </div>
-</header>
-
-<main>
-<section class="section" id="exhibits">
-  <div class="section-head">
-    <div><div class="kicker">Current collection</div><h2>Choose an Exhibit</h2></div>
-    <p>Euler's Number is open now. The remaining halls are prepared as test pages for future exhibits.</p>
-  </div>
-
-  <div class="exhibit-grid">
-    <a class="exhibit-card featured" href="/e/" data-symbol="e">
-      <span class="tag">Now open</span>
-      <h3>Euler's Number</h3>
-      <p>A deep dive into the number that connects logarithms, growth, calculus, engineering, physics, and the complex plane.</p>
-      <div class="enter">Enter exhibit <span>→</span></div>
-    </a>
-
-    <a class="exhibit-card coming" href="/pi/" data-symbol="π">
-      <span class="tag">Test page</span><h3>The Story of π</h3>
-      <p>Circles, geometry, infinite series, probability, and a constant that appears far beyond round objects.</p>
-      <div class="enter">Preview hall <span>→</span></div>
-    </a>
-
-    <a class="exhibit-card coming" href="/calculus/" data-symbol="∫">
-      <span class="tag">Test page</span><h3>Calculus</h3>
-      <p>A guided journey through motion, slopes, accumulation, limits, derivatives, and integrals.</p>
-      <div class="enter">Preview hall <span>→</span></div>
-    </a>
-
-    <a class="exhibit-card coming" href="/fourier/" data-symbol="∿">
-      <span class="tag">Test page</span><h3>Fourier</h3>
-      <p>See how complicated signals can be assembled from simple waves.</p>
-      <div class="enter">Preview hall <span>→</span></div>
-    </a>
-
-    <a class="exhibit-card coming" href="/complex/" data-symbol="i">
-      <span class="tag">Test page</span><h3>Complex Numbers</h3>
-      <p>Enter the plane where numbers rotate, oscillate, and solve previously impossible equations.</p>
-      <div class="enter">Preview hall <span>→</span></div>
-    </a>
-
-    <a class="exhibit-card coming" href="/chaos/" data-symbol="∞">
-      <span class="tag">Test page</span><h3>Chaos</h3>
-      <p>Explore how simple deterministic rules can create behavior that seems unpredictable.</p>
-      <div class="enter">Preview hall <span>→</span></div>
-    </a>
-
-    <a class="exhibit-card coming" href="/probability/" data-symbol="?">
-      <span class="tag">Test page</span><h3>Probability</h3>
-      <p>Experiment with randomness, expectation, distributions, and patterns hidden inside uncertainty.</p>
-      <div class="enter">Preview hall <span>→</span></div>
-    </a>
-  </div>
-</section>
-
-<section class="section" id="about">
-  <div class="about">
-    <div><div class="kicker">About the museum</div><h2>Ideas deserve rooms.</h2></div>
-    <div>
-      <p>Most mathematics websites begin with definitions and formulas. This museum begins with a problem, prediction, or experiment. The mathematics is revealed only after the visitor has a reason to want it.</p>
-      <p>The collection is an ApogeeLab project combining history, mathematics, programming, animation, and interactive storytelling.</p>
-    </div>
-  </div>
-</section>
-</main>
-
-<footer class="footer">ApogeeLab Mathematics Museum · mathmuseum.apogeelab.org</footer>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Math Museum by ApogeeLab</title><meta name="description" content="Interactive exhibits that reveal the stories and ideas behind mathematics.">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><style>
+:root{--bg:#05070a;--text:#f5f7fb;--muted:#aeb8c6;--line:rgba(255,255,255,.12);--max:1200px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);background:radial-gradient(circle at 50% -10%,#182642 0,transparent 36%),#05070a;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.65}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.014) 1px,transparent 1px);background-size:54px 54px;mask-image:linear-gradient(black,transparent 90%)}
+a{color:inherit;text-decoration:none}.site-nav{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:15px 24px;background:rgba(5,7,10,.8);backdrop-filter:blur(17px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;font-weight:750;letter-spacing:.12em;text-transform:uppercase;font-size:.8rem}.brand-logo{width:40px;height:40px;filter:drop-shadow(0 0 15px rgba(190,215,255,.18))}
+.nav-links{display:flex;gap:18px;color:var(--muted);font-size:.94rem}.hero{min-height:76vh;display:grid;place-items:center;text-align:center;padding:90px 22px 55px}.hero-inner{width:min(930px,100%)}.kicker{text-transform:uppercase;letter-spacing:.23em;font-size:.76rem;color:#cbd3df}
+h1,h2,h3{font-family:Georgia,serif;font-weight:500;line-height:1.08}h1{font-size:clamp(3rem,8vw,6.7rem);margin:18px 0}h2{font-size:clamp(2rem,4.5vw,4rem);margin:0 0 18px}h3{font-size:1.62rem;margin:0 0 10px}.lead{max-width:800px;margin:0 auto;color:var(--muted);font-size:clamp(1.08rem,2vw,1.3rem)}
+.section{width:min(var(--max),calc(100% - 36px));margin:auto;padding:55px 0 90px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:28px}.section-head p{max-width:670px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}.tile{--c:145,188,255;grid-column:span 4;min-height:350px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:28px;border:1px solid var(--line);border-radius:27px;background:linear-gradient(165deg,rgba(var(--c),.12),rgba(255,255,255,.018) 56%);box-shadow:0 23px 75px rgba(0,0,0,.35);transition:.32s ease}
+.tile:before,.tile:after{content:"";position:absolute;inset:0;pointer-events:none}.tile:before{background:var(--art);opacity:.34;mask-image:linear-gradient(to bottom,black,transparent 86%)}.tile:after{background:linear-gradient(to top,rgba(5,7,10,.96) 2%,rgba(5,7,10,.65) 42%,transparent 78%)}
+.tile>*{position:relative;z-index:2}.tile:hover{transform:translateY(-8px);border-color:rgba(var(--c),.5);box-shadow:0 30px 95px rgba(0,0,0,.48),0 0 38px rgba(var(--c),.1)}
+.tile.featured{grid-column:span 8;min-height:410px}.tag{align-self:flex-start;padding:6px 10px;border:1px solid var(--line);border-radius:999px;text-transform:uppercase;letter-spacing:.13em;font-size:.67rem;color:#d4dce8;margin-bottom:16px}.tile p{color:#bdc7d4;margin:0 0 18px}.enter{font-weight:680}.enter span{display:inline-block;transition:.2s}.tile:hover .enter span{transform:translateX(5px)}
+.tile.e{--c:145,188,255;--art:radial-gradient(circle at 73% 25%,rgba(145,188,255,.22),transparent 30%),repeating-radial-gradient(circle at 76% 25%,transparent 0 23px,rgba(145,188,255,.1) 24px 25px)}
+.tile.pi{--c:239,210,138;--art:repeating-radial-gradient(circle at 72% 27%,transparent 0 25px,rgba(239,210,138,.15) 26px 27px)}
+.tile.calc{--c:167,229,187;--art:linear-gradient(115deg,transparent 45%,rgba(167,229,187,.18) 46% 48%,transparent 49%),repeating-linear-gradient(0deg,transparent 0 35px,rgba(167,229,187,.07) 36px)}
+.tile.de{--c:255,153,153;--art:repeating-linear-gradient(90deg,transparent 0 44px,rgba(255,153,153,.05) 45px),radial-gradient(ellipse at 70% 32%,transparent 0 40px,rgba(255,153,153,.14) 41px 43px,transparent 44px)}
+.tile.complex{--c:151,174,255;--art:conic-gradient(from 0deg at 72% 30%,transparent,rgba(151,174,255,.2),transparent 35%,rgba(151,174,255,.12),transparent)}
+.tile.geo{--c:239,210,138;--art:linear-gradient(30deg,transparent 35%,rgba(239,210,138,.14) 36% 37%,transparent 38%),linear-gradient(150deg,transparent 35%,rgba(239,210,138,.1) 36% 37%,transparent 38%)}
+.tile.linear{--c:167,229,187;--art:repeating-linear-gradient(20deg,transparent 0 29px,rgba(167,229,187,.11) 30px 31px),repeating-linear-gradient(110deg,transparent 0 38px,rgba(167,229,187,.07) 39px 40px)}
+.tile.fourier{--c:145,188,255;--art:repeating-radial-gradient(ellipse at 72% 35%,transparent 0 19px,rgba(145,188,255,.12) 20px 21px,transparent 22px 39px)}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:24px;border:1px solid var(--line);border-radius:28px;padding:clamp(25px,5vw,50px);background:rgba(255,255,255,.025)}.about p{color:var(--muted)}footer{text-align:center;padding:42px 22px 65px;color:#7f8b9a;border-top:1px solid var(--line)}
+@media(max-width:850px){.nav-links{display:none}.tile,.tile.featured{grid-column:1/-1;min-height:320px}.about{grid-template-columns:1fr}.section-head{display:block}}
+</style></head><body>
+<nav class="site-nav"><a class="brand" href="/"><img class="brand-logo" src="/assets/favicon.svg" alt=""><span>Math Museum by ApogeeLab</span></a><div class="nav-links"><a href="#exhibits">Exhibits</a><a href="#about">About</a><a href="https://apogeelab.org">ApogeeLab</a></div></nav>
+<header class="hero"><div class="hero-inner"><div class="kicker">A collection of interactive experiences</div><h1>Walk Through Mathematics</h1><p class="lead">Explore the discoveries, questions, experiments, and hidden connections behind the equations. Each exhibit is meant to be experienced—not merely read.</p></div></header>
+<main><section class="section" id="exhibits"><div class="section-head"><div><div class="kicker">The collection</div><h2>Choose an Exhibit</h2></div><p>Euler's Number is the first polished hall. Seven additional exhibits now have full interactive master drafts ready for development.</p></div>
+<div class="grid">
+<a class="tile featured e" href="/e/"><span class="tag">Polished exhibit</span><h3>Euler's Number</h3><p>A deep dive into the number that connects logarithms, growth, calculus, engineering, physics, and the complex plane.</p><div class="enter">Enter exhibit <span>→</span></div></a>
+<a class="tile pi" href="/pi/"><span class="tag">Master draft</span><h3>The Story of π</h3><p>Measure circles, follow Archimedes, drop Buffon's needles, and discover why π appears far beyond round objects.</p><div class="enter">Enter exhibit <span>→</span></div></a>
+<a class="tile calc" href="/calculus/"><span class="tag">Master draft</span><h3>Calculus</h3><p>Chase an instantaneous speed, build areas from slices, and uncover the connection between derivatives and integrals.</p><div class="enter">Enter exhibit <span>→</span></div></a>
+<a class="tile de" href="/differential-equations/"><span class="tag">Master draft</span><h3>Differential Equations</h3><p>Use local rules of change to predict cooling, growth, motion, and the future of a spring.</p><div class="enter">Enter exhibit <span>→</span></div></a>
+<a class="tile complex" href="/complex/"><span class="tag">Master draft</span><h3>Complex Numbers</h3><p>Enter the plane where numbers gain direction, multiplication becomes rotation, and circles cast waves.</p><div class="enter">Enter exhibit <span>→</span></div></a>
+<a class="tile geo" href="/geometry/"><span class="tag">Master draft</span><h3>Geometry as Algebra</h3><p>Complete the square with physical pieces, see geometric proofs, slice cones, and tile the plane.</p><div class="enter">Enter exhibit <span>→</span></div></a>
+<a class="tile linear" href="/linear-algebra/"><span class="tag">Master draft</span><h3>Linear Algebra</h3><p>Explore vectors, transformation matrices, area, eigenvectors, and systems of equations.</p><div class="enter">Enter exhibit <span>→</span></div></a>
+<a class="tile fourier" href="/fourier/"><span class="tag">Master draft</span><h3>Fourier Analysis</h3><p>Build signals from waves, reveal frequency spectra, spin epicycles, and visualize an electromagnetic wave.</p><div class="enter">Enter exhibit <span>→</span></div></a>
+</div></section>
+<section class="section" id="about"><div class="about"><div><div class="kicker">About the museum</div><h2>Ideas deserve rooms.</h2></div><div><p>Most mathematics websites begin with definitions and formulas. This museum begins with a problem, prediction, experiment, or historical mystery. The mathematics is revealed only after the visitor has a reason to want it.</p><p>Math Museum is an ApogeeLab project combining history, mathematics, engineering, programming, animation, and interactive storytelling.</p></div></div></section></main>
+<footer>Math Museum by ApogeeLab · mathmuseum.apogeelab.org</footer></body></html>

@@ -1,24 +1,79 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Complex Numbers — ApogeeLab Mathematics Museum</title>
-<link rel="stylesheet" href="/assets/museum.css">
-</head>
-<body>
-<nav class="site-nav">
-  <a class="brand" href="/"><span class="brand-mark">∑</span><span>Mathematics Museum</span></a>
-  <div class="nav-links"><a href="/">All Exhibits</a><a href="https://apogeelab.org">ApogeeLab</a></div>
-</nav>
-<main class="placeholder">
-  <div class="placeholder-card">
-    <div class="kicker">Future exhibit · Test page</div>
-    <div class="placeholder-symbol">i</div>
-    <h1>Complex Numbers</h1>
-    <p class="lead">A future exhibit about rotation, oscillation, geometry, and numbers beyond the real line.</p>
-    <a class="button" href="/">Return to Museum Lobby</a>
-  </div>
-</main>
-</body>
-</html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Math Museum — Complex Numbers</title>
+<meta name="description" content="Enter the plane where numbers gain direction, multiplication becomes rotation, and waves become geometry.">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<style>
+:root{
+ --bg:#05070a;--panel:#0d1219;--text:#f6f8fc;--body:#e5ebf4;--muted:#aeb9c8;
+ --line:rgba(255,255,255,.13);--accent:#91bcff;--accent2:#a7e5bb;--gold:#efd28a;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;color:var(--text);background:#05070a;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.68;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 50% -10%,#1b2842 0,transparent 35%),radial-gradient(circle at 85% 42%,rgba(80,112,160,.11),transparent 30%),#05070a}
+body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);background-size:58px 58px;mask-image:linear-gradient(black,transparent 95%)}
+a{color:inherit}button,input,select{font:inherit}
+nav{position:fixed;z-index:50;inset:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:15px 22px;background:rgba(5,7,10,.8);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.brand{font-size:.8rem;letter-spacing:.13em;text-transform:uppercase;font-weight:760;text-decoration:none}.progress{color:var(--muted);font-size:.9rem}
+section{min-height:100vh;display:grid;place-items:center;padding:110px 20px 78px;position:relative}
+section:before{content:"";position:absolute;inset:6% 4%;z-index:-1;border:1px solid rgba(255,255,255,.025);border-radius:42px}
+.wrap{width:min(1120px,100%)}.hero{text-align:center}.symbol{font:italic clamp(7rem,22vw,16rem)/.85 Georgia,serif;text-shadow:0 0 75px rgba(190,215,255,.26)}
+.kicker{text-transform:uppercase;letter-spacing:.23em;font-size:.76rem;color:#d3dbe7}
+h1,h2,h3{font-family:Georgia,serif;font-weight:500;line-height:1.1}h1{font-size:clamp(2.7rem,6vw,5.35rem);margin:20px 0}h2{font-size:clamp(2.05rem,4.25vw,3.65rem);margin:0 0 19px}h3{font-size:1.46rem;margin:0 0 11px}
+.lead{max-width:890px;color:var(--body);font-size:clamp(1.15rem,2vw,1.38rem);margin:0 0 30px}.hero .lead{margin-left:auto;margin-right:auto;color:#d1dae7}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.062),rgba(255,255,255,.024));border:1px solid var(--line);border-radius:27px;padding:clamp(22px,4vw,40px);box-shadow:0 25px 80px rgba(0,0,0,.36)}
+button,.button{border:1px solid rgba(255,255,255,.31);background:rgba(255,255,255,.08);color:white;border-radius:999px;padding:13px 22px;cursor:pointer;transition:.25s ease;text-decoration:none;display:inline-block}
+button:hover,.button:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(255,255,255,.14)}
+.next{text-align:center;margin-top:34px}.next button{min-width:230px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}.box{grid-column:span 6;background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:20px;padding:22px}.box.full{grid-column:1/-1}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}.metric{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:18px;padding:18px;text-align:center}.metric strong{display:block;font:1.75rem Georgia,serif;margin-top:8px}
+canvas{width:100%;height:390px;background:#080c12;border:1px solid var(--line);border-radius:18px;display:block}.canvas-note{color:var(--muted);font-size:.92rem;margin-top:10px}
+label{display:block;margin:16px 0 7px;color:var(--body)}input[type=range]{width:100%;accent-color:white}.chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.chip.active{background:white;color:#080b10}
+.math{font-family:Georgia,serif;font-size:clamp(1.25rem,2.7vw,2.1rem);text-align:center;background:#080c12;border:1px solid var(--line);border-radius:18px;padding:18px;overflow:auto}
+.explain{color:var(--body);font-size:1.07rem}.muted{color:var(--muted)}
+.timeline{position:relative;margin-top:28px}.timeline:before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(transparent,rgba(255,255,255,.3),transparent)}
+.timeline-item{width:50%;padding:12px 38px 28px;position:relative}.timeline-item:nth-child(even){margin-left:50%}.timeline-item:after{content:"";position:absolute;top:25px;width:12px;height:12px;border-radius:50%;background:white;box-shadow:0 0 24px rgba(255,255,255,.4)}.timeline-item:nth-child(odd):after{right:-6px}.timeline-item:nth-child(even):after{left:-6px}.year{font:1.78rem Georgia,serif;color:var(--gold)}.timeline-item p{margin:5px 0;color:var(--body)}
+.callout{border-left:3px solid var(--accent);background:rgba(145,188,255,.08);padding:16px 18px;border-radius:0 14px 14px 0;color:var(--body);margin:20px 0}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin:13px 0 0;color:var(--body)}.legend span{display:flex;align-items:center;gap:8px}.swatch{width:26px;height:4px;border-radius:999px;display:inline-block}.blue{background:#91bcff}.green{background:#a7e5bb}.red{background:#ff9999}.white{background:white}.gold{background:#efd28a}
+.fade{opacity:0;transform:translateY(24px);transition:opacity .85s ease,transform .85s ease}.fade.visible{opacity:1;transform:none}.curtain{position:fixed;inset:0;background:#05070a;z-index:200;pointer-events:none;opacity:0;transition:opacity .45s}.curtain.on{opacity:1}
+.stage{padding:20px;border:1px solid var(--line);border-radius:20px;background:#080c12}.quote{font:clamp(1.35rem,3vw,2.15rem)/1.36 Georgia,serif;text-align:center;margin:28px auto;max-width:880px}
+.table{width:100%;border-collapse:collapse}.table th,.table td{padding:10px;border-bottom:1px solid var(--line);text-align:left}.table th{color:#dce4ef}.table td{color:var(--body)}
+@media(max-width:800px){.progress{display:none}.box{grid-column:1/-1}.metrics{grid-template-columns:1fr}.timeline:before{left:10px}.timeline-item,.timeline-item:nth-child(even){width:100%;margin-left:0;padding-left:38px;padding-right:0}.timeline-item:nth-child(odd):after,.timeline-item:nth-child(even):after{left:4px;right:auto}}
+</style>
+</head><body>
+<div class="curtain" id="curtain"></div>
+<nav><a class="brand" href="/">Math Museum · Complex Numbers</a><div class="progress" id="progress">Entrance</div></nav>
+<section class="hero" id="top" data-room="Entrance"><div class="wrap">
+<div class="kicker">A Math Museum interactive exhibit</div>
+<div class="symbol">i</div><h1>Complex Numbers</h1><p class="lead">Enter the plane where numbers gain direction, multiplication becomes rotation, and waves become geometry.</p>
+<button data-next="r1">Enter Exhibit</button></div></section>
+<section id="r1" class="fade" data-room="Room 1 · The Number That Wasn't Supposed to Exist"><div class="wrap">
+<div class="kicker">Room 1</div><h2>The Number That Wasn't Supposed to Exist</h2><p class="lead">Negative numbers were once considered suspicious. Square roots of negative numbers seemed even worse—until mathematicians discovered they completed a larger number system.</p><div class="card"><div class="timeline"><div class="timeline-item"><div class="year">1500s</div><h3>Cubic equations force the issue</h3><p>Mathematicians encounter square roots of negative numbers inside calculations that still produce ordinary real answers.</p></div><div class="timeline-item"><div class="year">1637</div><h3>Descartes calls them imaginary</h3><p>The name is dismissive, but it survives.</p></div><div class="timeline-item"><div class="year">1700s–1800s</div><h3>Euler, Wessel, Argand, and Gauss</h3><p>Complex numbers gain a geometric home: a two-dimensional plane where multiplication has a visible meaning.</p></div></div></div><div class="next"><button data-next="r2">Step Into the Complex Plane</button></div></div></section><section id="r2" class="fade" data-room="Room 2 · A Number With Two Directions"><div class="wrap">
+<div class="kicker">Room 2</div><h2>A Number With Two Directions</h2><p class="lead">A complex number has a real part and an imaginary part. Together they locate a point on a plane.</p><div class="card"><label>Real part: <strong id="reOut">2.0</strong></label><input id="re" type="range" min="-3" max="3" step=".1" value="2"><label>Imaginary part: <strong id="imOut">1.5</strong></label><input id="im" type="range" min="-3" max="3" step=".1" value="1.5"><canvas id="complexPlane"></canvas><div class="math" id="zText"></div></div><div class="next"><button data-next="r3">Add Complex Numbers</button></div></div></section><section id="r3" class="fade" data-room="Room 3 · Addition Is Still Vector Addition"><div class="wrap">
+<div class="kicker">Room 3</div><h2>Addition Is Still Vector Addition</h2><p class="lead">Add the horizontal parts together. Add the vertical parts together. Complex addition is the same head-to-tail rule used for vectors.</p><div class="card"><label>Second number angle: <strong id="addAngOut">120°</strong></label><input id="addAng" type="range" min="0" max="360" value="120"><canvas id="addCanvas"></canvas><div class="math" id="addText"></div></div><div class="next"><button data-next="r4">Multiply and Rotate</button></div></div></section><section id="r4" class="fade" data-room="Room 4 · Multiplication Becomes Rotation"><div class="wrap">
+<div class="kicker">Room 4</div><h2>Multiplication Becomes Rotation</h2><p class="lead">Multiplying by a complex number changes length and angle. Multiplying by i creates a clean quarter-turn.</p><div class="card"><label>Number of multiplications by i: <strong id="iPowerOut">1</strong></label><input id="iPower" type="range" min="0" max="8" value="1"><canvas id="rotateCanvas"></canvas><div class="metrics"><div class="metric">Power<strong id="powerText"></strong></div><div class="metric">Result<strong id="powerResult"></strong></div><div class="metric">Rotation<strong id="rotationDeg"></strong></div></div></div><div class="next"><button data-next="r5">Discover the Roots of Unity</button></div></div></section><section id="r5" class="fade" data-room="Room 5 · One Has Many Complex Roots"><div class="wrap">
+<div class="kicker">Room 5</div><h2>One Has Many Complex Roots</h2><p class="lead">In the real numbers, equations such as z⁶ = 1 appear to have only a few answers. On the complex plane, the answers arrange themselves with perfect rotational symmetry.</p><div class="card"><label>Roots of zⁿ = 1: n = <strong id="rootNOut">6</strong></label><input id="rootN" type="range" min="2" max="16" value="6"><canvas id="rootsCanvas"></canvas></div><div class="next"><button data-next="r6">Turn Rotation Into a Wave</button></div></div></section><section id="r6" class="fade" data-room="Room 6 · A Rotating Point Casts a Sine Wave"><div class="wrap">
+<div class="kicker">Room 6</div><h2>A Rotating Point Casts a Sine Wave</h2><p class="lead">Let a point travel around the unit circle. Its vertical shadow rises and falls as a sine wave; its horizontal shadow traces cosine.</p><div class="card"><label>Angle: <strong id="waveAngleOut">0.80 radians</strong></label><input id="waveAngle" type="range" min="0" max="6.283" step=".01" value=".8"><canvas id="complexWave"></canvas><div class="callout">This is why complex numbers appear so naturally in circuits, waves, vibration, quantum mechanics, and signal processing: they turn oscillation into rotation.</div></div><div class="next"><button data-next="final">Complete the Exhibit</button></div></div></section>
+<section id="final" class="fade" data-room="Final Room"><div class="wrap" style="text-align:center">
+<div class="kicker">Final Room</div><h2>The Idea Continues</h2><div class="symbol" style="font-size:clamp(6rem,16vw,11rem)">i</div>
+<p class="quote">The symbol is only the doorway. The real exhibit is the connection it reveals.</p>
+<a class="button" href="/">Return to Museum Lobby</a> <button data-next="top">Return to Entrance</button>
+</div></section>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+function prep(c,h=390){const d=Math.max(1,devicePixelRatio||1),w=Math.max(320,Math.round(c.getBoundingClientRect().width||1000));c.style.height=h+"px";c.width=Math.round(w*d);c.height=Math.round(h*d);const g=c.getContext("2d");g.setTransform(d,0,0,d,0,0);return{g,W:w,H:h}}
+function axes(g,W,H,x0,y0){g.strokeStyle="rgba(255,255,255,.14)";g.lineWidth=1;g.beginPath();g.moveTo(45,y0);g.lineTo(W-25,y0);g.moveTo(x0,25);g.lineTo(x0,H-35);g.stroke()}
+function path(g,pts,color="#91bcff",width=3){g.strokeStyle=color;g.lineWidth=width;g.beginPath();pts.forEach((p,i)=>i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1]));g.stroke()}
+function travel(id){const c=$("#curtain");c.classList.add("on");setTimeout(()=>{document.getElementById(id).scrollIntoView({behavior:"auto"});setTimeout(()=>c.classList.remove("on"),110)},410)}
+$$("[data-next]").forEach(b=>b.onclick=()=>travel(b.dataset.next));
+const observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");$("#progress").textContent=e.target.dataset.room||""}}),{threshold:.22});$$("section").forEach(s=>observer.observe(s));
+
+
+function plane(){let re=+$("#re").value,im=+$("#im").value,{g,W,H}=prep($("#complexPlane"),390),cx=W/2,cy=H/2,s=Math.min(W,H)*.105;g.clearRect(0,0,W,H);axes(g,W,H,cx,cy);g.fillStyle="rgba(255,255,255,.65)";g.font="15px system-ui";g.fillText("real",W-70,cy-10);g.fillText("i",cx+10,35);path(g,[[cx,cy],[cx+re*s,cy-im*s]],"#91bcff",4);g.fillStyle="white";g.beginPath();g.arc(cx+re*s,cy-im*s,8,0,Math.PI*2);g.fill();$("#reOut").textContent=re.toFixed(1);$("#imOut").textContent=im.toFixed(1);$("#zText").textContent=`z = ${re.toFixed(1)} ${im>=0?"+":"−"} ${Math.abs(im).toFixed(1)}i`}$("#re").oninput=$("#im").oninput=plane;
+function add(){let a=+$("#addAng").value*Math.PI/180,z1=[1.7,1],z2=[1.5*Math.cos(a),1.5*Math.sin(a)],z3=[z1[0]+z2[0],z1[1]+z2[1]],{g,W,H}=prep($("#addCanvas"),390),cx=W/2,cy=H/2,s=65;g.clearRect(0,0,W,H);axes(g,W,H,cx,cy);path(g,[[cx,cy],[cx+z1[0]*s,cy-z1[1]*s]],"#91bcff",4);path(g,[[cx+z1[0]*s,cy-z1[1]*s],[cx+z3[0]*s,cy-z3[1]*s]],"#a7e5bb",4);path(g,[[cx,cy],[cx+z3[0]*s,cy-z3[1]*s]],"white",3);$("#addAngOut").textContent=Math.round(a*180/Math.PI)+"°";$("#addText").textContent=`(${z1[0].toFixed(1)} + ${z1[1].toFixed(1)}i) + (${z2[0].toFixed(1)} ${z2[1]>=0?"+":"−"} ${Math.abs(z2[1]).toFixed(1)}i) = ${z3[0].toFixed(1)} ${z3[1]>=0?"+":"−"} ${Math.abs(z3[1]).toFixed(1)}i`}$("#addAng").oninput=add;
+function rotate(){let n=+$("#iPower").value,a=n*Math.PI/2,{g,W,H}=prep($("#rotateCanvas"),390),cx=W/2,cy=H/2,r=135;g.clearRect(0,0,W,H);axes(g,W,H,cx,cy);g.strokeStyle="rgba(255,255,255,.2)";g.beginPath();g.arc(cx,cy,r,0,Math.PI*2);g.stroke();let pts=[];for(let j=0;j<=n;j++)pts.push([cx+r*Math.cos(j*Math.PI/2),cy-r*Math.sin(j*Math.PI/2)]);if(pts.length>1)path(g,pts,"#91bcff",4);g.fillStyle="white";g.beginPath();g.arc(cx+r*Math.cos(a),cy-r*Math.sin(a),9,0,Math.PI*2);g.fill();let vals=["1","i","−1","−i"];$("#iPowerOut").textContent=n;$("#powerText").textContent="i^"+n;$("#powerResult").textContent=vals[n%4];$("#rotationDeg").textContent=(n*90)+"°"}$("#iPower").oninput=rotate;
+function roots(){let n=+$("#rootN").value,{g,W,H}=prep($("#rootsCanvas"),390),cx=W/2,cy=H/2,r=145;g.clearRect(0,0,W,H);axes(g,W,H,cx,cy);g.strokeStyle="rgba(255,255,255,.22)";g.beginPath();g.arc(cx,cy,r,0,Math.PI*2);g.stroke();for(let k=0;k<n;k++){let a=2*Math.PI*k/n,x=cx+r*Math.cos(a),y=cy-r*Math.sin(a);g.fillStyle="#91bcff";g.beginPath();g.arc(x,y,7,0,Math.PI*2);g.fill();g.strokeStyle="rgba(145,188,255,.4)";g.beginPath();g.moveTo(cx,cy);g.lineTo(x,y);g.stroke()}$("#rootNOut").textContent=n}$("#rootN").oninput=roots;
+function wave(){let a=+$("#waveAngle").value,{g,W,H}=prep($("#complexWave"),390),cx=180,cy=H/2,r=105;g.clearRect(0,0,W,H);g.strokeStyle="rgba(255,255,255,.22)";g.beginPath();g.arc(cx,cy,r,0,Math.PI*2);g.stroke();axes(g,W,H,cx,cy);let px=cx+r*Math.cos(a),py=cy-r*Math.sin(a);path(g,[[cx,cy],[px,py]],"white",3);g.fillStyle="white";g.beginPath();g.arc(px,py,8,0,Math.PI*2);g.fill();let start=340,pts=[];for(let x=0;x<W-start-30;x++){let t=x/(W-start-30)*2*Math.PI;pts.push([start+x,cy-r*Math.sin(t)])}path(g,pts,"#91bcff",4);g.strokeStyle="rgba(255,255,255,.25)";g.setLineDash([6,6]);g.beginPath();g.moveTo(px,py);g.lineTo(start+(a/(2*Math.PI))*(W-start-30),py);g.stroke();g.setLineDash([]);$("#waveAngleOut").textContent=a.toFixed(2)+" radians"}$("#waveAngle").oninput=wave;
+function init(){plane();add();rotate();roots();wave()}addEventListener("DOMContentLoaded",init);addEventListener("resize",init);
+
+</script></body></html>

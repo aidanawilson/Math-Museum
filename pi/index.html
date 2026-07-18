@@ -1,24 +1,95 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The Story of π — ApogeeLab Mathematics Museum</title>
-<link rel="stylesheet" href="/assets/museum.css">
-</head>
-<body>
-<nav class="site-nav">
-  <a class="brand" href="/"><span class="brand-mark">∑</span><span>Mathematics Museum</span></a>
-  <div class="nav-links"><a href="/">All Exhibits</a><a href="https://apogeelab.org">ApogeeLab</a></div>
-</nav>
-<main class="placeholder">
-  <div class="placeholder-card">
-    <div class="kicker">Future exhibit · Test page</div>
-    <div class="placeholder-symbol">π</div>
-    <h1>The Story of π</h1>
-    <p class="lead">A future interactive exhibit about circles, infinity, geometry, probability, and the many unexpected appearances of π.</p>
-    <a class="button" href="/">Return to Museum Lobby</a>
-  </div>
-</main>
-</body>
-</html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Math Museum — The Story of π</title>
+<meta name="description" content="Why does one ratio belong to every circle—and why does it keep appearing in probability, waves, geometry, and physics?">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<style>
+:root{
+ --bg:#05070a;--panel:#0d1219;--text:#f6f8fc;--body:#e5ebf4;--muted:#aeb9c8;
+ --line:rgba(255,255,255,.13);--accent:#91bcff;--accent2:#a7e5bb;--gold:#efd28a;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;color:var(--text);background:#05070a;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.68;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 50% -10%,#1b2842 0,transparent 35%),radial-gradient(circle at 85% 42%,rgba(80,112,160,.11),transparent 30%),#05070a}
+body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);background-size:58px 58px;mask-image:linear-gradient(black,transparent 95%)}
+a{color:inherit}button,input,select{font:inherit}
+nav{position:fixed;z-index:50;inset:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:15px 22px;background:rgba(5,7,10,.8);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.brand{font-size:.8rem;letter-spacing:.13em;text-transform:uppercase;font-weight:760;text-decoration:none}.progress{color:var(--muted);font-size:.9rem}
+section{min-height:100vh;display:grid;place-items:center;padding:110px 20px 78px;position:relative}
+section:before{content:"";position:absolute;inset:6% 4%;z-index:-1;border:1px solid rgba(255,255,255,.025);border-radius:42px}
+.wrap{width:min(1120px,100%)}.hero{text-align:center}.symbol{font:italic clamp(7rem,22vw,16rem)/.85 Georgia,serif;text-shadow:0 0 75px rgba(190,215,255,.26)}
+.kicker{text-transform:uppercase;letter-spacing:.23em;font-size:.76rem;color:#d3dbe7}
+h1,h2,h3{font-family:Georgia,serif;font-weight:500;line-height:1.1}h1{font-size:clamp(2.7rem,6vw,5.35rem);margin:20px 0}h2{font-size:clamp(2.05rem,4.25vw,3.65rem);margin:0 0 19px}h3{font-size:1.46rem;margin:0 0 11px}
+.lead{max-width:890px;color:var(--body);font-size:clamp(1.15rem,2vw,1.38rem);margin:0 0 30px}.hero .lead{margin-left:auto;margin-right:auto;color:#d1dae7}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.062),rgba(255,255,255,.024));border:1px solid var(--line);border-radius:27px;padding:clamp(22px,4vw,40px);box-shadow:0 25px 80px rgba(0,0,0,.36)}
+button,.button{border:1px solid rgba(255,255,255,.31);background:rgba(255,255,255,.08);color:white;border-radius:999px;padding:13px 22px;cursor:pointer;transition:.25s ease;text-decoration:none;display:inline-block}
+button:hover,.button:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(255,255,255,.14)}
+.next{text-align:center;margin-top:34px}.next button{min-width:230px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}.box{grid-column:span 6;background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:20px;padding:22px}.box.full{grid-column:1/-1}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}.metric{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:18px;padding:18px;text-align:center}.metric strong{display:block;font:1.75rem Georgia,serif;margin-top:8px}
+canvas{width:100%;height:390px;background:#080c12;border:1px solid var(--line);border-radius:18px;display:block}.canvas-note{color:var(--muted);font-size:.92rem;margin-top:10px}
+label{display:block;margin:16px 0 7px;color:var(--body)}input[type=range]{width:100%;accent-color:white}.chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.chip.active{background:white;color:#080b10}
+.math{font-family:Georgia,serif;font-size:clamp(1.25rem,2.7vw,2.1rem);text-align:center;background:#080c12;border:1px solid var(--line);border-radius:18px;padding:18px;overflow:auto}
+.explain{color:var(--body);font-size:1.07rem}.muted{color:var(--muted)}
+.timeline{position:relative;margin-top:28px}.timeline:before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(transparent,rgba(255,255,255,.3),transparent)}
+.timeline-item{width:50%;padding:12px 38px 28px;position:relative}.timeline-item:nth-child(even){margin-left:50%}.timeline-item:after{content:"";position:absolute;top:25px;width:12px;height:12px;border-radius:50%;background:white;box-shadow:0 0 24px rgba(255,255,255,.4)}.timeline-item:nth-child(odd):after{right:-6px}.timeline-item:nth-child(even):after{left:-6px}.year{font:1.78rem Georgia,serif;color:var(--gold)}.timeline-item p{margin:5px 0;color:var(--body)}
+.callout{border-left:3px solid var(--accent);background:rgba(145,188,255,.08);padding:16px 18px;border-radius:0 14px 14px 0;color:var(--body);margin:20px 0}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin:13px 0 0;color:var(--body)}.legend span{display:flex;align-items:center;gap:8px}.swatch{width:26px;height:4px;border-radius:999px;display:inline-block}.blue{background:#91bcff}.green{background:#a7e5bb}.red{background:#ff9999}.white{background:white}.gold{background:#efd28a}
+.fade{opacity:0;transform:translateY(24px);transition:opacity .85s ease,transform .85s ease}.fade.visible{opacity:1;transform:none}.curtain{position:fixed;inset:0;background:#05070a;z-index:200;pointer-events:none;opacity:0;transition:opacity .45s}.curtain.on{opacity:1}
+.stage{padding:20px;border:1px solid var(--line);border-radius:20px;background:#080c12}.quote{font:clamp(1.35rem,3vw,2.15rem)/1.36 Georgia,serif;text-align:center;margin:28px auto;max-width:880px}
+.table{width:100%;border-collapse:collapse}.table th,.table td{padding:10px;border-bottom:1px solid var(--line);text-align:left}.table th{color:#dce4ef}.table td{color:var(--body)}
+@media(max-width:800px){.progress{display:none}.box{grid-column:1/-1}.metrics{grid-template-columns:1fr}.timeline:before{left:10px}.timeline-item,.timeline-item:nth-child(even){width:100%;margin-left:0;padding-left:38px;padding-right:0}.timeline-item:nth-child(odd):after,.timeline-item:nth-child(even):after{left:4px;right:auto}}
+</style>
+</head><body>
+<div class="curtain" id="curtain"></div>
+<nav><a class="brand" href="/">Math Museum · The Story of π</a><div class="progress" id="progress">Entrance</div></nav>
+<section class="hero" id="top" data-room="Entrance"><div class="wrap">
+<div class="kicker">A Math Museum interactive exhibit</div>
+<div class="symbol">π</div><h1>The Story of π</h1><p class="lead">Why does one ratio belong to every circle—and why does it keep appearing in probability, waves, geometry, and physics?</p>
+<button data-next="r1">Enter Exhibit</button></div></section>
+<section id="r1" class="fade" data-room="Room 1 · A Ratio Older Than Its Name"><div class="wrap">
+<div class="kicker">Room 1</div><h2>A Ratio Older Than Its Name</h2><p class="lead">Long before π had a symbol, builders and astronomers noticed the same relationship hiding in every circle.</p><div class="card"><div class="timeline">
+<div class="timeline-item"><div class="year">c. 1900 BCE</div><h3>Babylon and Egypt</h3><p>Early civilizations use practical approximations for circular construction and surveying.</p></div>
+<div class="timeline-item"><div class="year">c. 250 BCE</div><h3>Archimedes traps π</h3><p>He places polygons inside and outside a circle, squeezing the true circumference between two calculable boundaries.</p></div>
+<div class="timeline-item"><div class="year">1706</div><h3>The symbol π appears</h3><p>William Jones uses the Greek letter π; Euler later helps make it standard.</p></div>
+<div class="timeline-item"><div class="year">1882</div><h3>π is proven transcendental</h3><p>No finite construction using only a compass and straightedge can exactly “square the circle.”</p></div>
+</div></div><div class="next"><button data-next="r2">Measure a Circle</button></div></div></section><section id="r2" class="fade" data-room="Room 2 · Every Circle Shares One Secret"><div class="wrap">
+<div class="kicker">Room 2</div><h2>Every Circle Shares One Secret</h2><p class="lead">Make the circle larger or smaller. Its circumference changes, but the ratio of circumference to diameter does not.</p><div class="card"><label>Circle diameter: <strong id="piD">180</strong> pixels</label><input id="piDiameter" type="range" min="70" max="300" value="180">
+<canvas id="circleCanvas"></canvas><div class="metrics"><div class="metric">Diameter<strong id="diameterOut"></strong></div><div class="metric">Circumference<strong id="circOut"></strong></div><div class="metric">Circumference ÷ diameter<strong id="ratioOut"></strong></div></div></div><div class="next"><button data-next="r3">See Archimedes' Method</button></div></div></section><section id="r3" class="fade" data-room="Room 3 · Trapping π With Polygons"><div class="wrap">
+<div class="kicker">Room 3</div><h2>Trapping π With Polygons</h2><p class="lead">A polygon is easier to measure than a circle. Add more sides and the inner and outer polygons close in on the same value.</p><div class="card"><label>Number of polygon sides: <strong id="sideOut">6</strong></label><input id="sides" type="range" min="3" max="120" value="6">
+<canvas id="polyCanvas"></canvas><div class="metrics"><div class="metric">Inner estimate<strong id="innerPi"></strong></div><div class="metric">π<strong>3.141593</strong></div><div class="metric">Outer estimate<strong id="outerPi"></strong></div></div></div><div class="next"><button data-next="r4">Drop Some Needles</button></div></div></section><section id="r4" class="fade" data-room="Room 4 · Finding π by Accident"><div class="wrap">
+<div class="kicker">Room 4</div><h2>Finding π by Accident</h2><p class="lead">Drop short needles across equally spaced lines. The fraction that crosses a line is connected to π—a surprising bridge between circles and probability.</p><div class="card"><div class="chips"><button id="drop10">Drop 10</button><button id="drop100">Drop 100</button><button id="resetNeedles">Reset</button></div>
+<canvas id="needleCanvas"></canvas><div class="metrics"><div class="metric">Needles dropped<strong id="needleN">0</strong></div><div class="metric">Crossings<strong id="needleX">0</strong></div><div class="metric">Estimated π<strong id="needlePi">—</strong></div></div></div><div class="next"><button data-next="r5">Build π From an Infinite Pattern</button></div></div></section><section id="r5" class="fade" data-room="Room 5 · A Circle Hidden in an Infinite Sum"><div class="wrap">
+<div class="kicker">Room 5</div><h2>A Circle Hidden in an Infinite Sum</h2><p class="lead">π can emerge from a pattern that never draws a circle at all. Add more terms and watch the total creep toward π.</p><div class="card"><div class="math">π ≈ 4(1 − 1/3 + 1/5 − 1/7 + ···)</div><label>Terms included: <strong id="piTermsOut">25</strong></label><input id="piTerms" type="range" min="1" max="2000" value="25">
+<canvas id="piSeriesCanvas"></canvas><div class="metrics"><div class="metric">Current estimate<strong id="piEstimate"></strong></div><div class="metric">Error<strong id="piError"></strong></div><div class="metric">True π<strong>3.141593</strong></div></div></div><div class="next"><button data-next="r6">Why π Escapes the Circle</button></div></div></section><section id="r6" class="fade" data-room="Room 6 · Why π Appears Far Beyond Circles"><div class="wrap">
+<div class="kicker">Room 6</div><h2>Why π Appears Far Beyond Circles</h2><p class="lead">Whenever a system contains rotation, waves, symmetry, or a hidden circular geometry, π tends to appear.</p><div class="grid"><div class="box"><h3>Waves</h3><p class="explain">One complete sine wave is one trip around a circle. That is why angles and frequencies naturally contain π.</p></div>
+<div class="box"><h3>Probability</h3><p class="explain">Bell curves contain π because their total area is tied to circular geometry hiding inside a two-dimensional integral.</p></div>
+<div class="box"><h3>Physics</h3><p class="explain">Rotations, orbits, fields, and quantum waves repeatedly return to circles and therefore to π.</p></div>
+<div class="box"><h3>Geometry</h3><p class="explain">Areas, volumes, and curved surfaces inherit π whenever circular cross-sections are present.</p></div></div><div class="next"><button data-next="final">Complete the Exhibit</button></div></div></section>
+<section id="final" class="fade" data-room="Final Room"><div class="wrap" style="text-align:center">
+<div class="kicker">Final Room</div><h2>The Idea Continues</h2><div class="symbol" style="font-size:clamp(6rem,16vw,11rem)">π</div>
+<p class="quote">The symbol is only the doorway. The real exhibit is the connection it reveals.</p>
+<a class="button" href="/">Return to Museum Lobby</a> <button data-next="top">Return to Entrance</button>
+</div></section>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+function prep(c,h=390){const d=Math.max(1,devicePixelRatio||1),w=Math.max(320,Math.round(c.getBoundingClientRect().width||1000));c.style.height=h+"px";c.width=Math.round(w*d);c.height=Math.round(h*d);const g=c.getContext("2d");g.setTransform(d,0,0,d,0,0);return{g,W:w,H:h}}
+function axes(g,W,H,x0,y0){g.strokeStyle="rgba(255,255,255,.14)";g.lineWidth=1;g.beginPath();g.moveTo(45,y0);g.lineTo(W-25,y0);g.moveTo(x0,25);g.lineTo(x0,H-35);g.stroke()}
+function path(g,pts,color="#91bcff",width=3){g.strokeStyle=color;g.lineWidth=width;g.beginPath();pts.forEach((p,i)=>i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1]));g.stroke()}
+function travel(id){const c=$("#curtain");c.classList.add("on");setTimeout(()=>{document.getElementById(id).scrollIntoView({behavior:"auto"});setTimeout(()=>c.classList.remove("on"),110)},410)}
+$$("[data-next]").forEach(b=>b.onclick=()=>travel(b.dataset.next));
+const observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");$("#progress").textContent=e.target.dataset.room||""}}),{threshold:.22});$$("section").forEach(s=>observer.observe(s));
+
+
+function drawCircle(){const d=+$("#piDiameter").value,{g,W,H}=prep($("#circleCanvas"));g.clearRect(0,0,W,H);const r=d/2,cx=W/2,cy=H/2;g.strokeStyle="#91bcff";g.lineWidth=4;g.beginPath();g.arc(cx,cy,r,0,Math.PI*2);g.stroke();g.strokeStyle="white";g.lineWidth=2;g.beginPath();g.moveTo(cx-r,cy);g.lineTo(cx+r,cy);g.stroke();g.fillStyle="rgba(255,255,255,.7)";g.font="16px system-ui";g.fillText("diameter",cx-31,cy-10);$("#piD").textContent=d;$("#diameterOut").textContent=d.toFixed(0);$("#circOut").textContent=(Math.PI*d).toFixed(2);$("#ratioOut").textContent=Math.PI.toFixed(6)}
+$("#piDiameter").oninput=drawCircle;
+function drawPoly(){const n=+$("#sides").value,{g,W,H}=prep($("#polyCanvas"));g.clearRect(0,0,W,H);const r=145,cx=W/2,cy=H/2;g.strokeStyle="rgba(255,255,255,.35)";g.lineWidth=2;g.beginPath();g.arc(cx,cy,r,0,Math.PI*2);g.stroke();function polygon(rad,col){g.strokeStyle=col;g.lineWidth=3;g.beginPath();for(let i=0;i<=n;i++){let a=-Math.PI/2+i*2*Math.PI/n,x=cx+rad*Math.cos(a),y=cy+rad*Math.sin(a);i?g.lineTo(x,y):g.moveTo(x,y)}g.stroke()}polygon(r,"#91bcff");polygon(r/Math.cos(Math.PI/n),"#a7e5bb");$("#sideOut").textContent=n;$("#innerPi").textContent=(n*Math.sin(Math.PI/n)).toFixed(6);$("#outerPi").textContent=(n*Math.tan(Math.PI/n)).toFixed(6)}
+$("#sides").oninput=drawPoly;
+let needles=[],cross=0;
+function drawNeedles(){const {g,W,H}=prep($("#needleCanvas"));g.clearRect(0,0,W,H);const spacing=70;g.strokeStyle="rgba(255,255,255,.16)";for(let x=40;x<W;x+=spacing){g.beginPath();g.moveTo(x,20);g.lineTo(x,H-20);g.stroke()}needles.forEach(n=>{g.strokeStyle=n.hit?"#efd28a":"#91bcff";g.lineWidth=2;g.beginPath();g.moveTo(n.x-Math.cos(n.a)*25,n.y-Math.sin(n.a)*25);g.lineTo(n.x+Math.cos(n.a)*25,n.y+Math.sin(n.a)*25);g.stroke()});$("#needleN").textContent=needles.length;$("#needleX").textContent=cross;$("#needlePi").textContent=cross?(2*50*needles.length/(70*cross)).toFixed(4):"—"}
+function drop(k){const W=$("#needleCanvas").getBoundingClientRect().width||1000;for(let i=0;i<k;i++){let x=40+Math.random()*(W-80),y=25+Math.random()*340,a=Math.random()*Math.PI;let nearest=Math.round((x-40)/70)*70+40,hit=Math.abs(x-nearest)<=Math.abs(Math.cos(a))*25;needles.push({x,y,a,hit});if(hit)cross++}drawNeedles()}$("#drop10").onclick=()=>drop(10);$("#drop100").onclick=()=>drop(100);$("#resetNeedles").onclick=()=>{needles=[];cross=0;drawNeedles()};
+function drawPiSeries(){const N=+$("#piTerms").value,{g,W,H}=prep($("#piSeriesCanvas"));g.clearRect(0,0,W,H);let sum=0,pts=[];for(let i=0;i<N;i++){sum+=4*(i%2? -1:1)/(2*i+1);if(i%Math.max(1,Math.floor(N/600))===0)pts.push([45+(W-70)*i/Math.max(1,N-1),H/2-(sum-Math.PI)*120])}axes(g,W,H,45,H/2);g.strokeStyle="#91bcff";g.setLineDash([8,7]);g.beginPath();g.moveTo(45,H/2);g.lineTo(W-25,H/2);g.stroke();g.setLineDash([]);path(g,pts,"white",3);$("#piTermsOut").textContent=N;$("#piEstimate").textContent=sum.toFixed(6);$("#piError").textContent=Math.abs(sum-Math.PI).toExponential(2)}
+$("#piTerms").oninput=drawPiSeries;
+function init(){drawCircle();drawPoly();drawNeedles();drawPiSeries()}addEventListener("DOMContentLoaded",init);addEventListener("resize",init);
+
+</script></body></html>

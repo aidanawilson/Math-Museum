@@ -1,24 +1,90 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Calculus — ApogeeLab Mathematics Museum</title>
-<link rel="stylesheet" href="/assets/museum.css">
-</head>
-<body>
-<nav class="site-nav">
-  <a class="brand" href="/"><span class="brand-mark">∑</span><span>Mathematics Museum</span></a>
-  <div class="nav-links"><a href="/">All Exhibits</a><a href="https://apogeelab.org">ApogeeLab</a></div>
-</nav>
-<main class="placeholder">
-  <div class="placeholder-card">
-    <div class="kicker">Future exhibit · Test page</div>
-    <div class="placeholder-symbol">∫</div>
-    <h1>Calculus</h1>
-    <p class="lead">A future guided exhibit about limits, motion, slopes, derivatives, accumulation, and integrals.</p>
-    <a class="button" href="/">Return to Museum Lobby</a>
-  </div>
-</main>
-</body>
-</html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Math Museum — Calculus</title>
+<meta name="description" content="A guided journey into the mathematics of motion, instantaneous change, accumulated area, and the surprising connection between them.">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<style>
+:root{
+ --bg:#05070a;--panel:#0d1219;--text:#f6f8fc;--body:#e5ebf4;--muted:#aeb9c8;
+ --line:rgba(255,255,255,.13);--accent:#91bcff;--accent2:#a7e5bb;--gold:#efd28a;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;color:var(--text);background:#05070a;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.68;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 50% -10%,#1b2842 0,transparent 35%),radial-gradient(circle at 85% 42%,rgba(80,112,160,.11),transparent 30%),#05070a}
+body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);background-size:58px 58px;mask-image:linear-gradient(black,transparent 95%)}
+a{color:inherit}button,input,select{font:inherit}
+nav{position:fixed;z-index:50;inset:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:15px 22px;background:rgba(5,7,10,.8);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.brand{font-size:.8rem;letter-spacing:.13em;text-transform:uppercase;font-weight:760;text-decoration:none}.progress{color:var(--muted);font-size:.9rem}
+section{min-height:100vh;display:grid;place-items:center;padding:110px 20px 78px;position:relative}
+section:before{content:"";position:absolute;inset:6% 4%;z-index:-1;border:1px solid rgba(255,255,255,.025);border-radius:42px}
+.wrap{width:min(1120px,100%)}.hero{text-align:center}.symbol{font:italic clamp(7rem,22vw,16rem)/.85 Georgia,serif;text-shadow:0 0 75px rgba(190,215,255,.26)}
+.kicker{text-transform:uppercase;letter-spacing:.23em;font-size:.76rem;color:#d3dbe7}
+h1,h2,h3{font-family:Georgia,serif;font-weight:500;line-height:1.1}h1{font-size:clamp(2.7rem,6vw,5.35rem);margin:20px 0}h2{font-size:clamp(2.05rem,4.25vw,3.65rem);margin:0 0 19px}h3{font-size:1.46rem;margin:0 0 11px}
+.lead{max-width:890px;color:var(--body);font-size:clamp(1.15rem,2vw,1.38rem);margin:0 0 30px}.hero .lead{margin-left:auto;margin-right:auto;color:#d1dae7}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.062),rgba(255,255,255,.024));border:1px solid var(--line);border-radius:27px;padding:clamp(22px,4vw,40px);box-shadow:0 25px 80px rgba(0,0,0,.36)}
+button,.button{border:1px solid rgba(255,255,255,.31);background:rgba(255,255,255,.08);color:white;border-radius:999px;padding:13px 22px;cursor:pointer;transition:.25s ease;text-decoration:none;display:inline-block}
+button:hover,.button:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(255,255,255,.14)}
+.next{text-align:center;margin-top:34px}.next button{min-width:230px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}.box{grid-column:span 6;background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:20px;padding:22px}.box.full{grid-column:1/-1}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}.metric{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:18px;padding:18px;text-align:center}.metric strong{display:block;font:1.75rem Georgia,serif;margin-top:8px}
+canvas{width:100%;height:390px;background:#080c12;border:1px solid var(--line);border-radius:18px;display:block}.canvas-note{color:var(--muted);font-size:.92rem;margin-top:10px}
+label{display:block;margin:16px 0 7px;color:var(--body)}input[type=range]{width:100%;accent-color:white}.chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.chip.active{background:white;color:#080b10}
+.math{font-family:Georgia,serif;font-size:clamp(1.25rem,2.7vw,2.1rem);text-align:center;background:#080c12;border:1px solid var(--line);border-radius:18px;padding:18px;overflow:auto}
+.explain{color:var(--body);font-size:1.07rem}.muted{color:var(--muted)}
+.timeline{position:relative;margin-top:28px}.timeline:before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(transparent,rgba(255,255,255,.3),transparent)}
+.timeline-item{width:50%;padding:12px 38px 28px;position:relative}.timeline-item:nth-child(even){margin-left:50%}.timeline-item:after{content:"";position:absolute;top:25px;width:12px;height:12px;border-radius:50%;background:white;box-shadow:0 0 24px rgba(255,255,255,.4)}.timeline-item:nth-child(odd):after{right:-6px}.timeline-item:nth-child(even):after{left:-6px}.year{font:1.78rem Georgia,serif;color:var(--gold)}.timeline-item p{margin:5px 0;color:var(--body)}
+.callout{border-left:3px solid var(--accent);background:rgba(145,188,255,.08);padding:16px 18px;border-radius:0 14px 14px 0;color:var(--body);margin:20px 0}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin:13px 0 0;color:var(--body)}.legend span{display:flex;align-items:center;gap:8px}.swatch{width:26px;height:4px;border-radius:999px;display:inline-block}.blue{background:#91bcff}.green{background:#a7e5bb}.red{background:#ff9999}.white{background:white}.gold{background:#efd28a}
+.fade{opacity:0;transform:translateY(24px);transition:opacity .85s ease,transform .85s ease}.fade.visible{opacity:1;transform:none}.curtain{position:fixed;inset:0;background:#05070a;z-index:200;pointer-events:none;opacity:0;transition:opacity .45s}.curtain.on{opacity:1}
+.stage{padding:20px;border:1px solid var(--line);border-radius:20px;background:#080c12}.quote{font:clamp(1.35rem,3vw,2.15rem)/1.36 Georgia,serif;text-align:center;margin:28px auto;max-width:880px}
+.table{width:100%;border-collapse:collapse}.table th,.table td{padding:10px;border-bottom:1px solid var(--line);text-align:left}.table th{color:#dce4ef}.table td{color:var(--body)}
+@media(max-width:800px){.progress{display:none}.box{grid-column:1/-1}.metrics{grid-template-columns:1fr}.timeline:before{left:10px}.timeline-item,.timeline-item:nth-child(even){width:100%;margin-left:0;padding-left:38px;padding-right:0}.timeline-item:nth-child(odd):after,.timeline-item:nth-child(even):after{left:4px;right:auto}}
+</style>
+</head><body>
+<div class="curtain" id="curtain"></div>
+<nav><a class="brand" href="/">Math Museum · Calculus</a><div class="progress" id="progress">Entrance</div></nav>
+<section class="hero" id="top" data-room="Entrance"><div class="wrap">
+<div class="kicker">A Math Museum interactive exhibit</div>
+<div class="symbol">∫</div><h1>Calculus</h1><p class="lead">A guided journey into the mathematics of motion, instantaneous change, accumulated area, and the surprising connection between them.</p>
+<button data-next="r1">Enter Exhibit</button></div></section>
+<section id="r1" class="fade" data-room="Room 1 · The Problem of an Instant"><div class="wrap">
+<div class="kicker">Room 1</div><h2>The Problem of an Instant</h2><p class="lead">Average speed is easy: distance divided by time. But how can we measure speed at one exact moment?</p><div class="card"><div class="timeline">
+<div class="timeline-item"><div class="year">Ancient Greece</div><h3>Areas and motion create paradoxes</h3><p>Mathematicians approximate curved areas and wrestle with what it means to divide motion into infinitely small pieces.</p></div>
+<div class="timeline-item"><div class="year">1600s</div><h3>Fermat studies tangents</h3><p>Methods for finding maximum values and tangent lines begin to resemble derivatives.</p></div>
+<div class="timeline-item"><div class="year">1660s</div><h3>Newton and Leibniz</h3><p>Working independently, they develop the two main languages of calculus and show that slopes and accumulated areas are deeply connected.</p></div>
+</div></div><div class="next"><button data-next="r2">Chase an Instantaneous Speed</button></div></div></section><section id="r2" class="fade" data-room="Room 2 · Average Speed Shrinks Toward an Instant"><div class="wrap">
+<div class="kicker">Room 2</div><h2>Average Speed Shrinks Toward an Instant</h2><p class="lead">Move the second time closer to the first. The average speed over that tiny interval approaches the speed at one exact moment.</p><div class="card"><label>Size of the time interval: <strong id="dtOut">1.00 s</strong></label><input id="dt" type="range" min=".02" max="2" step=".02" value="1"><canvas id="motionCanvas"></canvas>
+<div class="metrics"><div class="metric">Starting time<strong>2.00 s</strong></div><div class="metric">Average speed<strong id="avgSpeed"></strong></div><div class="metric">Instantaneous speed<strong>4.00 m/s</strong></div></div></div><div class="next"><button data-next="r3">Turn Speed Into Slope</button></div></div></section><section id="r3" class="fade" data-room="Room 3 · A Derivative Is a Local Slope"><div class="wrap">
+<div class="kicker">Room 3</div><h2>A Derivative Is a Local Slope</h2><p class="lead">The derivative tells how steep a curve is at one point. Move the point and watch the tangent line rotate.</p><div class="card"><label>Point on the curve: x = <strong id="calcXOut">1.00</strong></label><input id="calcX" type="range" min="-2" max="2" step=".01" value="1"><canvas id="tangentCanvas"></canvas>
+<div class="metrics"><div class="metric">Height<strong id="calcY"></strong></div><div class="metric">Slope<strong id="calcSlope"></strong></div><div class="metric">Meaning<strong id="slopeMeaning"></strong></div></div></div><div class="next"><button data-next="r4">Build an Area From Slices</button></div></div></section><section id="r4" class="fade" data-room="Room 4 · An Integral Adds Tiny Pieces"><div class="wrap">
+<div class="kicker">Room 4</div><h2>An Integral Adds Tiny Pieces</h2><p class="lead">A curved area can be approximated with rectangles. Make the rectangles thinner and the gaps disappear.</p><div class="card"><label>Number of rectangles: <strong id="rectOut">8</strong></label><input id="rects" type="range" min="1" max="120" value="8"><canvas id="areaCanvas"></canvas>
+<div class="metrics"><div class="metric">Rectangle estimate<strong id="areaEstimate"></strong></div><div class="metric">Exact area<strong>2.6667</strong></div><div class="metric">Error<strong id="areaError"></strong></div></div></div><div class="next"><button data-next="r5">Connect Slopes and Areas</button></div></div></section><section id="r5" class="fade" data-room="Room 5 · The Great Surprise"><div class="wrap">
+<div class="kicker">Room 5</div><h2>The Great Surprise</h2><p class="lead">Differentiation measures a rate of change. Integration adds changes together. The Fundamental Theorem of Calculus says these are opposite directions of the same operation.</p><div class="card"><div class="math">Accumulated area under a rate curve → total change</div><div class="grid" style="margin-top:18px">
+<div class="box"><h3>Speed → distance</h3><p class="explain">Add a car's speed over time and you recover how far it traveled.</p></div>
+<div class="box"><h3>Flow rate → volume</h3><p class="explain">Add water flowing each second and you recover the amount collected.</p></div>
+<div class="box"><h3>Power → energy</h3><p class="explain">Add energy transferred each second and you recover total energy.</p></div>
+<div class="box"><h3>Slope of area → original curve</h3><p class="explain">The rate at which accumulated area grows is the height of the curve itself.</p></div></div></div><div class="next"><button data-next="r6">Find the Best Possible Choice</button></div></div></section><section id="r6" class="fade" data-room="Room 6 · Calculus Finds Turning Points"><div class="wrap">
+<div class="kicker">Room 6</div><h2>Calculus Finds Turning Points</h2><p class="lead">At a maximum or minimum, a smooth curve briefly becomes flat. Move the design choice and find the largest possible area.</p><div class="card"><p class="explain">A farmer has 40 meters of fence for three sides of a rectangular pen against a wall.</p><label>Width of each side: <strong id="optW">8.0 m</strong></label><input id="widthOpt" type="range" min=".5" max="19.5" step=".1" value="8"><canvas id="optCanvas"></canvas>
+<div class="metrics"><div class="metric">Width<strong id="ow"></strong></div><div class="metric">Length<strong id="ol"></strong></div><div class="metric">Area<strong id="oa"></strong></div></div></div><div class="next"><button data-next="final">Complete the Exhibit</button></div></div></section>
+<section id="final" class="fade" data-room="Final Room"><div class="wrap" style="text-align:center">
+<div class="kicker">Final Room</div><h2>The Idea Continues</h2><div class="symbol" style="font-size:clamp(6rem,16vw,11rem)">∫</div>
+<p class="quote">The symbol is only the doorway. The real exhibit is the connection it reveals.</p>
+<a class="button" href="/">Return to Museum Lobby</a> <button data-next="top">Return to Entrance</button>
+</div></section>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+function prep(c,h=390){const d=Math.max(1,devicePixelRatio||1),w=Math.max(320,Math.round(c.getBoundingClientRect().width||1000));c.style.height=h+"px";c.width=Math.round(w*d);c.height=Math.round(h*d);const g=c.getContext("2d");g.setTransform(d,0,0,d,0,0);return{g,W:w,H:h}}
+function axes(g,W,H,x0,y0){g.strokeStyle="rgba(255,255,255,.14)";g.lineWidth=1;g.beginPath();g.moveTo(45,y0);g.lineTo(W-25,y0);g.moveTo(x0,25);g.lineTo(x0,H-35);g.stroke()}
+function path(g,pts,color="#91bcff",width=3){g.strokeStyle=color;g.lineWidth=width;g.beginPath();pts.forEach((p,i)=>i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1]));g.stroke()}
+function travel(id){const c=$("#curtain");c.classList.add("on");setTimeout(()=>{document.getElementById(id).scrollIntoView({behavior:"auto"});setTimeout(()=>c.classList.remove("on"),110)},410)}
+$$("[data-next]").forEach(b=>b.onclick=()=>travel(b.dataset.next));
+const observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");$("#progress").textContent=e.target.dataset.room||""}}),{threshold:.22});$$("section").forEach(s=>observer.observe(s));
+
+
+function motion(){let dt=+$("#dt").value,t0=2,t1=t0+dt,f=t=>t*t,{g,W,H}=prep($("#motionCanvas"));g.clearRect(0,0,W,H);const tx=t=>45+t/5*(W-70),ty=y=>H-35-y/25*(H-65);axes(g,W,H,tx(0),ty(0));let pts=[];for(let i=0;i<=300;i++){let t=5*i/300;pts.push([tx(t),ty(f(t))])}path(g,pts);let p0=[tx(t0),ty(f(t0))],p1=[tx(t1),ty(f(t1))];path(g,[p0,p1],"#ff9999",3);g.fillStyle="white";[p0,p1].forEach(p=>{g.beginPath();g.arc(...p,7,0,Math.PI*2);g.fill()});$("#dtOut").textContent=dt.toFixed(2)+" s";$("#avgSpeed").textContent=((f(t1)-f(t0))/dt).toFixed(3)+" m/s"}$("#dt").oninput=motion;
+function tangent(){let x0=+$("#calcX").value,y0=x0*x0,m=2*x0,{g,W,H}=prep($("#tangentCanvas"));g.clearRect(0,0,W,H);const tx=x=>W/2+x/3*(W*.42),ty=y=>H-50-y/5*(H*.35);axes(g,W,H,tx(0),ty(0));let pts=[];for(let i=0;i<=300;i++){let x=-3+6*i/300;pts.push([tx(x),ty(x*x)])}path(g,pts);path(g,[[tx(x0-1.2),ty(y0+m*(-1.2))],[tx(x0+1.2),ty(y0+m*1.2)]],"#ff9999",3);g.fillStyle="white";g.beginPath();g.arc(tx(x0),ty(y0),8,0,Math.PI*2);g.fill();$("#calcXOut").textContent=x0.toFixed(2);$("#calcY").textContent=y0.toFixed(2);$("#calcSlope").textContent=m.toFixed(2);$("#slopeMeaning").textContent=Math.abs(m)<.03?"flat":m>0?"rising":"falling"}$("#calcX").oninput=tangent;
+function area(){let n=+$("#rects").value,{g,W,H}=prep($("#areaCanvas"));g.clearRect(0,0,W,H);const tx=x=>50+x/2*(W-80),ty=y=>H-40-y/4.4*(H-70),dx=2/n;axes(g,W,H,tx(0),ty(0));let sum=0;for(let i=0;i<n;i++){let x=i*dx,y=x*x;sum+=y*dx;g.fillStyle="rgba(145,188,255,.22)";g.strokeStyle="rgba(145,188,255,.7)";g.fillRect(tx(x),ty(y),tx(x+dx)-tx(x),ty(0)-ty(y));g.strokeRect(tx(x),ty(y),tx(x+dx)-tx(x),ty(0)-ty(y))}let pts=[];for(let i=0;i<=300;i++){let x=2*i/300;pts.push([tx(x),ty(x*x)])}path(g,pts,"white",3);$("#rectOut").textContent=n;$("#areaEstimate").textContent=sum.toFixed(4);$("#areaError").textContent=Math.abs(sum-8/3).toFixed(4)}$("#rects").oninput=area;
+function opt(){let w=+$("#widthOpt").value,l=40-2*w,A=w*l,{g,W,H}=prep($("#optCanvas"));g.clearRect(0,0,W,H);let scale=Math.min((W-120)/40,(H-90)/20),x=(W-l*scale)/2,y=H-45-w*scale;g.strokeStyle="#91bcff";g.lineWidth=5;g.beginPath();g.moveTo(x,y);g.lineTo(x,y+w*scale);g.lineTo(x+l*scale,y+w*scale);g.lineTo(x+l*scale,y);g.stroke();g.strokeStyle="rgba(255,255,255,.25)";g.beginPath();g.moveTo(x-30,y);g.lineTo(x+l*scale+30,y);g.stroke();$("#optW").textContent=w.toFixed(1)+" m";$("#ow").textContent=w.toFixed(1)+" m";$("#ol").textContent=l.toFixed(1)+" m";$("#oa").textContent=A.toFixed(1)+" m²"}$("#widthOpt").oninput=opt;
+function init(){motion();tangent();area();opt()}addEventListener("DOMContentLoaded",init);addEventListener("resize",init);
+
+</script></body></html>

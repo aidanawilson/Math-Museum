@@ -1,24 +1,81 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Fourier — ApogeeLab Mathematics Museum</title>
-<link rel="stylesheet" href="/assets/museum.css">
-</head>
-<body>
-<nav class="site-nav">
-  <a class="brand" href="/"><span class="brand-mark">∑</span><span>Mathematics Museum</span></a>
-  <div class="nav-links"><a href="/">All Exhibits</a><a href="https://apogeelab.org">ApogeeLab</a></div>
-</nav>
-<main class="placeholder">
-  <div class="placeholder-card">
-    <div class="kicker">Future exhibit · Test page</div>
-    <div class="placeholder-symbol">∿</div>
-    <h1>Fourier</h1>
-    <p class="lead">A future interactive exhibit about building complicated signals from simple waves.</p>
-    <a class="button" href="/">Return to Museum Lobby</a>
-  </div>
-</main>
-</body>
-</html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Math Museum — Fourier Analysis</title>
+<meta name="description" content="Discover how sounds, images, signals, and electromagnetic waves can be assembled from simple rotating rhythms.">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<style>
+:root{
+ --bg:#05070a;--panel:#0d1219;--text:#f6f8fc;--body:#e5ebf4;--muted:#aeb9c8;
+ --line:rgba(255,255,255,.13);--accent:#91bcff;--accent2:#a7e5bb;--gold:#efd28a;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;color:var(--text);background:#05070a;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.68;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 50% -10%,#1b2842 0,transparent 35%),radial-gradient(circle at 85% 42%,rgba(80,112,160,.11),transparent 30%),#05070a}
+body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);background-size:58px 58px;mask-image:linear-gradient(black,transparent 95%)}
+a{color:inherit}button,input,select{font:inherit}
+nav{position:fixed;z-index:50;inset:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:15px 22px;background:rgba(5,7,10,.8);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.brand{font-size:.8rem;letter-spacing:.13em;text-transform:uppercase;font-weight:760;text-decoration:none}.progress{color:var(--muted);font-size:.9rem}
+section{min-height:100vh;display:grid;place-items:center;padding:110px 20px 78px;position:relative}
+section:before{content:"";position:absolute;inset:6% 4%;z-index:-1;border:1px solid rgba(255,255,255,.025);border-radius:42px}
+.wrap{width:min(1120px,100%)}.hero{text-align:center}.symbol{font:italic clamp(7rem,22vw,16rem)/.85 Georgia,serif;text-shadow:0 0 75px rgba(190,215,255,.26)}
+.kicker{text-transform:uppercase;letter-spacing:.23em;font-size:.76rem;color:#d3dbe7}
+h1,h2,h3{font-family:Georgia,serif;font-weight:500;line-height:1.1}h1{font-size:clamp(2.7rem,6vw,5.35rem);margin:20px 0}h2{font-size:clamp(2.05rem,4.25vw,3.65rem);margin:0 0 19px}h3{font-size:1.46rem;margin:0 0 11px}
+.lead{max-width:890px;color:var(--body);font-size:clamp(1.15rem,2vw,1.38rem);margin:0 0 30px}.hero .lead{margin-left:auto;margin-right:auto;color:#d1dae7}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.062),rgba(255,255,255,.024));border:1px solid var(--line);border-radius:27px;padding:clamp(22px,4vw,40px);box-shadow:0 25px 80px rgba(0,0,0,.36)}
+button,.button{border:1px solid rgba(255,255,255,.31);background:rgba(255,255,255,.08);color:white;border-radius:999px;padding:13px 22px;cursor:pointer;transition:.25s ease;text-decoration:none;display:inline-block}
+button:hover,.button:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(255,255,255,.14)}
+.next{text-align:center;margin-top:34px}.next button{min-width:230px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}.box{grid-column:span 6;background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:20px;padding:22px}.box.full{grid-column:1/-1}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}.metric{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:18px;padding:18px;text-align:center}.metric strong{display:block;font:1.75rem Georgia,serif;margin-top:8px}
+canvas{width:100%;height:390px;background:#080c12;border:1px solid var(--line);border-radius:18px;display:block}.canvas-note{color:var(--muted);font-size:.92rem;margin-top:10px}
+label{display:block;margin:16px 0 7px;color:var(--body)}input[type=range]{width:100%;accent-color:white}.chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.chip.active{background:white;color:#080b10}
+.math{font-family:Georgia,serif;font-size:clamp(1.25rem,2.7vw,2.1rem);text-align:center;background:#080c12;border:1px solid var(--line);border-radius:18px;padding:18px;overflow:auto}
+.explain{color:var(--body);font-size:1.07rem}.muted{color:var(--muted)}
+.timeline{position:relative;margin-top:28px}.timeline:before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(transparent,rgba(255,255,255,.3),transparent)}
+.timeline-item{width:50%;padding:12px 38px 28px;position:relative}.timeline-item:nth-child(even){margin-left:50%}.timeline-item:after{content:"";position:absolute;top:25px;width:12px;height:12px;border-radius:50%;background:white;box-shadow:0 0 24px rgba(255,255,255,.4)}.timeline-item:nth-child(odd):after{right:-6px}.timeline-item:nth-child(even):after{left:-6px}.year{font:1.78rem Georgia,serif;color:var(--gold)}.timeline-item p{margin:5px 0;color:var(--body)}
+.callout{border-left:3px solid var(--accent);background:rgba(145,188,255,.08);padding:16px 18px;border-radius:0 14px 14px 0;color:var(--body);margin:20px 0}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin:13px 0 0;color:var(--body)}.legend span{display:flex;align-items:center;gap:8px}.swatch{width:26px;height:4px;border-radius:999px;display:inline-block}.blue{background:#91bcff}.green{background:#a7e5bb}.red{background:#ff9999}.white{background:white}.gold{background:#efd28a}
+.fade{opacity:0;transform:translateY(24px);transition:opacity .85s ease,transform .85s ease}.fade.visible{opacity:1;transform:none}.curtain{position:fixed;inset:0;background:#05070a;z-index:200;pointer-events:none;opacity:0;transition:opacity .45s}.curtain.on{opacity:1}
+.stage{padding:20px;border:1px solid var(--line);border-radius:20px;background:#080c12}.quote{font:clamp(1.35rem,3vw,2.15rem)/1.36 Georgia,serif;text-align:center;margin:28px auto;max-width:880px}
+.table{width:100%;border-collapse:collapse}.table th,.table td{padding:10px;border-bottom:1px solid var(--line);text-align:left}.table th{color:#dce4ef}.table td{color:var(--body)}
+@media(max-width:800px){.progress{display:none}.box{grid-column:1/-1}.metrics{grid-template-columns:1fr}.timeline:before{left:10px}.timeline-item,.timeline-item:nth-child(even){width:100%;margin-left:0;padding-left:38px;padding-right:0}.timeline-item:nth-child(odd):after,.timeline-item:nth-child(even):after{left:4px;right:auto}}
+</style>
+</head><body>
+<div class="curtain" id="curtain"></div>
+<nav><a class="brand" href="/">Math Museum · Fourier Analysis</a><div class="progress" id="progress">Entrance</div></nav>
+<section class="hero" id="top" data-room="Entrance"><div class="wrap">
+<div class="kicker">A Math Museum interactive exhibit</div>
+<div class="symbol">∿</div><h1>Fourier Analysis</h1><p class="lead">Discover how sounds, images, signals, and electromagnetic waves can be assembled from simple rotating rhythms.</p>
+<button data-next="r1">Enter Exhibit</button></div></section>
+<section id="r1" class="fade" data-room="Room 1 · The Secret Ingredients of a Signal"><div class="wrap">
+<div class="kicker">Room 1</div><h2>The Secret Ingredients of a Signal</h2><p class="lead">A complicated sound or image can look impossible to describe. Fourier's idea is that it may be built from simple waves.</p><div class="card"><div class="timeline"><div class="timeline-item"><div class="year">1807</div><h3>Joseph Fourier studies heat</h3><p>He proposes that complicated temperature patterns can be represented as sums of sines and cosines.</p></div><div class="timeline-item"><div class="year">1800s</div><h3>The idea is debated and refined</h3><p>Mathematicians clarify when and why wave sums converge.</p></div><div class="timeline-item"><div class="year">1900s–today</div><h3>Signals become spectra</h3><p>Fourier analysis becomes central to radio, audio, imaging, compression, communications, and quantum mechanics.</p></div></div></div><div class="next"><button data-next="r2">Mix Two Pure Notes</button></div></div></section><section id="r2" class="fade" data-room="Room 2 · Simple Waves Combine Into New Shapes"><div class="wrap">
+<div class="kicker">Room 2</div><h2>Simple Waves Combine Into New Shapes</h2><p class="lead">Adjust two sine waves. The white curve is simply their heights added together at every moment.</p><div class="card"><label>First frequency: <strong id="f1Out">1.0</strong></label><input id="f1" type="range" min=".5" max="6" step=".1" value="1"><label>Second frequency: <strong id="f2Out">3.0</strong></label><input id="f2" type="range" min=".5" max="10" step=".1" value="3"><label>Second-wave strength: <strong id="amp2Out">0.45</strong></label><input id="amp2" type="range" min="0" max="1" step=".01" value=".45"><canvas id="mixCanvas"></canvas><div class="legend"><span><i class="swatch blue"></i>Wave 1</span><span><i class="swatch green"></i>Wave 2</span><span><i class="swatch white"></i>The combined signal</span></div></div><div class="next"><button data-next="r3">Build a Square Wave</button></div></div></section><section id="r3" class="fade" data-room="Room 3 · Sharp Corners From Smooth Waves"><div class="wrap">
+<div class="kicker">Room 3</div><h2>Sharp Corners From Smooth Waves</h2><p class="lead">A square wave has sudden jumps. Add odd harmonics and smooth sine waves cooperate to imitate those sharp edges.</p><div class="card"><label>Odd harmonics included: <strong id="harmOut">1</strong></label><input id="harmonics" type="range" min="1" max="25" value="1"><canvas id="squareWaveCanvas"></canvas><p class="explain">The ripples near each jump do not disappear completely; this is the Gibbs phenomenon.</p></div><div class="next"><button data-next="r4">See the Spectrum</button></div></div></section><section id="r4" class="fade" data-room="Room 4 · Time View and Frequency View"><div class="wrap">
+<div class="kicker">Room 4</div><h2>Time View and Frequency View</h2><p class="lead">The waveform shows how a signal changes over time. The spectrum shows which frequencies are hiding inside it.</p><div class="card"><canvas id="spectrumCanvas"></canvas><div class="callout">A tall bar means that frequency contributes strongly to the signal. This is the mathematical idea behind an audio equalizer.</div></div><div class="next"><button data-next="r5">Turn Rotation Into Waves</button></div></div></section><section id="r5" class="fade" data-room="Room 5 · Spinning Circles Draw Complicated Curves"><div class="wrap">
+<div class="kicker">Room 5</div><h2>Spinning Circles Draw Complicated Curves</h2><p class="lead">Each rotating circle contributes one frequency. Chain the circles together and the final point traces a richer waveform.</p><div class="card"><label>Rotating circles: <strong id="epiOut">5</strong></label><input id="epicycles" type="range" min="1" max="15" value="5"><canvas id="epiCanvas"></canvas></div><div class="next"><button data-next="r6">Visualize an Electromagnetic Wave</button></div></div></section><section id="r6" class="fade" data-room="Room 6 · One Wave, Two Perpendicular Fields"><div class="wrap">
+<div class="kicker">Room 6</div><h2>One Wave, Two Perpendicular Fields</h2><p class="lead">An electromagnetic wave contains an electric field and a magnetic field oscillating at right angles while the wave travels forward.</p><div class="card"><label>Wave frequency: <strong id="emFreqOut">1.5</strong></label><input id="emFreq" type="range" min=".5" max="4" step=".1" value="1.5"><label>Phase: <strong id="emPhaseOut">0.0</strong></label><input id="emPhase" type="range" min="0" max="6.283" step=".02" value="0"><canvas id="emCanvas"></canvas><div class="callout">The physics is electromagnetic, but the mathematical heart is Fourier analysis: fields can be represented as waves with frequency, amplitude, and phase.</div></div><div class="next"><button data-next="r7">Why Fourier Analysis Runs Modern Technology</button></div></div></section><section id="r7" class="fade" data-room="Room 7 · From Waves to Information"><div class="wrap">
+<div class="kicker">Room 7</div><h2>From Waves to Information</h2><p class="lead">Once a signal is separated into frequencies, we can filter it, transmit it, compress it, compare it, or reconstruct it.</p><div class="grid"><div class="box"><h3>Audio and music</h3><p class="explain">Equalizers and codecs work by measuring and changing frequency content.</p></div><div class="box"><h3>Images</h3><p class="explain">JPEG compression keeps visually important frequency patterns and discards less noticeable detail.</p></div><div class="box"><h3>Radio and Wi‑Fi</h3><p class="explain">Information is placed onto carrier waves and recovered by separating frequencies and phases.</p></div><div class="box"><h3>Medical imaging</h3><p class="explain">MRI measurements are converted from frequency information into spatial images.</p></div></div><div class="next"><button data-next="final">Complete the Exhibit</button></div></div></section>
+<section id="final" class="fade" data-room="Final Room"><div class="wrap" style="text-align:center">
+<div class="kicker">Final Room</div><h2>The Idea Continues</h2><div class="symbol" style="font-size:clamp(6rem,16vw,11rem)">∿</div>
+<p class="quote">The symbol is only the doorway. The real exhibit is the connection it reveals.</p>
+<a class="button" href="/">Return to Museum Lobby</a> <button data-next="top">Return to Entrance</button>
+</div></section>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+function prep(c,h=390){const d=Math.max(1,devicePixelRatio||1),w=Math.max(320,Math.round(c.getBoundingClientRect().width||1000));c.style.height=h+"px";c.width=Math.round(w*d);c.height=Math.round(h*d);const g=c.getContext("2d");g.setTransform(d,0,0,d,0,0);return{g,W:w,H:h}}
+function axes(g,W,H,x0,y0){g.strokeStyle="rgba(255,255,255,.14)";g.lineWidth=1;g.beginPath();g.moveTo(45,y0);g.lineTo(W-25,y0);g.moveTo(x0,25);g.lineTo(x0,H-35);g.stroke()}
+function path(g,pts,color="#91bcff",width=3){g.strokeStyle=color;g.lineWidth=width;g.beginPath();pts.forEach((p,i)=>i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1]));g.stroke()}
+function travel(id){const c=$("#curtain");c.classList.add("on");setTimeout(()=>{document.getElementById(id).scrollIntoView({behavior:"auto"});setTimeout(()=>c.classList.remove("on"),110)},410)}
+$$("[data-next]").forEach(b=>b.onclick=()=>travel(b.dataset.next));
+const observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");$("#progress").textContent=e.target.dataset.room||""}}),{threshold:.22});$$("section").forEach(s=>observer.observe(s));
+
+
+function waves(){let f1=+$("#f1").value,f2=+$("#f2").value,a2=+$("#amp2").value,{g,W,H}=prep($("#mixCanvas"),390),cy=H/2,pts1=[],pts2=[],sum=[];g.clearRect(0,0,W,H);axes(g,W,H,45,cy);for(let i=0;i<=600;i++){let t=i/600*2*Math.PI,x=45+(W-70)*i/600,y1=Math.sin(f1*t),y2=a2*Math.sin(f2*t);pts1.push([x,cy-y1*70]);pts2.push([x,cy-y2*70]);sum.push([x,cy-(y1+y2)*70])}path(g,pts1,"#91bcff",2);path(g,pts2,"#a7e5bb",2);path(g,sum,"white",4);$("#f1Out").textContent=f1.toFixed(1);$("#f2Out").textContent=f2.toFixed(1);$("#amp2Out").textContent=a2.toFixed(2);spectrum()}["f1","f2","amp2"].forEach(id=>$("#"+id).oninput=waves);
+function squareWave(){let n=+$("#harmonics").value,{g,W,H}=prep($("#squareWaveCanvas"),390),cy=H/2,pts=[];g.clearRect(0,0,W,H);axes(g,W,H,45,cy);for(let i=0;i<=700;i++){let t=i/700*4*Math.PI,s=0;for(let k=0;k<n;k++){let m=2*k+1;s+=4/Math.PI*Math.sin(m*t)/m}pts.push([45+(W-70)*i/700,cy-s*75])}path(g,pts,"#91bcff",4);$("#harmOut").textContent=n}$("#harmonics").oninput=squareWave;
+function spectrum(){let f1=+$("#f1").value,f2=+$("#f2").value,a2=+$("#amp2").value,{g,W,H}=prep($("#spectrumCanvas"),390);g.clearRect(0,0,W,H);axes(g,W,H,45,H-45);for(let k=0;k<=10;k++){let amp=Math.abs(k-f1)<.25?1:Math.abs(k-f2)<.25?a2:0,x=55+k*(W-90)/10,h=amp*(H-90);g.strokeStyle=amp?"#91bcff":"rgba(255,255,255,.12)";g.lineWidth=12;g.beginPath();g.moveTo(x,H-45);g.lineTo(x,H-45-h);g.stroke();g.fillStyle="rgba(255,255,255,.55)";g.font="13px system-ui";g.fillText(k,x-4,H-24)}}
+let epiPhase=0,trace=[];
+function epicycle(){let n=+$("#epicycles").value,{g,W,H}=prep($("#epiCanvas"),390),cx=175,cy=H/2,x=cx,y=cy;g.clearRect(0,0,W,H);for(let k=0;k<n;k++){let m=2*k+1,r=95*(4/Math.PI)/m*.6,a=m*epiPhase;g.strokeStyle="rgba(255,255,255,.18)";g.beginPath();g.arc(x,y,r,0,Math.PI*2);g.stroke();let nx=x+r*Math.cos(a),ny=y-r*Math.sin(a);path(g,[[x,y],[nx,ny]],k===n-1?"white":"#91bcff",2);x=nx;y=ny}trace.unshift(y);trace=trace.slice(0,Math.max(0,W-390));g.strokeStyle="rgba(255,255,255,.25)";g.setLineDash([5,6]);g.beginPath();g.moveTo(x,y);g.lineTo(370,y);g.stroke();g.setLineDash([]);let pts=trace.map((v,i)=>[370+i,v]);path(g,pts,"white",3);$("#epiOut").textContent=n;epiPhase+=.012;requestAnimationFrame(epicycle)}$("#epicycles").oninput=()=>trace=[];
+function em(){let f=+$("#emFreq").value,p=+$("#emPhase").value,{g,W,H}=prep($("#emCanvas"),390),ox=70,oy=H/2,scaleX=(W-120)/8;g.clearRect(0,0,W,H);path(g,[[ox,oy],[W-40,oy]],"rgba(255,255,255,.3)",2);let epts=[],bpts=[];for(let i=0;i<=400;i++){let z=8*i/400,x=ox+z*scaleX,v=Math.sin(f*z+p);epts.push([x,oy-v*95]);bpts.push([x+v*42,oy+v*18])}path(g,epts,"#91bcff",4);path(g,bpts,"#a7e5bb",4);g.fillStyle="rgba(255,255,255,.65)";g.font="16px system-ui";g.fillText("travel direction →",W-190,oy-14);g.fillStyle="#91bcff";g.fillText("electric field",75,45);g.fillStyle="#a7e5bb";g.fillText("magnetic field",75,H-35);$("#emFreqOut").textContent=f.toFixed(1);$("#emPhaseOut").textContent=p.toFixed(1)}$("#emFreq").oninput=$("#emPhase").oninput=em;
+function init(){waves();squareWave();em();epicycle()}addEventListener("DOMContentLoaded",init);addEventListener("resize",()=>{waves();squareWave();em()});
+
+</script></body></html>
