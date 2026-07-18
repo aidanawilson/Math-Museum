@@ -3,81 +3,98 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Math Museum — The Number e</title>
-<meta name="description" content="An interactive Math Museum exhibit about Euler's number e.">
+<title>Math Museum — Euler's Number</title>
+<meta name="description" content="An interactive Math Museum exhibit about Euler's number.">
 <script>
-window.MathJax = {
-  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
-  svg: { fontCache: 'global' }
+window.MathJax={
+  tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
+  svg:{fontCache:'global'}
 };
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 <style>
 :root{
-  --bg:#05070a;--panel:#0d1219;--panel2:#111923;--text:#f5f7fb;
-  --muted:#b8c4d3;--body:#e7edf7;--line:rgba(255,255,255,.12);
-  --blue:#8db9ff;--red:#ff8f8f;--green:#9de2b0;--gold:#f0d58a;
+  --bg:#05070a;--panel:#0d1219;--panel2:#111923;--text:#f7f9fc;
+  --body:#edf2fa;--muted:#bac5d3;--line:rgba(255,255,255,.13);
+  --blue:#91bcff;--red:#ff9797;--green:#9de2b0;--gold:#efd28a;
+  --paper:#d8c39b;--ink:#332819;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  margin:0;color:var(--text);
-  background:radial-gradient(circle at 50% -8%,#182238 0,transparent 34%),#05070a;
+  margin:0;color:var(--text);background:#05070a;
   font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  line-height:1.68;overflow-x:hidden;
+  line-height:1.68;overflow-x:hidden
 }
 body:before{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
-  background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
-  linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
-  background-size:52px 52px;
-  mask-image:linear-gradient(to bottom,#000,transparent 88%);
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(circle at 50% -10%,#1a263d 0,transparent 34%),
+    radial-gradient(circle at 85% 38%,rgba(61,89,135,.12),transparent 30%),
+    #05070a;
+}
+body:after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:100;
+  opacity:.16;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+  mix-blend-mode:soft-light
 }
 a{color:inherit}
 button,input{font:inherit}
 nav{
-  position:fixed;z-index:30;inset:0 0 auto;display:flex;justify-content:space-between;align-items:center;
-  gap:20px;padding:15px 22px;background:rgba(5,7,10,.8);backdrop-filter:blur(16px);
+  position:fixed;z-index:50;inset:0 0 auto;display:flex;justify-content:space-between;align-items:center;
+  gap:20px;padding:15px 22px;background:rgba(5,7,10,.78);backdrop-filter:blur(18px);
   border-bottom:1px solid var(--line)
 }
-.brand{font-weight:750;letter-spacing:.13em;text-transform:uppercase;font-size:.82rem}
+.brand{font-weight:760;letter-spacing:.13em;text-transform:uppercase;font-size:.82rem}
 .brand a{text-decoration:none}
 .progress{color:var(--muted);font-size:.9rem}
-section{min-height:100vh;display:grid;place-items:center;padding:105px 20px 75px}
+section{
+  min-height:100vh;display:grid;place-items:center;padding:110px 20px 78px;
+  position:relative
+}
+section:before{
+  content:"";position:absolute;inset:6% 4%;pointer-events:none;z-index:-1;
+  border:1px solid rgba(255,255,255,.025);border-radius:42px
+}
 .wrap{width:min(1120px,100%)}
 .hero{text-align:center}
-.e{font:italic clamp(9rem,25vw,18rem)/.8 Georgia,serif;text-shadow:0 0 75px rgba(190,215,255,.26)}
-.kicker{text-transform:uppercase;letter-spacing:.23em;font-size:.76rem;color:#d5dce7}
-h1,h2,h3{font-family:Georgia,serif;font-weight:500;line-height:1.08}
-h1{font-size:clamp(2.5rem,6vw,5.2rem);margin:20px 0}
-h2{font-size:clamp(2.2rem,5vw,4.35rem);margin:0 0 18px}
-h3{font-size:1.55rem;margin:0 0 12px}
+.e{
+  font:italic clamp(8rem,23vw,17rem)/.82 Georgia,serif;
+  text-shadow:0 0 75px rgba(190,215,255,.26)
+}
+.kicker{text-transform:uppercase;letter-spacing:.23em;font-size:.76rem;color:#d8dfe9}
+h1,h2,h3{font-family:Georgia,serif;font-weight:500;line-height:1.1}
+h1{font-size:clamp(2.45rem,5.3vw,4.85rem);margin:20px 0}
+h2{font-size:clamp(2.05rem,4.25vw,3.65rem);margin:0 0 19px}
+h3{font-size:1.48rem;margin:0 0 12px}
 .lead{
-  max-width:850px;color:var(--body);font-size:clamp(1.08rem,2vw,1.3rem);
+  max-width:880px;color:var(--body);font-size:clamp(1.16rem,2.15vw,1.38rem);
   margin:0 0 30px
 }
-.hero .lead{margin-left:auto;margin-right:auto;color:var(--muted)}
+.hero .lead{margin-left:auto;margin-right:auto;color:#d3dbe7}
 .card{
-  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.025));
-  border:1px solid var(--line);border-radius:26px;padding:clamp(22px,4vw,40px);
-  box-shadow:0 25px 80px rgba(0,0,0,.35)
+  background:linear-gradient(180deg,rgba(255,255,255,.062),rgba(255,255,255,.024));
+  border:1px solid var(--line);border-radius:27px;padding:clamp(22px,4vw,40px);
+  box-shadow:0 25px 80px rgba(0,0,0,.36)
 }
 button{
-  border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:white;
-  border-radius:999px;padding:13px 22px;cursor:pointer;transition:.25s
+  border:1px solid rgba(255,255,255,.31);background:rgba(255,255,255,.08);color:white;
+  border-radius:999px;padding:13px 22px;cursor:pointer;transition:.25s ease
 }
 button:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(255,255,255,.14)}
-.next{text-align:center;margin-top:32px}
+.next{text-align:center;margin-top:34px}
+.next button{min-width:230px}
 .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .row input{
   background:#080c12;border:1px solid var(--line);color:white;border-radius:12px;padding:13px;width:230px
 }
 .problem,.formula,.big{font-family:Georgia,serif;text-align:center}
-.problem{font-size:clamp(2.2rem,6vw,4rem)}
-.formula{font-size:clamp(1.35rem,3vw,2.35rem);margin:22px 0}
-.big{font-size:clamp(3rem,8vw,6rem)}
-.quote{font:clamp(1.35rem,3vw,2.25rem)/1.35 Georgia,serif;text-align:center;margin:34px auto;max-width:850px}
-.note,.explain{color:var(--body);font-size:1.04rem}
+.problem{font-size:clamp(2.1rem,5.5vw,3.7rem)}
+.formula{font-size:clamp(1.35rem,3vw,2.25rem);margin:22px 0}
+.big{font-size:clamp(2.8rem,7vw,5.7rem)}
+.quote{font:clamp(1.35rem,3vw,2.15rem)/1.36 Georgia,serif;text-align:center;margin:34px auto;max-width:850px}
+.note,.explain{color:var(--body);font-size:1.08rem}
 .muted{color:var(--muted)}
 .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
 .box{
@@ -85,15 +102,9 @@ button:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(255,255,255,.14
   border-radius:20px;padding:22px
 }
 .box.full{grid-column:1/-1}
-.step-list{display:grid;gap:12px}
-.step{
-  display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:start;
-  background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:16px;padding:15px
-}
-.step-num{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,255,255,.28)}
 .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
 .metric{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:18px;padding:18px;text-align:center}
-.metric strong{display:block;font:1.8rem Georgia,serif;margin-top:8px}
+.metric strong{display:block;font:1.75rem Georgia,serif;margin-top:8px}
 input[type=range]{width:100%;accent-color:white}
 .chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
 .chip.active{background:white;color:#080b10}
@@ -101,33 +112,125 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
 .legend{display:flex;gap:18px;flex-wrap:wrap;margin:14px 0 0;color:var(--body)}
 .legend span{display:flex;align-items:center;gap:8px}
 .swatch{width:26px;height:4px;border-radius:999px;display:inline-block}
-.blue{background:var(--blue)}.white{background:white}.red{background:var(--red)}.green{background:var(--green)}.gold{background:var(--gold)}
+.blue{background:var(--blue)}.white{background:white}.red{background:var(--red)}
+.green{background:var(--green)}.gold{background:var(--gold)}
 .math-panel{
   background:#080c12;border:1px solid var(--line);border-radius:18px;padding:18px;
   overflow-x:auto;text-align:center
 }
-.variable-key{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px}
-.variable{
-  padding:12px 14px;border:1px solid var(--line);border-radius:14px;
-  background:rgba(255,255,255,.025);color:var(--body)
-}
-.stage-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
-.stage{display:none}.stage.active{display:block}
 .callout{
   border-left:3px solid var(--blue);background:rgba(141,185,255,.08);
   padding:16px 18px;border-radius:0 14px 14px 0;color:var(--body);margin:20px 0
 }
-.fade{opacity:0;transform:translateY(22px);transition:.8s}
+.fade{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s ease}
 .fade.visible{opacity:1;transform:none}
+.transition-curtain{
+  position:fixed;inset:0;background:#05070a;z-index:200;pointer-events:none;
+  opacity:0;transition:opacity .48s ease
+}
+.transition-curtain.on{opacity:1}
+.timeline{position:relative;margin-top:32px}
+.timeline:before{
+  content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;
+  background:linear-gradient(transparent,rgba(255,255,255,.28),transparent)
+}
+.timeline-item{width:50%;padding:12px 38px 28px;position:relative}
+.timeline-item:nth-child(even){margin-left:50%}
+.timeline-item:after{
+  content:"";position:absolute;top:25px;width:12px;height:12px;border-radius:50%;
+  background:white;box-shadow:0 0 24px rgba(255,255,255,.4)
+}
+.timeline-item:nth-child(odd):after{right:-6px}
+.timeline-item:nth-child(even):after{left:-6px}
+.year{font:1.85rem Georgia,serif;color:var(--gold)}
+.timeline-item p{margin:5px 0;color:var(--body)}
+.paper-stage{
+  background:radial-gradient(circle at 50% 0,rgba(239,210,138,.1),transparent 42%),#080b0e;
+  border:1px solid var(--line);border-radius:23px;padding:22px;overflow:hidden
+}
+.paper{
+  position:relative;color:var(--ink);
+  background:
+    linear-gradient(rgba(75,52,26,.05),rgba(75,52,26,.05)),
+    repeating-linear-gradient(0deg,transparent 0 25px,rgba(62,43,20,.06) 26px),
+    var(--paper);
+  border-radius:7px;padding:22px;box-shadow:0 18px 45px rgba(0,0,0,.45);
+  font-family:Georgia,serif
+}
+.paper:after{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:7px;
+  box-shadow:inset 0 0 35px rgba(74,48,19,.28)
+}
+.paper-title{text-align:center;font-size:1.55rem;letter-spacing:.06em;margin-bottom:14px}
+.log-table{display:grid;grid-template-columns:repeat(2,1fr);gap:5px 22px}
+.log-row{
+  display:grid;grid-template-columns:46px 1fr;gap:10px;padding:4px 8px;border-radius:4px;
+  transition:.25s
+}
+.log-row.head{font-weight:700;border-bottom:1px solid rgba(51,40,25,.5)}
+.log-row.active{background:rgba(110,50,15,.19);box-shadow:inset 0 0 0 1px rgba(75,35,8,.28)}
+.log-row.disabled{opacity:.43}
+.slide-rule{
+  margin-top:18px;padding:22px 14px 18px;border-radius:10px;
+  background:linear-gradient(90deg,#c7ad7c,#e2cda2,#c7ad7c);
+  color:var(--ink);box-shadow:inset 0 0 22px rgba(56,37,15,.28),0 12px 30px rgba(0,0,0,.35);
+  overflow:hidden
+}
+.rule-label{text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;margin-bottom:5px}
+.scale{position:relative;height:54px;border-top:2px solid rgba(52,37,19,.68)}
+.tick{
+  position:absolute;top:0;transform:translateX(-50%);font:12px Georgia,serif
+}
+.tick:before{content:"";display:block;width:1px;height:15px;background:rgba(52,37,19,.72);margin:auto auto 3px}
+.cursor{
+  position:absolute;top:-8px;width:2px;height:65px;background:#9b1717;
+  box-shadow:0 0 7px rgba(155,23,23,.55);transition:left .28s ease
+}
+.log-controls{margin-top:20px}
+.log-result{
+  margin-top:17px;text-align:center;padding:16px;border:1px solid rgba(51,40,25,.22);
+  border-radius:8px;background:rgba(255,248,222,.34);font-size:1.13rem
+}
+.interest-story{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin-bottom:18px
+}
+.story-panel{padding:20px;border:1px solid var(--line);border-radius:19px;background:rgba(255,255,255,.026)}
+.story-panel strong{color:white}
+.plain-key{display:flex;gap:11px;flex-wrap:wrap;margin:16px 0}
+.plain-pill{
+  border:1px solid var(--line);background:rgba(255,255,255,.035);
+  border-radius:999px;padding:8px 13px;color:var(--body)
+}
+.euler-banner{
+  padding:25px;border:1px solid rgba(145,188,255,.26);border-radius:22px;
+  background:radial-gradient(circle at 50% 0,rgba(145,188,255,.11),transparent 60%),#080c12;
+  text-align:center;margin-bottom:26px
+}
+.euler-banner .label{text-transform:uppercase;letter-spacing:.2em;color:#cdd9e9;font-size:.75rem}
+.euler-banner .formula{font-size:clamp(2.1rem,5vw,4.15rem);margin:10px 0}
+.derivation-step{
+  display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:start;
+  padding:16px 0;border-bottom:1px solid var(--line)
+}
+.derivation-step:last-child{border-bottom:0}
+.step-num{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,255,255,.28)}
+.rotation-panel{margin-top:30px;padding-top:30px;border-top:1px solid var(--line)}
+.glow-button{animation:pulse 2.3s infinite;box-shadow:0 0 20px rgba(145,188,255,.17)}
+@keyframes pulse{50%{box-shadow:0 0 34px rgba(145,188,255,.35);border-color:rgba(145,188,255,.7)}}
+.final-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
 @media(max-width:800px){
   .progress{display:none}.box{grid-column:1/-1}.metrics{grid-template-columns:1fr}
-  .variable-key{grid-template-columns:1fr}
+  .timeline:before{left:10px}.timeline-item,.timeline-item:nth-child(even){width:100%;margin-left:0;padding-left:38px;padding-right:0}
+  .timeline-item:nth-child(odd):after,.timeline-item:nth-child(even):after{left:4px;right:auto}
+  .interest-story{grid-template-columns:1fr}
+  .log-table{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
+<div class="transition-curtain" id="curtain"></div>
 <nav>
-  <div class="brand"><a href="/">Math Museum · Exhibit: e</a></div>
+  <div class="brand"><a href="/">Math Museum · Euler's Number</a></div>
   <div class="progress" id="progress">Entrance</div>
 </nav>
 
@@ -136,122 +239,128 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
   <div class="kicker">A Math Museum interactive exhibit</div>
   <div class="e">e</div>
   <h1>The Number That Connects Everything</h1>
-  <p class="lead">Follow one constant from the problem of difficult multiplication to compound interest, calculus, engineering, physics, and Euler's identity.</p>
+  <p class="lead">Follow one remarkable number through history, calculation, growth, calculus, engineering, physics, and the complex plane.</p>
   <button data-next="r1">Enter Exhibit</button>
 </div>
 </section>
 
-<section id="r1" class="fade" data-room="Room 1 · Before e">
+<section id="r1" class="fade" data-room="Room 1 · A Brief History">
 <div class="wrap">
   <div class="kicker">Room One</div>
-  <h2>Before <em>e</em></h2>
-  <p class="lead">Before calculators, multiplication was expensive. Astronomers, navigators, engineers, and merchants had to repeat long calculations by hand. A method that could replace multiplication with addition would save enormous amounts of time.</p>
+  <h2>A Number Discovered Over Centuries</h2>
+  <p class="lead">Euler's number was not invented in a single moment. It slowly emerged as people searched for faster calculations, studied interest, and tried to describe continuous change.</p>
+  <div class="card">
+    <div class="timeline">
+      <div class="timeline-item"><div class="year">1614</div><h3>John Napier publishes logarithms</h3><p>Logarithms give astronomers and navigators a practical way to turn difficult multiplication into easier addition.</p></div>
+      <div class="timeline-item"><div class="year">1620s</div><h3>Logarithmic scales become physical tools</h3><p>Edmund Gunter and William Oughtred help turn logarithms into the sliding scales that become the slide rule.</p></div>
+      <div class="timeline-item"><div class="year">1683</div><h3>Jacob Bernoulli studies compound interest</h3><p>He notices that compounding more and more often approaches a fixed value near 2.71828.</p></div>
+      <div class="timeline-item"><div class="year">1730s</div><h3>Leonhard Euler reveals its deeper role</h3><p>Euler adopts the symbol <em>e</em> and shows that the same number belongs naturally to growth, calculus, infinite series, and complex numbers.</p></div>
+      <div class="timeline-item"><div class="year">Today</div><h3>A constant woven through science</h3><p>Euler's number appears in probability, circuits, heat transfer, motion, population growth, quantum physics, and countless other systems.</p></div>
+    </div>
+  </div>
+  <div class="next"><button data-next="r2">See the Problem That Started It</button></div>
+</div>
+</section>
+
+<section id="r2" class="fade" data-room="Room 2 · Before Calculators">
+<div class="wrap">
+  <div class="kicker">Room Two</div>
+  <h2>Before Calculators, Multiplication Was Expensive</h2>
+  <p class="lead">Astronomers, navigators, engineers, and merchants repeated long calculations by hand. A method that could replace multiplication with addition could save hours of work—and reduce costly mistakes.</p>
   <div class="card">
     <div class="problem" id="problem">347 × 982</div>
     <div class="row"><input id="answer" placeholder="Your answer"><button id="check">Check</button></div>
     <p id="status" class="muted" style="text-align:center"></p>
-    <p class="quote">Imagine doing thousands of calculations like this every day.</p>
+    <p class="quote">Now imagine doing thousands of calculations like this without a calculator.</p>
   </div>
-  <div class="next"><button data-next="r2">Enter the Logarithm Gallery</button></div>
+  <div class="next"><button data-next="r3">Enter the Logarithm Gallery</button></div>
 </div>
 </section>
 
-<section id="r2" class="fade" data-room="Room 2 · Logarithms">
-<div class="wrap">
-  <div class="kicker">Room Two</div>
-  <h2>How Multiplication Becomes Addition</h2>
-  <p class="lead">The trick is not limited to powers of 2. Logarithms assign every positive number an exponent. Once numbers are represented by exponents, multiplication can be performed by adding those exponents.</p>
-  <div class="card">
-    <div class="grid">
-      <div class="box">
-        <h3>A simple exact example</h3>
-        <div class="step-list">
-          <div class="step"><div class="step-num">1</div><div>Recognize the numbers as powers of 2:<br>\(32=2^5\) and \(64=2^6\).</div></div>
-          <div class="step"><div class="step-num">2</div><div>Use the exponent rule:<br>\(2^5\cdot2^6=2^{5+6}=2^{11}\).</div></div>
-          <div class="step"><div class="step-num">3</div><div>Convert back:<br>\(2^{11}=2048\).</div></div>
-        </div>
-      </div>
-      <div class="box">
-        <h3>Why this was actually useful</h3>
-        <p class="explain">People did not usually recognize every number as a neat power of 2. They used printed logarithm tables. A table told them the exponent corresponding to almost any positive number.</p>
-        <div class="math-panel">
-          \[
-          \log(37)\approx1.5682,\qquad \log(83)\approx1.9191
-          \]
-          \[
-          \log(37\cdot83)=1.5682+1.9191=3.4873
-          \]
-          \[
-          10^{3.4873}\approx3071
-          \]
-        </div>
-        <p class="muted">So even awkward numbers could be multiplied using table lookup, addition, and one final reverse lookup.</p>
-      </div>
-      <div class="box full">
-        <h3>Try the exponent rule</h3>
-        <label>First exponent: <strong id="av">5</strong></label>
-        <input id="a" type="range" min="0" max="10" value="5">
-        <label>Second exponent: <strong id="bv">6</strong></label>
-        <input id="b" type="range" min="0" max="10" value="6">
-        <div class="metrics">
-          <div class="metric">Original multiplication<strong id="mul"></strong></div>
-          <div class="metric">Add exponents<strong id="add"></strong></div>
-          <div class="metric">Final result<strong id="result"></strong></div>
-        </div>
-        <div class="formula" id="logFormula"></div>
-      </div>
-    </div>
-  </div>
-  <div class="next"><button data-next="r3">Continue to Bernoulli</button></div>
-</div>
-</section>
-
-<section id="r3" class="fade" data-room="Room 3 · Bernoulli">
+<section id="r3" class="fade" data-room="Room 3 · Logarithms">
 <div class="wrap">
   <div class="kicker">Room Three</div>
-  <h2>A Number Hiding in Interest</h2>
-  <p class="lead">Keep the total annual interest fixed at 100%. When the account compounds more often, each individual interest payment becomes smaller: 100% once, 50% twice, 25% four times, and so on.</p>
-  <div class="card">
-    <div class="math-panel">
-      \[
-      A_n=\left(1+\frac{1}{n}\right)^n
-      \]
+  <h2>Turning Multiplication Into Movement</h2>
+  <p class="lead">A logarithm table pairs each ordinary number with a second number—its logarithm. Multiplying two ordinary numbers then becomes a matter of finding two rows, adding their logarithms, and converting the result back. Sliding scales later made the same idea physical.</p>
+  <div class="paper-stage">
+    <div class="paper">
+      <div class="paper-title">A Small Table of Common Logarithms</div>
+      <div class="log-table" id="logTable"></div>
+
+      <div class="slide-rule">
+        <div class="rule-label">Fixed logarithmic scale</div>
+        <div class="scale" id="scaleA"><div class="cursor" id="cursorA"></div></div>
+        <div class="rule-label">Sliding logarithmic scale</div>
+        <div class="scale" id="scaleB"><div class="cursor" id="cursorB"></div></div>
+      </div>
+
+      <div class="log-controls">
+        <label>First number: <strong id="logAV">4</strong></label>
+        <input id="logA" type="range" min="1" max="10" value="4">
+        <label>Second number: <strong id="logBV">8</strong></label>
+        <input id="logB" type="range" min="1" max="10" value="8">
+      </div>
+
+      <div class="log-result" id="logResult"></div>
     </div>
-    <p class="explain">Here, \(n\) is the number of compounding periods. Each period pays only \(1/n\) of the original principal, so the total stated annual rate remains 100%.</p>
-    <label>Compounding periods per year</label>
-    <input id="compound" type="range" min="0" max="9" value="0">
-    <div class="metrics">
-      <div class="metric">Periods \(n\)<strong id="count"></strong></div>
-      <div class="metric">Rate each period<strong id="periodRate"></strong></div>
-      <div class="metric">Ending balance<strong id="balance"></strong></div>
-    </div>
-    <canvas id="compoundCanvas" width="1000" height="370"></canvas>
-    <div class="legend"><span><i class="swatch white"></i>Values of \(\left(1+\frac1n\right)^n\)</span><span><i class="swatch blue"></i>Limit \(e\)</span></div>
-    <div class="big" id="mystery"></div>
   </div>
-  <div class="next"><button data-next="r4">Meet Euler</button></div>
+  <p class="explain" style="margin-top:20px">For a neat example, \(32=2^5\) and \(64=2^6\), so \(32\times64=2^{5+6}=2^{11}=2048\). Tables and slide rules extended that same shortcut to numbers that were not obvious powers.</p>
+  <div class="next"><button data-next="r4">Continue to Compound Interest</button></div>
 </div>
 </section>
 
-<section id="r4" class="fade" data-room="Room 4 · Euler">
+<section id="r4" class="fade" data-room="Room 4 · Compound Interest">
 <div class="wrap">
   <div class="kicker">Room Four</div>
+  <h2>A Number Hiding in Interest</h2>
+  <p class="lead">Imagine investing one dollar at 100% interest for one year. The more often the interest is added, the more the balance grows—but the year's total rate must still remain 100%.</p>
+  <div class="card">
+    <div class="interest-story">
+      <div class="story-panel">
+        <h3>Why the rate changes</h3>
+        <p class="explain">If interest is added once, the full 100% is added at once. If it is added twice, each payment is 50%. If it is added four times, each payment is 25%.</p>
+        <p class="explain">Keeping every payment at 100% would create a completely different investment: two periods would mean two separate 100% payments, and twelve periods would mean twelve. The yearly rate would no longer be fixed.</p>
+      </div>
+      <div class="story-panel">
+        <h3>The pattern</h3>
+        <div class="math-panel">\[\left(1+\frac{1}{n}\right)^n\]</div>
+        <p class="explain">The number \(n\) tells us both how many payments occur and how small each payment becomes.</p>
+      </div>
+    </div>
+    <label>How many times is interest added?</label>
+    <input id="compound" type="range" min="0" max="9" value="4">
+    <div class="metrics">
+      <div class="metric">Payments<strong id="count"></strong></div>
+      <div class="metric">Interest each time<strong id="periodRate"></strong></div>
+      <div class="metric">One dollar becomes<strong id="balance"></strong></div>
+    </div>
+    <canvas id="compoundCanvas" width="1000" height="370"></canvas>
+    <div class="legend"><span><i class="swatch white"></i>What the investment becomes</span><span><i class="swatch blue"></i>The value it approaches: \(e\)</span></div>
+  </div>
+  <div class="next"><button data-next="r5">Meet Euler</button></div>
+</div>
+</section>
+
+<section id="r5" class="fade" data-room="Room 5 · Euler">
+<div class="wrap">
+  <div class="kicker">Room Five</div>
   <h2>Euler Gives the Number a Name</h2>
   <div class="card" style="text-align:center">
     <div class="e" style="font-size:clamp(8rem,20vw,14rem)">e</div>
-    <p class="quote">A constant born from repeated growth became the natural language of continuous change.</p>
+    <p class="quote">A number first noticed in repeated growth became the natural language of continuous change.</p>
+    <p class="explain">Leonhard Euler did not discover every piece of the story himself, but he connected the pieces, developed the mathematics around them, and gave the constant the symbol we still use today.</p>
   </div>
-  <div class="next"><button data-next="r5">Enter the Calculus Gallery</button></div>
+  <div class="next"><button data-next="r6">Enter the Calculus Gallery</button></div>
 </div>
 </section>
 
-<section id="r5" class="fade" data-room="Room 5 · Calculus">
+<section id="r6" class="fade" data-room="Room 6 · A Curve That Matches Its Slope">
 <div class="wrap">
-  <div class="kicker">Room Five</div>
-  <h2>Can a Function Equal Its Own Slope?</h2>
-  <p class="lead">This is a question from calculus. A derivative measures a function's instantaneous rate of change—the slope of the tangent line touching the curve at one point.</p>
+  <div class="kicker">Room Six</div>
+  <h2>Can a Curve Match Its Own Slope?</h2>
+  <p class="lead">In calculus, the slope at one exact point is called a derivative. It is shown by the straight line that just touches the curve there.</p>
   <div class="card">
-    <div class="callout"><strong>Why this is remarkable:</strong> among functions of the form \(a^x\), only \(e^x\) has derivative exactly equal to itself without any extra multiplier. More generally, every solution of \(f'(x)=f(x)\) is a constant multiple \(Ce^x\).</div>
+    <div class="callout"><strong>What makes \(e^x\) extraordinary:</strong> wherever you look on its curve, its height and its slope are the same. No other exponential base does this perfectly.</div>
     <div class="chips">
       <button class="chip active" data-f="x2">\(x^2\)</button>
       <button class="chip" data-f="sin">\(\sin x\)</button>
@@ -259,56 +368,99 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
       <button class="chip" data-f="two">\(2^x\)</button>
       <button class="chip" data-f="e">\(e^x\)</button>
     </div>
-    <label>Inspect at \(x=\) <strong id="xv">1.00</strong></label>
+    <label>Move along the curve: \(x=\) <strong id="xv">1.00</strong></label>
     <input id="x" type="range" min="-1.5" max="2" step=".01" value="1">
     <canvas id="functionCanvas" width="1000" height="400"></canvas>
     <div class="legend">
-      <span><i class="swatch blue"></i>Function curve</span>
-      <span><i class="swatch red"></i>Tangent line</span>
-      <span><i class="swatch white"></i>Selected point</span>
+      <span><i class="swatch blue"></i>The curve</span>
+      <span><i class="swatch red"></i>The slope at this point</span>
+      <span><i class="swatch white"></i>The point being measured</span>
     </div>
     <div class="metrics">
-      <div class="metric">Function value<strong id="height"></strong></div>
-      <div class="metric">Derivative / slope<strong id="slope"></strong></div>
+      <div class="metric">Height of the curve<strong id="height"></strong></div>
+      <div class="metric">Slope here<strong id="slope"></strong></div>
       <div class="metric">Difference<strong id="difference"></strong></div>
     </div>
     <p id="fnMessage" class="explain" style="text-align:center"></p>
   </div>
-  <div class="next"><button data-next="r6">Build the Curve from a Series</button></div>
+  <div class="next"><button data-next="r7">Build the Curve Piece by Piece</button></div>
 </div>
 </section>
 
-<section id="r6" class="fade" data-room="Room 6 · Taylor Series">
+<section id="r7" class="fade" data-room="Room 7 · Taylor Series">
 <div class="wrap">
-  <div class="kicker">Room Six</div>
-  <h2>Building \(e^x\) Term by Term</h2>
-  <p class="lead">A Taylor series represents a function as an infinite sum of polynomial terms. Calculators and numerical software use related approximation methods to evaluate functions efficiently.</p>
+  <div class="kicker">Room Seven</div>
+  <h2>Building \(e^x\) Piece by Piece</h2>
+  <p class="lead">A Taylor series builds a complicated curve from simple pieces. Begin with a flat line, then add one piece at a time. Each new piece makes the white curve look more like the true curve of \(e^x\).</p>
   <div class="card">
     <div class="math-panel">
       \[
-      e^x=\sum_{n=0}^{\infty}\frac{x^n}{n!}
-      =1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\frac{x^4}{4!}+\cdots
+      e^x=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\frac{x^4}{4!}+\cdots
       \]
     </div>
-    <p class="explain">The symbol \(n!\) means factorial: \(4!=4\cdot3\cdot2\cdot1=24\). Each additional term improves the approximation over a wider region.</p>
-    <label>Number of included terms: <strong id="termsV">1</strong></label>
-    <input id="terms" type="range" min="1" max="10" value="1">
+    <p class="explain">The exclamation mark means factorial. For example, \(4!=4\times3\times2\times1=24\). Calculators use approximation ideas like this to turn functions into arithmetic they can actually compute.</p>
+    <label>Pieces included: <strong id="termsV">5</strong></label>
+    <input id="terms" type="range" min="1" max="10" value="5">
     <div class="math-panel" id="seriesText"></div>
     <canvas id="seriesCanvas" width="1000" height="370"></canvas>
     <div class="legend">
-      <span><i class="swatch blue"></i>True function \(e^x\)</span>
-      <span><i class="swatch white"></i>Current Taylor polynomial</span>
+      <span><i class="swatch blue"></i>The true curve \(e^x\)</span>
+      <span><i class="swatch white"></i>The curve built from the pieces so far</span>
     </div>
   </div>
-  <div class="next"><button data-next="r7">See e Describe the Real World</button></div>
+  <div class="next"><button data-next="r8">Watch the Same Series Begin to Rotate</button></div>
 </div>
 </section>
 
-<section id="r7" class="fade" data-room="Room 7 · Change">
+<section id="r8" class="fade" data-room="Room 8 · Euler's Formula">
 <div class="wrap">
-  <div class="kicker">Room Seven</div>
+  <div class="kicker">Room Eight</div>
+  <h2>When Exponential Growth Becomes Rotation</h2>
+  <p class="lead">The same series from the previous room changes character when the imaginary number \(i\) enters the exponent. Instead of simply growing, it begins to move around a circle.</p>
+  <div class="card">
+    <div class="euler-banner">
+      <div class="label">Euler's formula</div>
+      <div class="formula">\[e^{i\theta}=\cos\theta+i\sin\theta\]</div>
+      <p class="explain">One equation connects exponentials, circles, sine, cosine, and complex numbers.</p>
+    </div>
+
+    <h3>How the connection appears</h3>
+    <div class="derivation-step"><div class="step-num">1</div><div><strong>Start with the same Taylor series.</strong><p class="explain">Replace \(x\) with \(i\theta\). The equation still has the same pieces, but now those pieces contain powers of \(i\).</p><div class="math-panel">\[e^{i\theta}=1+i\theta+\frac{(i\theta)^2}{2!}+\frac{(i\theta)^3}{3!}+\cdots\]</div></div></div>
+    <div class="derivation-step"><div class="step-num">2</div><div><strong>Powers of \(i\) repeat in a cycle.</strong><p class="explain">They move through \(i,-1,-i,1\), then repeat. That naturally divides the series into ordinary real pieces and imaginary pieces.</p></div></div>
+    <div class="derivation-step"><div class="step-num">3</div><div><strong>Two familiar patterns appear.</strong><p class="explain">The real pieces match the series for cosine. The imaginary pieces match the series for sine.</p><div class="math-panel">\[
+    \underbrace{\left(1-\frac{\theta^2}{2!}+\frac{\theta^4}{4!}-\cdots\right)}_{\cos\theta}
+    +i\underbrace{\left(\theta-\frac{\theta^3}{3!}+\frac{\theta^5}{5!}-\cdots\right)}_{\sin\theta}
+    \]</div></div></div>
+
+    <div class="rotation-panel">
+      <h3>Now watch it move</h3>
+      <p class="explain">Cosine controls the horizontal position. Sine controls the vertical position. Together they place the glowing point on a circle.</p>
+      <label>Angle \(\theta=\) <strong id="thetaV">0.00</strong> radians</label>
+      <input id="theta" type="range" min="0" max="6.283185307" step=".001" value=".85">
+      <canvas id="complexCanvas" width="1000" height="440"></canvas>
+      <div class="legend">
+        <span><i class="swatch blue"></i>Horizontal: \(\cos\theta\)</span>
+        <span><i class="swatch green"></i>Vertical: \(\sin\theta\)</span>
+        <span><i class="swatch white"></i>The complete number \(e^{i\theta}\)</span>
+      </div>
+      <div class="math-panel" id="complexText"></div>
+      <div class="next"><button id="pi" class="glow-button">Move the angle to \(\pi\)</button></div>
+      <div class="euler-banner" id="identityPanel" style="margin-top:24px;opacity:.48;transition:opacity .8s,box-shadow .8s">
+        <div class="label">Euler's identity</div>
+        <div class="formula">\(e^{i\pi}+1=0\)</div>
+        <p class="explain">At half a turn, the point reaches \(-1\). Adding \(1\) leaves zero, joining five of mathematics' most important symbols in a single line.</p>
+      </div>
+    </div>
+  </div>
+  <div class="next"><button data-next="r9">See Where e Appears in the World</button></div>
+</div>
+</section>
+
+<section id="r9" class="fade" data-room="Room 9 · The Language of Change">
+<div class="wrap">
+  <div class="kicker">Room Nine</div>
   <h2>The Language of Change</h2>
-  <p class="lead">Exponential equations appear whenever a system changes at a rate related to its present state. Choose a system, adjust its parameter, and watch how the curve responds.</p>
+  <p class="lead">Whenever the speed of change depends on how much is already present, \(e\) tends to appear. Choose a real system and adjust one plain-language control to see how its behavior changes.</p>
   <div class="card">
     <div class="chips">
       <button class="chip active" data-s="growth">Population</button>
@@ -318,60 +470,11 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
       <button class="chip" data-s="damping">Damping</button>
     </div>
     <div class="math-panel" id="scenarioFormula"></div>
-    <div class="variable-key" id="variableKey"></div>
+    <div class="plain-key" id="plainKey"></div>
     <p id="scenarioText" class="explain"></p>
     <label id="parameterLabel"></label>
-    <input id="parameter" type="range" min="0.1" max="1" step=".01" value=".35">
+    <input id="parameter" type="range" min=".1" max="1" step=".01" value=".35">
     <canvas id="changeCanvas" width="1000" height="370"></canvas>
-  </div>
-  <div class="next"><button data-next="r8">Enter Euler's Formula</button></div>
-</div>
-</section>
-
-<section id="r8" class="fade" data-room="Room 8 · Euler's Formula">
-<div class="wrap">
-  <div class="kicker">Room Eight</div>
-  <h2>Euler's Formula: Exponentials Become Rotation</h2>
-  <p class="lead">Euler's formula is one of the central bridges in modern mathematics. It connects exponential functions, trigonometry, and complex numbers:</p>
-  <div class="card">
-    <div class="math-panel">\[e^{i\theta}=\cos\theta+i\sin\theta\]</div>
-    <div class="stage-tabs">
-      <button class="chip active" data-stage="derive">Stage 1 · Where it comes from</button>
-      <button class="chip" data-stage="rotate">Stage 2 · How it rotates</button>
-    </div>
-
-    <div class="stage active" id="deriveStage">
-      <p class="explain">Begin with the Taylor series for \(e^x\), then substitute \(x=i\theta\). Powers of \(i\) cycle through \(1,i,-1,-i\). Separating the real terms from the imaginary terms reveals the Taylor series for cosine and sine.</p>
-      <div class="math-panel">
-        \[
-        e^{i\theta}=1+i\theta+\frac{(i\theta)^2}{2!}+\frac{(i\theta)^3}{3!}+\cdots
-        \]
-        \[
-        =\left(1-\frac{\theta^2}{2!}+\frac{\theta^4}{4!}-\cdots\right)
-        +i\left(\theta-\frac{\theta^3}{3!}+\frac{\theta^5}{5!}-\cdots\right)
-        \]
-        \[
-        =\cos\theta+i\sin\theta
-        \]
-      </div>
-      <div class="callout">The real terms become cosine. The imaginary terms become \(i\) times sine. This is why an exponential with an imaginary exponent describes circular motion instead of ordinary growth.</div>
-    </div>
-
-    <div class="stage" id="rotateStage">
-      <p class="explain">A complex number has a horizontal real component and a vertical imaginary component. In Euler's formula, \(\cos\theta\) is the horizontal coordinate and \(\sin\theta\) is the vertical coordinate.</p>
-      <label>Angle \(\theta=\) <strong id="thetaV">0.00</strong> radians</label>
-      <input id="theta" type="range" min="0" max="6.283185307" step=".001" value="0">
-      <canvas id="complexCanvas" width="1000" height="440"></canvas>
-      <div class="legend">
-        <span><i class="swatch blue"></i>\(\cos\theta\): real component</span>
-        <span><i class="swatch green"></i>\(\sin\theta\): imaginary component</span>
-        <span><i class="swatch white"></i>\(e^{i\theta}\)</span>
-      </div>
-      <div class="math-panel" id="complexText"></div>
-      <div class="next"><button id="pi">Move to \(\pi\)</button></div>
-      <div class="formula" id="identity" style="opacity:.16;transition:1s">\(e^{i\pi}+1=0\)</div>
-      <p class="muted" style="text-align:center">At \(\theta=\pi\), the point reaches \(-1\), producing Euler's identity—an equation joining \(e\), \(i\), \(\pi\), \(1\), and \(0\).</p>
-    </div>
   </div>
   <div class="next"><button data-next="final">Enter the Final Room</button></div>
 </div>
@@ -383,37 +486,65 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
   <h2>Everything Returns to <em>e</em></h2>
   <div class="e" style="font-size:clamp(8rem,18vw,14rem)">e</div>
   <p class="quote">Some numbers describe quantities.<br><strong><em>e</em> describes change.</strong></p>
-  <button data-next="top">Return to Entrance</button>
+  <div class="final-actions">
+    <button data-next="top">Return to Entrance</button>
+    <a href="/" style="text-decoration:none"><button>Return to Museum Lobby</button></a>
+  </div>
 </div>
 </section>
 
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-$$("[data-next]").forEach(b=>b.onclick=()=>document.getElementById(b.dataset.next).scrollIntoView({behavior:"smooth"}));
-const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");$("#progress").textContent=e.target.dataset.room}}),{threshold:.28});
+const typeset=els=>{if(window.MathJax?.typesetPromise) MathJax.typesetPromise(els).catch(()=>{})};
+
+function travelTo(id){
+  const curtain=$("#curtain");curtain.classList.add("on");
+  setTimeout(()=>{document.getElementById(id).scrollIntoView({behavior:"auto"});setTimeout(()=>curtain.classList.remove("on"),120)},430);
+}
+$$("[data-next]").forEach(b=>b.onclick=()=>travelTo(b.dataset.next));
+
+const obs=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add("visible");$("#progress").textContent=e.target.dataset.room}
+}),{threshold:.25});
 $$("section").forEach(s=>obs.observe(s));
 
 const probs=[[347,982],[762,1458],[918,654]];let pIndex=0;
-$("#check").onclick=()=>{let[a,b]=probs[pIndex],v=Number($("#answer").value.replace(/,/g,""));$("#status").textContent=v===a*b?"Correct. Now imagine doing this all day.":"The answer is "+(a*b).toLocaleString()+". The difficulty is the point.";if(v===a*b){pIndex=(pIndex+1)%probs.length;setTimeout(()=>{$("#problem").textContent=probs[pIndex][0]+" × "+probs[pIndex][1];$("#answer").value="";$("#status").textContent=""},1000)}};
+$("#check").onclick=()=>{
+  let[a,b]=probs[pIndex],v=Number($("#answer").value.replace(/,/g,""));
+  $("#status").textContent=v===a*b?"Correct. Now imagine doing this all day.":"The answer is "+(a*b).toLocaleString()+". The difficulty is the point.";
+  if(v===a*b){pIndex=(pIndex+1)%probs.length;setTimeout(()=>{$("#problem").textContent=probs[pIndex][0]+" × "+probs[pIndex][1];$("#answer").value="";$("#status").textContent=""},1000)}
+};
 
-function updateLogs(){
-  let a=+$("#a").value,b=+$("#b").value,A=2**a,B=2**b,R=2**(a+b);
-  $("#av").textContent=a;$("#bv").textContent=b;
-  $("#mul").textContent=A.toLocaleString()+" × "+B.toLocaleString();
-  $("#add").textContent=a+" + "+b+" = "+(a+b);
-  $("#result").textContent=R.toLocaleString();
-  $("#logFormula").innerHTML="\\(2^{"+a+"}\\cdot2^{"+b+"}=2^{"+(a+b)+"}="+R.toLocaleString()+"\\)";
-  if(window.MathJax) MathJax.typesetPromise([$("#logFormula")]);
+function buildLogTable(){
+  let html='<div class="log-row head"><span>No.</span><span>log₁₀</span></div><div class="log-row head"><span>No.</span><span>log₁₀</span></div>';
+  for(let i=1;i<=15;i++){
+    html+=`<div class="log-row ${i>10?'disabled':''}" data-log-row="${i}"><span>${i}</span><span>${Math.log10(i).toFixed(5)}</span></div>`;
+  }
+  $("#logTable").innerHTML=html;
+  [$("#scaleA"),$("#scaleB")].forEach(scale=>{
+    for(let n=1;n<=10;n++){
+      const tick=document.createElement("span");tick.className="tick";tick.textContent=n;
+      tick.style.left=(Math.log10(n)*100)+"%";scale.appendChild(tick);
+    }
+  });
 }
-$("#a").oninput=$("#b").oninput=updateLogs;
+function updateLogRoom(){
+  let a=+$("#logA").value,b=+$("#logB").value,product=a*b;
+  $("#logAV").textContent=a;$("#logBV").textContent=b;
+  $$("[data-log-row]").forEach(r=>r.classList.toggle("active",[a,b].includes(+r.dataset.logRow)));
+  $("#cursorA").style.left=(Math.log10(a)*100)+"%";
+  $("#cursorB").style.left=(Math.log10(b)*100)+"%";
+  $("#scaleB").style.transform=`translateX(${Math.log10(a)*32}%)`;
+  $("#logResult").innerHTML=`Find ${a} and ${b}. Their logarithms are ${Math.log10(a).toFixed(4)} and ${Math.log10(b).toFixed(4)}.<br><strong>Add them:</strong> ${(Math.log10(a)+Math.log10(b)).toFixed(4)}. Convert back, and the answer is <strong>${product}</strong>.`;
+}
+$("#logA").oninput=$("#logB").oninput=updateLogRoom;
 
 const opts=[1,2,3,4,12,52,365,1000,100000,10000000],cv=n=>(1+1/n)**n;
 function drawCompound(){
   let i=+$("#compound").value,n=opts[i],v=cv(n);
   $("#count").textContent=n.toLocaleString();
   $("#periodRate").textContent=(100/n).toFixed(n<100?2:5)+"%";
-  $("#balance").textContent="$"+v.toFixed(9);
-  $("#mystery").textContent=v.toFixed(9);
+  $("#balance").textContent="$"+v.toFixed(6);
   let c=$("#compoundCanvas"),g=c.getContext("2d"),W=c.width,H=c.height;
   g.clearRect(0,0,W,H);
   const left=65,right=30,top=30,bottom=55,yMin=1.9,yMax=2.75;
@@ -421,41 +552,38 @@ function drawCompound(){
   const ty=y=>H-bottom-(y-yMin)/(yMax-yMin)*(H-top-bottom);
   g.strokeStyle="rgba(255,255,255,.11)";g.lineWidth=1;
   for(let k=0;k<5;k++){let y=top+k*(H-top-bottom)/4;g.beginPath();g.moveTo(left,y);g.lineTo(W-right,y);g.stroke()}
-  g.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--blue');g.setLineDash([9,8]);g.lineWidth=2;
+  g.strokeStyle="#91bcff";g.setLineDash([9,8]);g.lineWidth=2;
   g.beginPath();g.moveTo(left,ty(Math.E));g.lineTo(W-right,ty(Math.E));g.stroke();g.setLineDash([]);
   g.strokeStyle="white";g.lineWidth=4;g.beginPath();
   opts.forEach((n,j)=>{let x=tx(j),y=ty(cv(n));j?g.lineTo(x,y):g.moveTo(x,y)});g.stroke();
   opts.forEach((n,j)=>{let x=tx(j),y=ty(cv(n));g.fillStyle=j===i?"white":"rgba(255,255,255,.45)";g.beginPath();g.arc(x,y,j===i?7:4,0,Math.PI*2);g.fill()});
-  g.fillStyle="rgba(255,255,255,.7)";g.font="16px system-ui";
-  g.fillText("n increases →",W-155,H-18);
-  g.fillStyle="#8db9ff";g.fillText("e ≈ 2.71828",left+8,ty(Math.E)-9);
+  g.fillStyle="rgba(255,255,255,.7)";g.font="16px system-ui";g.fillText("more frequent payments →",W-230,H-18);
+  g.fillStyle="#91bcff";g.fillText("e ≈ 2.71828",left+8,ty(Math.E)-9);
 }
 $("#compound").oninput=drawCompound;
 
 let active="x2";
 const fns={
-  x2:{name:"x²",f:x=>x*x,d:x=>2*x},
-  sin:{name:"sin x",f:Math.sin,d:Math.cos},
-  linear:{name:"3x",f:x=>3*x,d:x=>3},
-  two:{name:"2ˣ",f:x=>2**x,d:x=>Math.log(2)*2**x},
-  e:{name:"eˣ",f:Math.exp,d:Math.exp}
+ x2:{f:x=>x*x,d:x=>2*x},sin:{f:Math.sin,d:Math.cos},
+ linear:{f:x=>3*x,d:x=>3},two:{f:x=>2**x,d:x=>Math.log(2)*2**x},
+ e:{f:Math.exp,d:Math.exp}
 };
 function drawFunction(){
   let x0=+$("#x").value,def=fns[active],y0=def.f(x0),m=def.d(x0);
   $("#xv").textContent=x0.toFixed(2);$("#height").textContent=y0.toFixed(3);
   $("#slope").textContent=m.toFixed(3);$("#difference").textContent=Math.abs(y0-m).toFixed(3);
-  $("#fnMessage").textContent=active==="e"?"For eˣ, the curve's height and the tangent-line slope match at every x.":Math.abs(y0-m)<.03?"They happen to match near this point, but not everywhere.":"For this function, the height and tangent-line slope are generally different.";
+  $("#fnMessage").textContent=active==="e"?"For eˣ, the height and the slope match wherever you move the point.":Math.abs(y0-m)<.03?"They happen to match near this one point, but they do not stay matched.":"The height and slope are different here.";
   let c=$("#functionCanvas"),g=c.getContext("2d"),W=c.width,H=c.height;
   g.clearRect(0,0,W,H);
   const xMin=-2,xMax=2.5,yMin=-3,yMax=9,left=55,right=25,top=25,bottom=45;
-  const tx=x=>left+(x-xMin)/(xMax-xMin)*(W-left-right);
-  const ty=y=>H-bottom-(y-yMin)/(yMax-yMin)*(H-top-bottom);
-  g.strokeStyle="rgba(255,255,255,.11)";g.lineWidth=1;
-  g.beginPath();g.moveTo(tx(0),top);g.lineTo(tx(0),H-bottom);g.moveTo(left,ty(0));g.lineTo(W-right,ty(0));g.stroke();
-  g.strokeStyle="#8db9ff";g.lineWidth=4;g.beginPath();
-  for(let px=0;px<=W-left-right;px++){let x=xMin+(xMax-xMin)*px/(W-left-right),y=def.f(x),X=left+px,Y=ty(y);if(!Number.isFinite(Y))continue;px?g.lineTo(X,Y):g.moveTo(X,Y)}g.stroke();
-  g.strokeStyle="#ff8f8f";g.lineWidth=3;g.beginPath();
-  const xa=x0-1.1,xb=x0+1.1;g.moveTo(tx(xa),ty(y0+m*(xa-x0)));g.lineTo(tx(xb),ty(y0+m*(xb-x0)));g.stroke();
+  const tx=x=>left+(x-xMin)/(xMax-xMin)*(W-left-right),ty=y=>H-bottom-(y-yMin)/(yMax-yMin)*(H-top-bottom);
+  g.strokeStyle="rgba(255,255,255,.11)";g.lineWidth=1;g.beginPath();
+  g.moveTo(tx(0),top);g.lineTo(tx(0),H-bottom);g.moveTo(left,ty(0));g.lineTo(W-right,ty(0));g.stroke();
+  g.strokeStyle="#91bcff";g.lineWidth=4;g.beginPath();
+  let started=false;
+  for(let px=0;px<=W-left-right;px++){let x=xMin+(xMax-xMin)*px/(W-left-right),Y=ty(def.f(x)),X=left+px;if(!Number.isFinite(Y))continue;if(!started){g.moveTo(X,Y);started=true}else g.lineTo(X,Y)}g.stroke();
+  g.strokeStyle="#ff9797";g.lineWidth=3;g.beginPath();
+  let xa=x0-1.1,xb=x0+1.1;g.moveTo(tx(xa),ty(y0+m*(xa-x0)));g.lineTo(tx(xb),ty(y0+m*(xb-x0)));g.stroke();
   g.fillStyle="white";g.beginPath();g.arc(tx(x0),ty(y0),8,0,Math.PI*2);g.fill();
 }
 $$("[data-f]").forEach(b=>b.onclick=()=>{$$("[data-f]").forEach(q=>q.classList.remove("active"));b.classList.add("active");active=b.dataset.f;drawFunction()});
@@ -463,93 +591,80 @@ $("#x").oninput=drawFunction;
 
 const fact=n=>n<2?1:n*fact(n-1),ap=(x,n)=>{let s=0;for(let i=0;i<n;i++)s+=x**i/fact(i);return s};
 function seriesLatex(n){
-  let terms=[];
-  for(let i=0;i<n;i++){
-    if(i===0)terms.push("1");
-    else if(i===1)terms.push("x");
-    else terms.push("\\frac{x^{"+i+"}}{"+i+"!}");
-  }
+  let terms=[];for(let i=0;i<n;i++)terms.push(i===0?"1":i===1?"x":"\\frac{x^{"+i+"}}{"+i+"!}");
   return "\\[P_{"+(n-1)+"}(x)="+terms.join("+")+"\\]";
 }
 function drawSeries(){
-  let n=+$("#terms").value;$("#termsV").textContent=n;$("#seriesText").innerHTML=seriesLatex(n);
-  if(window.MathJax) MathJax.typesetPromise([$("#seriesText")]);
+  let n=+$("#terms").value;$("#termsV").textContent=n;$("#seriesText").innerHTML=seriesLatex(n);typeset([$("#seriesText")]);
   let c=$("#seriesCanvas"),g=c.getContext("2d"),W=c.width,H=c.height;
   const xMin=-3,xMax=3,yMin=-1,yMax=10,left=55,right=25,top=25,bottom=45;
-  const tx=x=>left+(x-xMin)/(xMax-xMin)*(W-left-right);
-  const ty=y=>H-bottom-(y-yMin)/(yMax-yMin)*(H-top-bottom);
-  g.clearRect(0,0,W,H);
-  g.strokeStyle="rgba(255,255,255,.1)";g.lineWidth=1;
-  g.beginPath();g.moveTo(tx(0),top);g.lineTo(tx(0),H-bottom);g.moveTo(left,ty(0));g.lineTo(W-right,ty(0));g.stroke();
+  const tx=x=>left+(x-xMin)/(xMax-xMin)*(W-left-right),ty=y=>H-bottom-(y-yMin)/(yMax-yMin)*(H-top-bottom);
+  g.clearRect(0,0,W,H);g.strokeStyle="rgba(255,255,255,.1)";g.lineWidth=1;g.beginPath();
+  g.moveTo(tx(0),top);g.lineTo(tx(0),H-bottom);g.moveTo(left,ty(0));g.lineTo(W-right,ty(0));g.stroke();
   function plot(f,color,width){g.strokeStyle=color;g.lineWidth=width;g.beginPath();let started=false;for(let px=0;px<=W-left-right;px++){let x=xMin+(xMax-xMin)*px/(W-left-right),Y=ty(f(x));if(Y<-1000||Y>1500)continue;let X=left+px;if(!started){g.moveTo(X,Y);started=true}else g.lineTo(X,Y)}g.stroke()}
-  plot(Math.exp,"#8db9ff",4);plot(x=>ap(x,n),"white",4);
+  plot(Math.exp,"#91bcff",4);plot(x=>ap(x,n),"white",4);
 }
 $("#terms").oninput=drawSeries;
-
-const scenarios={
- growth:{formula:"\\[N(t)=N_0e^{rt}\\]",text:"The larger the current population N, the faster the population grows when the growth rate r is positive.",label:"Growth rate r",min:.05,max:.8,step:.01,value:.35,
- keys:[["N(t)","population at time t"],["N₀","initial population"],["r","growth rate"],["t","time"]],
- fn:(t,p)=>Math.exp(p*t)},
- decay:{formula:"\\[N(t)=N_0e^{-\\lambda t}\\]",text:"The remaining amount N falls exponentially. A larger decay constant λ makes it disappear faster.",label:"Decay constant λ",min:.05,max:1,step:.01,value:.5,
- keys:[["N(t)","amount remaining"],["N₀","initial amount"],["λ","decay constant"],["t","time"]],
- fn:(t,p)=>Math.exp(-p*t)},
- cooling:{formula:"\\[T(t)=T_a+(T_0-T_a)e^{-kt}\\]",text:"The temperature T approaches the ambient temperature Tₐ. A larger k means faster heat transfer.",label:"Cooling constant k",min:.05,max:1,step:.01,value:.55,
- keys:[["T(t)","object temperature"],["Tₐ","ambient temperature"],["T₀","initial temperature"],["k","cooling constant"]],
- fn:(t,p)=>.2+.8*Math.exp(-p*t)},
- charging:{formula:"\\[V(t)=V_0\\left(1-e^{-t/(RC)}\\right)\\]",text:"The capacitor voltage V rises toward V₀. Changing the time constant RC changes how quickly it charges.",label:"Charge-speed parameter 1/(RC)",min:.05,max:1,step:.01,value:.65,
- keys:[["V(t)","capacitor voltage"],["V₀","supply voltage"],["R","resistance"],["C","capacitance"]],
- fn:(t,p)=>1-Math.exp(-p*t)},
- damping:{formula:"\\[x(t)=Ae^{-bt}\\cos(\\omega t)\\]",text:"The displacement x oscillates while the exponential factor removes amplitude. A larger b creates stronger damping.",label:"Damping constant b",min:.03,max:.55,step:.01,value:.22,
- keys:[["x(t)","displacement"],["A","initial amplitude"],["b","damping constant"],["ω","angular frequency"]],
- fn:(t,p)=>.85*Math.exp(-p*t)*Math.cos(3.2*t)}
-};
-let scenario="growth";
-function setScenario(){
-  const s=scenarios[scenario],p=$("#parameter");
-  $("#scenarioFormula").innerHTML=s.formula;$("#scenarioText").textContent=s.text;$("#parameterLabel").textContent=s.label;
-  p.min=s.min;p.max=s.max;p.step=s.step;p.value=s.value;
-  $("#variableKey").innerHTML=s.keys.map(([a,b])=>`<div class="variable"><strong>${a}</strong> — ${b}</div>`).join("");
-  if(window.MathJax) MathJax.typesetPromise([$("#scenarioFormula")]);
-  drawChange();
-}
-function drawChange(){
-  const s=scenarios[scenario],param=+$("#parameter").value;
-  let c=$("#changeCanvas"),g=c.getContext("2d"),W=c.width,H=c.height,vals=[];
-  for(let i=0;i<500;i++)vals.push(s.fn(i/499*8,param));
-  let mn=Math.min(...vals),mx=Math.max(...vals),pad=(mx-mn||1)*.12;mn-=pad;mx+=pad;
-  g.clearRect(0,0,W,H);g.strokeStyle="rgba(255,255,255,.1)";
-  for(let i=0;i<6;i++){let y=30+i*(H-60)/5;g.beginPath();g.moveTo(40,y);g.lineTo(W-25,y);g.stroke()}
-  g.strokeStyle="#8db9ff";g.lineWidth=4;g.beginPath();
-  vals.forEach((v,i)=>{let x=40+i/499*(W-65),y=H-30-(v-mn)/(mx-mn)*(H-60);i?g.lineTo(x,y):g.moveTo(x,y)});g.stroke();
-  g.fillStyle="rgba(255,255,255,.7)";g.font="16px system-ui";g.fillText(s.label+" = "+param.toFixed(2),55,28);
-}
-$$("[data-s]").forEach(b=>b.onclick=()=>{$$("[data-s]").forEach(q=>q.classList.remove("active"));b.classList.add("active");scenario=b.dataset.s;setScenario()});
-$("#parameter").oninput=drawChange;
-
-$$("[data-stage]").forEach(b=>b.onclick=()=>{$$("[data-stage]").forEach(q=>q.classList.remove("active"));b.classList.add("active");$$(".stage").forEach(s=>s.classList.remove("active"));$("#"+b.dataset.stage+"Stage").classList.add("active");if(b.dataset.stage==="rotate")drawComplex()});
 
 function drawComplex(){
   let t=+$("#theta").value,re=Math.cos(t),im=Math.sin(t);
   $("#thetaV").textContent=t.toFixed(2);
   $("#complexText").innerHTML="\\[e^{i"+t.toFixed(2)+"}="+re.toFixed(3)+(im>=0?"+":"-")+Math.abs(im).toFixed(3)+"i\\]";
-  if(window.MathJax) MathJax.typesetPromise([$("#complexText")]);
-  $("#identity").style.opacity=Math.abs(t-Math.PI)<.015?1:.16;
+  typeset([$("#complexText")]);
+  const unlocked=Math.abs(t-Math.PI)<.016;
+  $("#identityPanel").style.opacity=unlocked?1:.48;
+  $("#identityPanel").style.boxShadow=unlocked?"0 0 44px rgba(145,188,255,.22)":"none";
   let c=$("#complexCanvas"),g=c.getContext("2d"),W=c.width,H=c.height,cx=W/2,cy=H/2,r=145;
   g.clearRect(0,0,W,H);
-  g.strokeStyle="rgba(255,255,255,.18)";g.lineWidth=1;
-  g.beginPath();g.moveTo(70,cy);g.lineTo(W-70,cy);g.moveTo(cx,35);g.lineTo(cx,H-35);g.stroke();
+  g.strokeStyle="rgba(255,255,255,.18)";g.lineWidth=1;g.beginPath();
+  g.moveTo(70,cy);g.lineTo(W-70,cy);g.moveTo(cx,35);g.lineTo(cx,H-35);g.stroke();
   g.beginPath();g.arc(cx,cy,r,0,Math.PI*2);g.stroke();
   let px=cx+r*re,py=cy-r*im;
-  g.strokeStyle="#8db9ff";g.lineWidth=4;g.beginPath();g.moveTo(cx,cy);g.lineTo(px,cy);g.stroke();
+  g.strokeStyle="#91bcff";g.lineWidth=4;g.beginPath();g.moveTo(cx,cy);g.lineTo(px,cy);g.stroke();
   g.strokeStyle="#9de2b0";g.beginPath();g.moveTo(px,cy);g.lineTo(px,py);g.stroke();
   g.strokeStyle="white";g.lineWidth=3;g.beginPath();g.moveTo(cx,cy);g.lineTo(px,py);g.stroke();
   g.fillStyle="white";g.beginPath();g.arc(px,py,9,0,Math.PI*2);g.fill();
-  g.fillStyle="#8db9ff";g.font="18px system-ui";g.fillText("cos θ",cx+(px-cx)/2-20,cy+24);
+  g.font="18px system-ui";g.fillStyle="rgba(255,255,255,.72)";
+  g.fillText("Real numbers",W-175,cy-12);g.fillText("− Real",76,cy-12);
+  g.fillText("i",cx+12,52);g.fillText("−i",cx+12,H-45);
+  g.fillStyle="#91bcff";g.fillText("cos θ",cx+(px-cx)/2-20,cy+24);
   g.fillStyle="#9de2b0";g.fillText("sin θ",px+12,cy+(py-cy)/2);
 }
-$("#theta").oninput=drawComplex;$("#pi").onclick=()=>{$("#theta").value=Math.PI;drawComplex()};
+$("#theta").oninput=drawComplex;
+$("#pi").onclick=()=>{$("#theta").value=Math.PI;drawComplex()};
 
-updateLogs();drawCompound();drawFunction();drawSeries();setScenario();drawComplex();
+const scenarios={
+ growth:{formula:"\\[\\text{population}=\\text{starting population}\\times e^{(\\text{growth speed})(\\text{time})}\\]",text:"A population grows faster when more individuals are already present. Move the control to change how quickly it grows.",label:"How quickly the population reproduces",value:.35,fn:(t,p)=>Math.exp(p*t),pills:["starting population","growth speed","time"]},
+ decay:{formula:"\\[\\text{amount left}=\\text{starting amount}\\times e^{-(\\text{decay speed})(\\text{time})}\\]",text:"Radioactive material and many other quantities lose a fixed fraction of what remains. Increase the control to make it disappear faster.",label:"How quickly it decays",value:.5,fn:(t,p)=>Math.exp(-p*t),pills:["starting amount","decay speed","time"]},
+ cooling:{formula:"\\[\\text{temperature gap later}=\\text{starting gap}\\times e^{-(\\text{cooling speed})(\\text{time})}\\]",text:"A hot object cools quickly at first, then more slowly as it approaches room temperature.",label:"How easily heat escapes",value:.55,fn:(t,p)=>.2+.8*Math.exp(-p*t),pills:["starting temperature gap","room temperature","cooling speed"]},
+ charging:{formula:"\\[\\text{voltage}=\\text{final voltage}\\times\\left(1-e^{-(\\text{charge speed})(\\text{time})}\\right)\\]",text:"A capacitor charges quickly at first, then slows as it approaches the supply voltage.",label:"How quickly the capacitor charges",value:.65,fn:(t,p)=>1-Math.exp(-p*t),pills:["supply voltage","charge speed","time"]},
+ damping:{formula:"\\[\\text{motion}=\\text{oscillation}\\times e^{-(\\text{damping})(\\text{time})}\\]",text:"A swinging or vibrating system keeps moving back and forth while friction steadily removes its motion.",label:"How strongly the motion is damped",value:.22,fn:(t,p)=>.85*Math.exp(-p*t)*Math.cos(3.2*t),pills:["starting motion","oscillation","damping"]},
+};
+let scenario="growth";
+function setScenario(){
+  const s=scenarios[scenario],p=$("#parameter");p.value=s.value;
+  $("#scenarioFormula").innerHTML=s.formula;$("#scenarioText").textContent=s.text;$("#parameterLabel").textContent=s.label;
+  $("#plainKey").innerHTML=s.pills.map(x=>`<span class="plain-pill">${x}</span>`).join("");
+  typeset([$("#scenarioFormula")]);drawChange();
+}
+function drawChange(){
+  const s=scenarios[scenario],param=+$("#parameter").value,c=$("#changeCanvas"),g=c.getContext("2d"),W=c.width,H=c.height,vals=[];
+  for(let i=0;i<500;i++)vals.push(s.fn(i/499*8,param));
+  let mn=Math.min(...vals),mx=Math.max(...vals),pad=(mx-mn||1)*.12;mn-=pad;mx+=pad;
+  g.clearRect(0,0,W,H);g.strokeStyle="rgba(255,255,255,.1)";
+  for(let i=0;i<6;i++){let y=30+i*(H-60)/5;g.beginPath();g.moveTo(40,y);g.lineTo(W-25,y);g.stroke()}
+  g.strokeStyle="#91bcff";g.lineWidth=4;g.beginPath();
+  vals.forEach((v,i)=>{let x=40+i/499*(W-65),y=H-30-(v-mn)/(mx-mn)*(H-60);i?g.lineTo(x,y):g.moveTo(x,y)});g.stroke();
+  g.fillStyle="rgba(255,255,255,.72)";g.font="16px system-ui";g.fillText("control = "+param.toFixed(2),55,28);
+}
+$$("[data-s]").forEach(b=>b.onclick=()=>{$$("[data-s]").forEach(q=>q.classList.remove("active"));b.classList.add("active");scenario=b.dataset.s;setScenario()});
+$("#parameter").oninput=drawChange;
+
+function initialize(){
+  buildLogTable();updateLogRoom();drawCompound();drawFunction();drawSeries();drawComplex();setScenario();
+  setTimeout(()=>typeset([document.body]),250);
+}
+if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",initialize); else initialize();
 </script>
 </body>
 </html>
