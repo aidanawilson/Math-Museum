@@ -354,9 +354,9 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
 
       <div class="log-controls">
         <label>First number: <strong id="logAV">4</strong></label>
-        <input id="logA" type="range" min="1" max="10" value="4">
+        <input id="logA" type="range" min="1" max="10" value="4" step="any">
         <label>Second number: <strong id="logBV">8</strong></label>
-        <input id="logB" type="range" min="1" max="10" value="8">
+        <input id="logB" type="range" min="1" max="10" value="8" step="any">
       </div>
 
       <div class="log-result" id="logResult"></div>
@@ -376,22 +376,24 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
 <div class="wrap">
   <div class="kicker">Room Four</div>
   <h2>A Strange Number Hiding in Logarithms</h2>
-  <p class="lead">A logarithm needs a base—the number whose powers we are measuring. Base 10 is convenient for decimal arithmetic, and base 2 is useful in computing. But one unusual base fits the mathematics of smooth, continuous change with almost no extra adjustment.</p>
+  <p class="lead">Logarithms can use different bases. Changing the base changes the scale—but one strange base keeps showing up when math describes smooth, continuous change.</p>
 
   <div class="card">
     <div class="base-grid">
       <div>
-        <h3>Change the base</h3>
-        <p class="explain">Pick several bases below. The logarithm still asks the same question: <strong>“What power of this base makes my number?”</strong> What changes is the scale used to measure that exponent.</p>
+        <h3>Try a few different bases</h3>
+        <p class="explain">A logarithm is really asking one question: <strong>“What power of this base gives me my number?”</strong></p>
+
         <div class="chips" id="baseChoices">
           <button class="chip base-chip" data-base="2">Base 2</button>
           <button class="chip base-chip" data-base="3">Base 3</button>
           <button class="chip base-chip" data-base="10">Base 10</button>
           <button class="chip base-chip special" data-base="2.718281828459045">2.71828…</button>
         </div>
+
         <label>Number to examine: <strong id="baseXOut">8.00</strong></label>
-        <input id="baseX" type="range" min="1.05" max="20" step=".05" value="8">
-        <div class="base-status" id="baseStatus">Try at least three different bases.</div>
+        <input id="baseX" type="range" min="1.05" max="20" value="8" step="any">
+        <div class="base-status" id="baseStatus">Compare at least three bases.</div>
       </div>
 
       <div class="base-readout">
@@ -406,11 +408,12 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
     <canvas id="baseCanvas" width="1000" height="370" style="margin-top:22px"></canvas>
 
     <div class="mystery-recall" id="naturalReveal" style="opacity:.45;transition:.5s ease">
-      <div class="muted">In modern notation, this special logarithm is written</div>
+      <div class="muted">This special logarithm eventually got its own name:</div>
       <div class="formula">\[\ln(x)=\log_{2.718281828\ldots}(x)\]</div>
-      <p class="explain">The name is <strong>natural logarithm</strong>. Later mathematics revealed why the name fits: with this base, continuous growth and calculus line up without an extra conversion factor. We will see that reason later in the exhibit.</p>
+      <p class="explain"><strong>ln</strong> means <strong>natural logarithm</strong>. Why “natural”? Because later mathematicians discovered that this base makes the math of continuous growth unusually clean. Other bases work—but this one fits without extra conversion factors.</p>
+
       <div class="mystery-number">2.718281828…</div>
-      <p class="explain"><strong>Do not give the number a name yet.</strong> Just remember it. We are about to leave logarithms completely—and meet it again.</p>
+      <p class="explain">For now, just remember that number. We are about to leave logarithms behind and find it again somewhere completely different.</p>
     </div>
   </div>
 
@@ -437,7 +440,7 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
       </div>
     </div>
     <label>How many times is interest added?</label>
-    <input id="compound" type="range" min="0" max="9" value="4">
+    <input id="compound" type="range" min="0" max="9" value="4" step="any">
     <div class="metrics">
       <div class="metric">Payments<strong id="count"></strong></div>
       <div class="metric">Interest each time<strong id="periodRate"></strong></div>
@@ -479,7 +482,7 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
       <button class="chip" data-f="e">\(e^x\)</button>
     </div>
     <label>Move along the curve: \(x=\) <strong id="xv">1.00</strong></label>
-    <input id="x" type="range" min="-1.5" max="2" step=".01" value="1">
+    <input id="x" type="range" min="-1.5" max="2" value="1" step="any">
     <canvas id="functionCanvas" width="1000" height="400"></canvas>
     <div class="legend">
       <span><i class="swatch blue"></i>The curve</span>
@@ -494,9 +497,25 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
     <p id="fnMessage" class="explain" style="text-align:center"></p>
     <div class="mystery-recall">
       <h3>Remember the natural logarithm?</h3>
-      <p class="explain">Now the earlier clue pays off. The special base is \(e\), so the natural logarithm is \(\ln(x)=\log_e(x)\). The two operations undo one another: \(e^x\) builds a value from an exponent, while \(\ln(x)\) asks which exponent produced that value.</p>
-      <div class="math-panel">\[e^{\ln(x)}=x \qquad\text{and}\qquad \ln(e^x)=x\]</div>
-      <p class="explain">Their calculus is unusually clean too: \(\frac{d}{dx}e^x=e^x\) and \(\frac{d}{dx}\ln(x)=\frac1x\). That is the deeper reason this base feels “natural” whenever change happens continuously.</p>
+      <p class="explain">Now we can finally name its base. That mysterious \(2.71828\ldots\) is \(e\), so:</p>
+      <div class="math-panel">\[\ln(x)=\log_e(x)\]</div>
+
+      <p class="explain">These two operations undo each other. Think of them as two opposite machines:</p>
+      <div class="grid" style="margin-top:14px">
+        <div class="box">
+          <h3>\(e^x\) builds</h3>
+          <p class="explain">Give it an exponent, and it tells you the resulting number.</p>
+          <div class="formula">\(2 \;\longrightarrow\; e^2 \;\longrightarrow\; 7.389\ldots\)</div>
+        </div>
+        <div class="box">
+          <h3>\(\ln(x)\) undoes</h3>
+          <p class="explain">Give it the result, and it tells you what exponent was used.</p>
+          <div class="formula">\(7.389\ldots \;\longrightarrow\; \ln \;\longrightarrow\; 2\)</div>
+        </div>
+      </div>
+
+      <div class="math-panel" style="margin-top:14px">\[e^{\ln(x)}=x \qquad\text{and}\qquad \ln(e^x)=x\]</div>
+      <p class="explain">There is an even deeper calculus reason this pair is so clean. We will save that derivation for the Calculus exhibit rather than dropping a wall of new symbols on you here.</p>
     </div>
   </div>
   <div class="next"><button data-next="r8">Build the Curve Piece by Piece</button></div>
@@ -516,7 +535,7 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
     </div>
     <p class="explain">The exclamation mark means factorial. For example, \(4!=4\times3\times2\times1=24\). Calculators use approximation ideas like this to turn functions into arithmetic they can actually compute.</p>
     <label>Pieces included: <strong id="termsV">1</strong></label>
-    <input id="terms" type="range" min="1" max="10" value="1">
+    <input id="terms" type="range" min="1" max="10" value="1" step="any">
     <div class="math-panel" id="seriesText"></div>
     <canvas id="seriesCanvas" width="1000" height="370"></canvas>
     <div class="legend">
@@ -552,7 +571,7 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
       <h3>Now watch it move</h3>
       <p class="explain">Cosine controls the horizontal position. Sine controls the vertical position. Together they place the glowing point on a circle.</p>
       <label>Angle \(\theta=\) <strong id="thetaV">0.00</strong> radians</label>
-      <input id="theta" type="range" min="0" max="6.283185307" step=".001" value=".85">
+      <input id="theta" type="range" min="0" max="6.283185307" value=".85" step="any">
       <canvas id="complexCanvas" width="1000" height="440"></canvas>
       <div class="legend">
         <span><i class="swatch blue"></i>Horizontal: \(\cos\theta\)</span>
@@ -589,7 +608,7 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
     <div class="plain-key" id="plainKey"></div>
     <p id="scenarioText" class="explain"></p>
     <label id="parameterLabel"></label>
-    <input id="parameter" type="range" min=".1" max="1" step=".01" value=".35">
+    <input id="parameter" type="range" min=".1" max="1" value=".35" step="any">
     <canvas id="changeCanvas" width="1000" height="370"></canvas>
   </div>
   <div class="next"><button data-next="final">Enter the Final Room</button></div>
@@ -688,7 +707,7 @@ $("#logA").oninput=$("#logB").oninput=updateLogRoom;
 
 const opts=[1,2,3,4,12,52,365,1000,100000,10000000],cv=n=>(1+1/n)**n;
 function drawCompound(){
-  let i=+$("#compound").value,n=opts[i],v=cv(n);
+  let i=Math.max(0,Math.min(opts.length-1,Math.round(+$("#compound").value))),n=opts[i],v=cv(n);
   $("#count").textContent=n.toLocaleString();
   $("#periodRate").textContent=(100/n).toFixed(n<100?2:5)+"%";
   $("#balance").textContent="$"+v.toFixed(6);
@@ -750,7 +769,7 @@ function seriesLatex(n){
   return "\\[P_{"+(n-1)+"}(x)="+terms.join("+")+"\\]";
 }
 function drawSeries(){
-  let n=+$("#terms").value;$("#termsV").textContent=n;$("#seriesText").innerHTML=seriesLatex(n);typeset([$("#seriesText")]);
+  let n=Math.max(1,Math.min(10,Math.round(+$("#terms").value)));$("#termsV").textContent=n;$("#seriesText").innerHTML=seriesLatex(n);typeset([$("#seriesText")]);
   let c=$("#seriesCanvas"),{g,W,H}=prepareCanvas(c,370);
   const xMin=-3,xMax=3,yMin=-1,yMax=10,left=55,right=25,top=25,bottom=45;
   const tx=x=>left+(x-xMin)/(xMax-xMin)*(W-left-right),ty=y=>H-bottom-(y-yMin)/(yMax-yMin)*(H-top-bottom);
@@ -909,11 +928,11 @@ $("#check").addEventListener("click",()=>{markAction("r2","attempted");checkRoom
 $("#logA").addEventListener("input",()=>{markAction("r3","a");checkRoomCompletion("r3")});
 $("#logB").addEventListener("input",()=>{markAction("r3","b");checkRoomCompletion("r3")});
 $("#compound").addEventListener("input",()=>{
-  const i=+$("#compound").value;if(i<=1)markAction("r5","low");if(i>=7)markAction("r5","high");checkRoomCompletion("r5")
+  const i=Math.round(+$("#compound").value);if(i<=1)markAction("r5","low");if(i>=7)markAction("r5","high");checkRoomCompletion("r5")
 });
 $$("[data-f]").forEach(b=>b.addEventListener("click",()=>{if(b.dataset.f==="e")markAction("r7","e");checkRoomCompletion("r7")}));
 $("#x").addEventListener("input",()=>{markAction("r7","moved");checkRoomCompletion("r7")});
-$("#terms").addEventListener("input",()=>{if(+$("#terms").value>=6)markAction("r8","built");checkRoomCompletion("r8")});
+$("#terms").addEventListener("input",()=>{if(Math.round(+$("#terms").value)>=6)markAction("r8","built");checkRoomCompletion("r8")});
 $("#pi").addEventListener("click",()=>{markAction("r9","pi");checkRoomCompletion("r9")});
 $$("[data-s]").forEach(b=>b.addEventListener("click",()=>{actions.r10.add(b.dataset.s);checkRoomCompletion("r10")}));
 $("#parameter").addEventListener("input",()=>{actions.r10.add("moved");checkRoomCompletion("r10")});
