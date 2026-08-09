@@ -257,6 +257,37 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
   .timeline-item:nth-child(odd):after,.timeline-item:nth-child(even):after{left:4px;right:auto}
   .interest-story{grid-template-columns:1fr}
 }
+
+/* Guided discovery */
+.next button.room-locked{
+  opacity:.48;cursor:not-allowed;box-shadow:none;transform:none;
+  border-color:rgba(255,255,255,.16);color:#aab4c1
+}
+.next button.room-locked:hover{transform:none;box-shadow:none}
+.unlock-note{
+  margin:12px auto 0;max-width:620px;text-align:center;color:var(--muted);
+  font-size:.92rem;transition:.35s ease
+}
+.unlock-note.complete{color:var(--green)}
+.base-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch}
+.base-readout{
+  display:grid;place-items:center;min-height:250px;text-align:center;
+  border:1px solid var(--line);border-radius:20px;background:#080c12;padding:24px
+}
+.mystery-number{
+  font:clamp(2.4rem,6vw,4.8rem)/1 Georgia,serif;color:var(--gold);
+  text-shadow:0 0 30px rgba(239,210,138,.14);margin:12px 0
+}
+.base-status{min-height:28px;color:var(--body);margin-top:15px}
+.base-chip.seen{border-color:rgba(157,226,176,.5)}
+.base-chip.special{border-color:rgba(239,210,138,.55)}
+.base-chip.special.active{background:var(--gold);color:#17120a}
+.mystery-recall{
+  border:1px solid rgba(239,210,138,.28);border-radius:18px;padding:18px;
+  background:rgba(239,210,138,.055);text-align:center;margin-top:20px
+}
+@media(max-width:800px){.base-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -336,13 +367,60 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
     <h3>A version you can do without a table</h3>
     <p class="explain">Some numbers are already easy to recognize as powers. Since \(32=2^5\) and \(64=2^6\), multiplying them becomes \(2^{5+6}=2^{11}=2048\). A logarithm table applies that same exponent shortcut to less convenient numbers.</p>
   </div>
-  <div class="next"><button data-next="r4">Continue to Compound Interest</button></div>
+  <div class="next"><button data-next="r4">Follow the Hidden Number</button></div>
 </div>
 </section>
 
-<section id="r4" class="fade" data-room="Room 4 · Compound Interest">
+
+<section id="r4" class="fade" data-room="Room 4 · A Hidden Base">
 <div class="wrap">
   <div class="kicker">Room Four</div>
+  <h2>A Strange Number Hiding in Logarithms</h2>
+  <p class="lead">A logarithm needs a base—the number whose powers we are measuring. Base 10 is convenient for decimal arithmetic, and base 2 is useful in computing. But one unusual base fits the mathematics of smooth, continuous change with almost no extra adjustment.</p>
+
+  <div class="card">
+    <div class="base-grid">
+      <div>
+        <h3>Change the base</h3>
+        <p class="explain">Pick several bases below. The logarithm still asks the same question: <strong>“What power of this base makes my number?”</strong> What changes is the scale used to measure that exponent.</p>
+        <div class="chips" id="baseChoices">
+          <button class="chip base-chip" data-base="2">Base 2</button>
+          <button class="chip base-chip" data-base="3">Base 3</button>
+          <button class="chip base-chip" data-base="10">Base 10</button>
+          <button class="chip base-chip special" data-base="2.718281828459045">2.71828…</button>
+        </div>
+        <label>Number to examine: <strong id="baseXOut">8.00</strong></label>
+        <input id="baseX" type="range" min="1.05" max="20" step=".05" value="8">
+        <div class="base-status" id="baseStatus">Try at least three different bases.</div>
+      </div>
+
+      <div class="base-readout">
+        <div>
+          <div class="muted">Using base <span id="baseName">2</span></div>
+          <div class="formula" id="baseEquation"></div>
+          <p class="explain" id="baseMeaning"></p>
+        </div>
+      </div>
+    </div>
+
+    <canvas id="baseCanvas" width="1000" height="370" style="margin-top:22px"></canvas>
+
+    <div class="mystery-recall" id="naturalReveal" style="opacity:.45;transition:.5s ease">
+      <div class="muted">In modern notation, this special logarithm is written</div>
+      <div class="formula">\[\ln(x)=\log_{2.718281828\ldots}(x)\]</div>
+      <p class="explain">The name is <strong>natural logarithm</strong>. Later mathematics revealed why the name fits: with this base, continuous growth and calculus line up without an extra conversion factor. We will see that reason later in the exhibit.</p>
+      <div class="mystery-number">2.718281828…</div>
+      <p class="explain"><strong>Do not give the number a name yet.</strong> Just remember it. We are about to leave logarithms completely—and meet it again.</p>
+    </div>
+  </div>
+
+  <div class="next"><button data-next="r5">Leave Logarithms Behind</button></div>
+</div>
+</section>
+
+<section id="r5" class="fade" data-room="Room 5 · Compound Interest">
+<div class="wrap">
+  <div class="kicker">Room Five</div>
   <h2>A Number Hiding in Interest</h2>
   <p class="lead">Imagine investing one dollar at 100% interest for one year. The more often the interest is added, the more the balance grows—but the year's total rate must still remain 100%.</p>
   <div class="card">
@@ -366,28 +444,29 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
       <div class="metric">One dollar becomes<strong id="balance"></strong></div>
     </div>
     <canvas id="compoundCanvas" width="1000" height="370"></canvas>
-    <div class="legend"><span><i class="swatch white"></i>What the investment becomes</span><span><i class="swatch blue"></i>The value it approaches: \(e\)</span></div>
+    <div class="legend"><span><i class="swatch white"></i>What the investment becomes</span><span><i class="swatch blue"></i>The value it approaches: 2.718281828…</span></div>
+    <div class="mystery-recall"><strong>That number again.</strong><p class="explain">The logarithm room and a completely different problem about money have led to the same decimal: <strong>2.718281828…</strong> This is the clue that the number is more than a calculating trick.</p></div>
   </div>
-  <div class="next"><button data-next="r5">Meet Euler</button></div>
+  <div class="next"><button data-next="r6">Meet Euler</button></div>
 </div>
 </section>
 
-<section id="r5" class="fade" data-room="Room 5 · Euler">
+<section id="r6" class="fade" data-room="Room 6 · Euler">
 <div class="wrap">
-  <div class="kicker">Room Five</div>
+  <div class="kicker">Room Six</div>
   <h2>Euler Gives the Number a Name</h2>
   <div class="card" style="text-align:center">
     <div class="e" style="font-size:clamp(8rem,20vw,14rem)">e</div>
     <p class="quote">A number first noticed in repeated growth became the natural language of continuous change.</p>
     <p class="explain">Leonhard Euler did not discover every piece of the story himself, but he connected the pieces, developed the mathematics around them, and gave the constant the symbol we still use today.</p>
   </div>
-  <div class="next"><button data-next="r6">Enter the Calculus Gallery</button></div>
+  <div class="next"><button data-next="r7">Enter the Calculus Gallery</button></div>
 </div>
 </section>
 
-<section id="r6" class="fade" data-room="Room 6 · A Curve That Matches Its Slope">
+<section id="r7" class="fade" data-room="Room 7 · A Curve That Matches Its Slope">
 <div class="wrap">
-  <div class="kicker">Room Six</div>
+  <div class="kicker">Room Seven</div>
   <h2>Can a Curve Match Its Own Slope?</h2>
   <p class="lead">In calculus, the slope at one exact point is called a derivative. It is shown by the straight line that just touches the curve there.</p>
   <div class="card">
@@ -413,14 +492,20 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
       <div class="metric">Difference<strong id="difference"></strong></div>
     </div>
     <p id="fnMessage" class="explain" style="text-align:center"></p>
+    <div class="mystery-recall">
+      <h3>Remember the natural logarithm?</h3>
+      <p class="explain">Now the earlier clue pays off. The special base is \(e\), so the natural logarithm is \(\ln(x)=\log_e(x)\). The two operations undo one another: \(e^x\) builds a value from an exponent, while \(\ln(x)\) asks which exponent produced that value.</p>
+      <div class="math-panel">\[e^{\ln(x)}=x \qquad\text{and}\qquad \ln(e^x)=x\]</div>
+      <p class="explain">Their calculus is unusually clean too: \(\frac{d}{dx}e^x=e^x\) and \(\frac{d}{dx}\ln(x)=\frac1x\). That is the deeper reason this base feels “natural” whenever change happens continuously.</p>
+    </div>
   </div>
-  <div class="next"><button data-next="r7">Build the Curve Piece by Piece</button></div>
+  <div class="next"><button data-next="r8">Build the Curve Piece by Piece</button></div>
 </div>
 </section>
 
-<section id="r7" class="fade" data-room="Room 7 · Taylor Series">
+<section id="r8" class="fade" data-room="Room 8 · Taylor Series">
 <div class="wrap">
-  <div class="kicker">Room Seven</div>
+  <div class="kicker">Room Eight</div>
   <h2>Building \(e^x\) Piece by Piece</h2>
   <p class="lead">A Taylor series builds a complicated curve from simple pieces. Begin with a flat line, then add one piece at a time. Each new piece makes the white curve look more like the true curve of \(e^x\).</p>
   <div class="card">
@@ -439,13 +524,13 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
       <span><i class="swatch white"></i>The curve built from the pieces so far</span>
     </div>
   </div>
-  <div class="next"><button data-next="r8">Watch the Same Series Begin to Rotate</button></div>
+  <div class="next"><button data-next="r9">Watch the Same Series Begin to Rotate</button></div>
 </div>
 </section>
 
-<section id="r8" class="fade" data-room="Room 8 · Euler's Formula">
+<section id="r9" class="fade" data-room="Room 9 · Euler's Formula">
 <div class="wrap">
-  <div class="kicker">Room Eight</div>
+  <div class="kicker">Room Nine</div>
   <h2>When Exponential Growth Becomes Rotation</h2>
   <p class="lead">The same series from the previous room changes character when the imaginary number \(i\) enters the exponent. Instead of simply growing, it begins to move around a circle.</p>
   <div class="card">
@@ -483,13 +568,13 @@ canvas{width:100%;height:370px;background:#080c12;border:1px solid var(--line);b
       </div>
     </div>
   </div>
-  <div class="next"><button data-next="r9">See Where e Appears in the World</button></div>
+  <div class="next"><button data-next="r10">See Where e Appears in the World</button></div>
 </div>
 </section>
 
-<section id="r9" class="fade" data-room="Room 9 · The Language of Change">
+<section id="r10" class="fade" data-room="Room 10 · The Language of Change">
 <div class="wrap">
-  <div class="kicker">Room Nine</div>
+  <div class="kicker">Room Ten</div>
   <h2>The Language of Change</h2>
   <p class="lead">Whenever the speed of change depends on how much is already present, \(e\) tends to appear. Choose a real system and adjust one plain-language control to see how its behavior changes.</p>
   <div class="card">
@@ -544,7 +629,7 @@ function travelTo(id){
   const curtain=$("#curtain");curtain.classList.add("on");
   setTimeout(()=>{document.getElementById(id).scrollIntoView({behavior:"auto"});setTimeout(()=>curtain.classList.remove("on"),120)},430);
 }
-$$("[data-next]").forEach(b=>b.onclick=()=>travelTo(b.dataset.next));
+
 
 const obs=new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting){e.target.classList.add("visible");$("#progress").textContent=e.target.dataset.room}
@@ -620,7 +705,7 @@ function drawCompound(){
   opts.forEach((n,j)=>{let x=tx(j),y=ty(cv(n));j?g.lineTo(x,y):g.moveTo(x,y)});g.stroke();
   opts.forEach((n,j)=>{let x=tx(j),y=ty(cv(n));g.fillStyle=j===i?"white":"rgba(255,255,255,.45)";g.beginPath();g.arc(x,y,j===i?7:4,0,Math.PI*2);g.fill()});
   g.fillStyle="rgba(255,255,255,.7)";g.font="16px system-ui";g.fillText("more frequent payments →",W-230,H-18);
-  g.fillStyle="#91bcff";g.fillText("e ≈ 2.71828",left+8,ty(Math.E)-9);
+  g.fillStyle="#91bcff";g.fillText("2.71828…",left+8,ty(Math.E)-9);
 }
 $("#compound").oninput=drawCompound;
 
@@ -725,13 +810,116 @@ function drawChange(){
   for(let i=0;i<6;i++){let y=30+i*(H-60)/5;g.beginPath();g.moveTo(40,y);g.lineTo(W-25,y);g.stroke()}
   g.strokeStyle="#91bcff";g.lineWidth=4;g.beginPath();
   vals.forEach((v,i)=>{let x=40+i/499*(W-65),y=H-30-(v-mn)/(mx-mn)*(H-60);i?g.lineTo(x,y):g.moveTo(x,y)});g.stroke();
-  g.fillStyle="rgba(255,255,255,.72)";g.font="16px system-ui";g.fillText(s.unit+" = "+param.toFixed(2),55,28);
+  g.fillStyle="rgba(255,255,255,.72)";g.font="16px system-ui";g.fillText($("#parameterLabel").textContent+" = "+param.toFixed(2),55,28);
 }
 $$("[data-s]").forEach(b=>b.onclick=()=>{$$("[data-s]").forEach(q=>q.classList.remove("active"));b.classList.add("active");scenario=b.dataset.s;setScenario()});
 $("#parameter").oninput=drawChange;
 
+
+/* ---------- Room 4: the unnamed natural-log base ---------- */
+const visitedBases=new Set();
+let selectedBase=2;
+function drawBaseRoom(){
+  const x=+$("#baseX").value,b=selectedBase,y=Math.log(x)/Math.log(b);
+  $("#baseXOut").textContent=x.toFixed(2);
+  $("#baseName").textContent=Math.abs(b-Math.E)<1e-10?"2.71828…":b;
+  $("#baseEquation").innerHTML=`\\[\\log_{${Math.abs(b-Math.E)<1e-10?"2.71828\\ldots":b}}(${x.toFixed(2)})=${y.toFixed(4)}\\]`;
+  $("#baseMeaning").textContent=`This says ${b.toFixed?b.toFixed(Math.abs(b-Math.E)<1e-10?5:0):b} raised to the power ${y.toFixed(4)} gives ${x.toFixed(2)}.`;
+  typeset([$("#baseEquation")]);
+
+  const c=$("#baseCanvas"),{g,W,H}=prepareCanvas(c,370);
+  const left=62,right=25,top=28,bottom=48,xMin=.25,xMax=20,yMin=-3,yMax=5;
+  const tx=v=>left+(v-xMin)/(xMax-xMin)*(W-left-right);
+  const ty=v=>H-bottom-(v-yMin)/(yMax-yMin)*(H-top-bottom);
+  g.clearRect(0,0,W,H);
+  g.strokeStyle="rgba(255,255,255,.11)";g.lineWidth=1;
+  g.beginPath();g.moveTo(tx(1),top);g.lineTo(tx(1),H-bottom);g.moveTo(left,ty(0));g.lineTo(W-right,ty(0));g.stroke();
+  g.strokeStyle=Math.abs(b-Math.E)<1e-10?"#efd28a":"#91bcff";g.lineWidth=4;g.beginPath();
+  let started=false;
+  for(let px=0;px<=W-left-right;px++){
+    const xx=xMin+(xMax-xMin)*px/(W-left-right), yy=Math.log(xx)/Math.log(b), X=left+px,Y=ty(yy);
+    if(!started){g.moveTo(X,Y);started=true}else g.lineTo(X,Y);
+  } g.stroke();
+  g.fillStyle="white";g.beginPath();g.arc(tx(x),ty(y),7,0,Math.PI*2);g.fill();
+}
+$$("[data-base]").forEach(b=>b.onclick=()=>{
+  $$("[data-base]").forEach(q=>q.classList.remove("active"));
+  b.classList.add("active");b.classList.add("seen");
+  selectedBase=+b.dataset.base;visitedBases.add(b.dataset.base);
+  if(Math.abs(selectedBase-Math.E)<1e-10){
+    $("#naturalReveal").style.opacity=1;
+    $("#baseStatus").textContent="You found the unusual base. Compare it with at least two others.";
+  } else {
+    $("#baseStatus").textContent=`Bases explored: ${visitedBases.size}. Keep comparing the scales.`;
+  }
+  drawBaseRoom();checkRoomCompletion("r4");
+});
+$("#baseX").oninput=()=>{drawBaseRoom();markAction("r4","movedX");checkRoomCompletion("r4")};
+
+/* ---------- Guided discovery + persistent progress ---------- */
+const PROGRESS_KEY="mathMuseum.euler.guided.v1";
+let museumProgress={};
+try{museumProgress=JSON.parse(localStorage.getItem(PROGRESS_KEY)||"{}")}catch(e){museumProgress={}}
+const actions={r2:new Set(),r3:new Set(),r4:new Set(),r5:new Set(),r7:new Set(),r8:new Set(),r9:new Set(),r10:new Set()};
+function saveProgress(){try{localStorage.setItem(PROGRESS_KEY,JSON.stringify(museumProgress))}catch(e){}}
+function markAction(room,key){if(actions[room]) actions[room].add(key)}
+function completeRoom(room){
+  if(museumProgress[room]) return;
+  museumProgress[room]=true;saveProgress();refreshLocks();
+}
+function roomRequirement(room){
+  if(["r1","r6","final"].includes(room)) return true;
+  if(room==="r2") return actions.r2.has("attempted");
+  if(room==="r3") return actions.r3.has("a")&&actions.r3.has("b");
+  if(room==="r4") return visitedBases.size>=3&&visitedBases.has(String(Math.E));
+  if(room==="r5") return actions.r5.has("low")&&actions.r5.has("high");
+  if(room==="r7") return actions.r7.has("e")&&actions.r7.has("moved");
+  if(room==="r8") return actions.r8.has("built");
+  if(room==="r9") return actions.r9.has("pi");
+  if(room==="r10") return actions.r10.size>=3&&actions.r10.has("moved");
+  return true;
+}
+function checkRoomCompletion(room){if(roomRequirement(room)) completeRoom(room)}
+function refreshLocks(){
+  $$("section").forEach(section=>{
+    const room=section.id;if(!room) return;
+    const next=section.querySelector(":scope > .wrap > .next > button[data-next]");
+    if(!next) return;
+    const unlocked=!!museumProgress[room]||roomRequirement(room);
+    next.classList.toggle("room-locked",!unlocked);
+    next.setAttribute("aria-disabled",unlocked?"false":"true");
+    let note=next.parentElement.querySelector(".unlock-note");
+    if(!note){note=document.createElement("div");note.className="unlock-note";next.parentElement.appendChild(note)}
+    note.textContent=unlocked?"Room complete — the guided path is unlocked.":"Explore the main activity to unlock the guided path.";
+    note.classList.toggle("complete",unlocked);
+  });
+}
+$$("[data-next]").forEach(b=>b.onclick=()=>{
+  const section=b.closest("section"),room=section?.id;
+  if(room && !museumProgress[room] && !roomRequirement(room)){
+    b.animate([{transform:"translateX(0)"},{transform:"translateX(-5px)"},{transform:"translateX(5px)"},{transform:"translateX(0)"}],{duration:280});
+    return;
+  }
+  if(room) completeRoom(room);
+  travelTo(b.dataset.next);
+});
+
+/* meaningful completion events */
+$("#check").addEventListener("click",()=>{markAction("r2","attempted");checkRoomCompletion("r2")});
+$("#logA").addEventListener("input",()=>{markAction("r3","a");checkRoomCompletion("r3")});
+$("#logB").addEventListener("input",()=>{markAction("r3","b");checkRoomCompletion("r3")});
+$("#compound").addEventListener("input",()=>{
+  const i=+$("#compound").value;if(i<=1)markAction("r5","low");if(i>=7)markAction("r5","high");checkRoomCompletion("r5")
+});
+$$("[data-f]").forEach(b=>b.addEventListener("click",()=>{if(b.dataset.f==="e")markAction("r7","e");checkRoomCompletion("r7")}));
+$("#x").addEventListener("input",()=>{markAction("r7","moved");checkRoomCompletion("r7")});
+$("#terms").addEventListener("input",()=>{if(+$("#terms").value>=6)markAction("r8","built");checkRoomCompletion("r8")});
+$("#pi").addEventListener("click",()=>{markAction("r9","pi");checkRoomCompletion("r9")});
+$$("[data-s]").forEach(b=>b.addEventListener("click",()=>{actions.r10.add(b.dataset.s);checkRoomCompletion("r10")}));
+$("#parameter").addEventListener("input",()=>{actions.r10.add("moved");checkRoomCompletion("r10")});
+
 function initialize(){
-  buildLogTable();updateLogRoom();drawCompound();drawFunction();drawSeries();drawComplex();setScenario();
+  buildLogTable();updateLogRoom();drawCompound();drawFunction();drawSeries();drawComplex();setScenario();$("[data-base=\"2\"]").classList.add("active");drawBaseRoom();refreshLocks();
   setTimeout(()=>typeset([document.body]),250);
 }
 if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",initialize); else initialize();
