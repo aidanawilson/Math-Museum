@@ -835,6 +835,34 @@ $$("[data-s]").forEach(b=>b.onclick=()=>{$$("[data-s]").forEach(q=>q.classList.r
 $("#parameter").oninput=drawChange;
 
 
+
+/* Smooth drag, integer selection, animated snap on release. */
+function smoothIntegerSlider(el,onValue){
+  let snapping=false,raf=null;
+  const integerValue=()=>Math.round(+el.value);
+  const report=()=>{ if(onValue) onValue(integerValue()); };
+  function snap(){
+    if(snapping)return;
+    const from=+el.value,to=Math.max(+el.min,Math.min(+el.max,Math.round(from)));
+    if(Math.abs(from-to)<.001){el.value=to;report();return}
+    snapping=true; const t0=performance.now(),duration=150;
+    function frame(t){
+      const p=Math.min(1,(t-t0)/duration),ease=1-Math.pow(1-p,3);
+      el.value=from+(to-from)*ease; report();
+      if(p<1)raf=requestAnimationFrame(frame);
+      else{el.value=to;snapping=false;report()}
+    }
+    cancelAnimationFrame(raf);raf=requestAnimationFrame(frame);
+  }
+  el.addEventListener("input",report);
+  el.addEventListener("change",snap);
+  el.addEventListener("pointerup",snap);
+  el.addEventListener("keyup",e=>{
+    if(["ArrowLeft","ArrowRight","ArrowUp","ArrowDown","Home","End","PageUp","PageDown"].includes(e.key))snap();
+  });
+  report();
+}
+
 /* ---------- Room 4: the unnamed natural-log base ---------- */
 const visitedBases=new Set();
 let selectedBase=2;
@@ -938,7 +966,10 @@ $$("[data-s]").forEach(b=>b.addEventListener("click",()=>{actions.r10.add(b.data
 $("#parameter").addEventListener("input",()=>{actions.r10.add("moved");checkRoomCompletion("r10")});
 
 function initialize(){
-  buildLogTable();updateLogRoom();drawCompound();drawFunction();drawSeries();drawComplex();setScenario();$("[data-base=\"2\"]").classList.add("active");drawBaseRoom();refreshLocks();
+  buildLogTable();
+smoothIntegerSlider($("#logA"),()=>updateLogRoom());
+smoothIntegerSlider($("#logB"),()=>updateLogRoom());
+updateLogRoom();drawCompound();drawFunction();drawSeries();drawComplex();setScenario();$("[data-base=\"2\"]").classList.add("active");drawBaseRoom();refreshLocks();
   setTimeout(()=>typeset([document.body]),250);
 }
 if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",initialize); else initialize();
